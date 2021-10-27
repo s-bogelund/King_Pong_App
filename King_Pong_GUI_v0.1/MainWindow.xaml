@@ -5,45 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:King_Pong_GUI_v0._1"
         mc:Ignorable="d"
-        Title="King Pong v0.1" Height="1080" Width="1920">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF24292C" Offset="0"/>
-            <GradientStop Color="#FF353434" Offset="0.07"/>
-        </LinearGradientBrush>
-    </Window.Background>
-    <Grid ShowGridLines="True">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="565*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="314*"/>
-            <ColumnDefinition Width="314*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="350.4"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Rectangle 
+        Title="King Pong v0.1" Height="1200" Width="1920">
+	<Window.Background>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="#FF24292C" Offset="0"/>
+			<GradientStop Color="#FF353434" Offset="0.07"/>
+		</LinearGradientBrush>
+	</Window.Background>
+	<Grid ShowGridLines="True">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="565*"/>
+			<ColumnDefinition Width="0*"/>
+			<ColumnDefinition Width="314*"/>
+			<ColumnDefinition Width="314*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="350.4"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Rectangle 
             Grid.Row="0" 
             Grid.Column="0" 
             Fill="Black" 
             Height="10" 
             Opacity="10"
             Margin="0,181,6.4,168.4"/>
-        <Rectangle 
+		<Rectangle 
             Grid.Row="0" 
             Grid.Column="0" 
             Fill="Black" 
             Height="5" 
             Margin="0,100,6.4,249.4"/>
-        <StackPanel 
+		<StackPanel 
             Grid.Row="0" 
             Grid.Column="0" 
             Height="Auto" 
             Width="Auto" 
             Margin="0,0,6.8,0" 
             VerticalAlignment="Stretch">
-            <TextBox 
+			<TextBox 
                 IsReadOnly="True"
                 Margin="5" 
                 Width="Auto" 
@@ -54,9 +54,9 @@
                 Background="#FF353434" 
                 Foreground="#FF566E7A" 
                 BorderBrush="{x:Null}">
-                Score
-            </TextBox>
-            <TextBox
+				Score
+			</TextBox>
+			<TextBox
                 IsReadOnly="True"
                 Margin="5" 
                 HorizontalAlignment="Stretch" 
@@ -68,9 +68,9 @@
                 Background="#FF353434" 
                 Foreground="#FF566E7A" 
                 BorderBrush="{x:Null}">
-                TS  6 : 5  HF
-            </TextBox>
-            <TextBox 
+				TS  6 : 5  HF
+			</TextBox>
+			<TextBox 
                 IsReadOnly="True"
                 Width="Auto" 
                 Height="Auto" 
@@ -81,36 +81,36 @@
                 VerticalAlignment="Bottom" 
                 Background="#FF353434" 
                 Foreground="#FF566E7A">
-                Magnex's Tur
-            </TextBox>
-        </StackPanel>
-        <Grid 
+				Magnex's Tur
+			</TextBox>
+		</StackPanel>
+		<Grid 
             Grid.Row="1" 
             ShowGridLines="True" 
             Margin="0,0,6.8,-0.2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Ellipse 
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="4*"/>
+				<RowDefinition Height="2*"/>
+				<RowDefinition Height="3*"/>
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0" Grid.Column="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Ellipse 
                     Grid.Row="0" 
                     Grid.Column="3" 
                     Width="55" 
@@ -118,7 +118,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="0" 
                     Grid.Column="2" 
                     Width="55" 
@@ -126,7 +126,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Width="55" 
@@ -134,7 +134,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Width="55" 
@@ -142,7 +142,9 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
+					x:Name="Ellipse06"
+					Opacity="90"
                     Grid.Row="1" 
                     Grid.Column="2"
                     Width="55" 
@@ -150,7 +152,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="2"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Width="55" 
@@ -158,21 +160,21 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="2"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="1" 
                     Grid.Column="0" 
                     Width="55" Height="55" 
                     Fill="Green" 
                     Canvas.Left="10"
                     Grid.ColumnSpan="2"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="2" 
                     Grid.Column="2" 
                     Width="55" Height="55" 
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Width="55" 
@@ -180,7 +182,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Width="55" 
@@ -189,21 +191,21 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="2"/>
 
-            </Grid>
-            <Grid Grid.Row="0" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Ellipse 
+			</Grid>
+			<Grid Grid.Row="0" Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Ellipse 
                     Grid.Row="0" 
                     Grid.Column="3" 
                     Width="55" 
@@ -211,7 +213,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="0" 
                     Grid.Column="2" 
                     Width="55" 
@@ -219,7 +221,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Width="55" 
@@ -227,7 +229,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Width="55" 
@@ -235,7 +237,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="1" 
                     Grid.Column="2"
                     Width="55" 
@@ -243,7 +245,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="2"/>
-                <Ellipse
+				<Ellipse
                     x:Name="Ellipse1"
                     Grid.Row="1" 
                     Grid.Column="1" 
@@ -251,56 +253,23 @@
                     Height="55" 
                     Fill="Green"
                     Canvas.Left="10" 
-                    Grid.ColumnSpan="2"
-                    >
-                    <Ellipse.Style>
-                        <Style TargetType="Ellipse">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                                Duration="0:0:2"
-                                                Storyboard.TargetProperty="Width" From="120" To="0"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                                Duration="0:0:2"
-                                                Storyboard.TargetProperty="Height" From="120" To="0"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                                />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Ellipse.Style>
-                </Ellipse>
-                <Ellipse 
+                    Grid.ColumnSpan="2">
+				</Ellipse>
+				<Ellipse 
                     Grid.Row="1" 
                     Grid.Column="0" 
                     Width="55" Height="55" 
                     Fill="Green" 
                     Canvas.Left="10"
                     Grid.ColumnSpan="2"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="2" 
                     Grid.Column="2" 
                     Width="55" Height="55" 
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Width="55" 
@@ -308,7 +277,7 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-                <Ellipse 
+				<Ellipse 
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Width="55" 
@@ -316,12 +285,12 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="2"/>
-            </Grid>
-            <StackPanel 
+			</Grid>
+			<StackPanel 
                 Grid.Row="1" 
                 Grid.Column="0" 
                 Width="Auto">
-                <TextBox 
+				<TextBox 
                     IsReadOnly="True"
                     Name="Text1_1" 
                     TextAlignment="Center" 
@@ -333,9 +302,9 @@
                     Foreground="#FF566E7A" 
                     Background="#FF353434" 
                     BorderBrush="{x:Null}">
-                    Navn1
-                </TextBox>
-                <TextBox 
+					Navn1
+				</TextBox>
+				<TextBox 
                     IsReadOnly="True"
                     Name="Text1_2" 
                     TextAlignment="Center" 
@@ -346,14 +315,14 @@
                     Foreground="#FF566E7A" 
                     Height="60" 
                     BorderBrush="{x:Null}">
-                    Navn2
-                </TextBox>
-            </StackPanel>
-            <StackPanel 
+					Navn2
+				</TextBox>
+			</StackPanel>
+			<StackPanel 
                 Grid.Row="1" 
                 Grid.Column="1" 
                 Width="Auto">
-                <TextBox 
+				<TextBox 
                     Name="Text2_1" 
                     IsReadOnly="True" 
                     TextAlignment="Center" 
@@ -364,9 +333,9 @@
                     Foreground="#FF566E7A" 
                     Background="#FF353434" 
                     BorderBrush="{x:Null}">
-                    Navn1
-                </TextBox>
-                <TextBox 
+					Navn1
+				</TextBox>
+				<TextBox 
                     IsReadOnly="True"
                     Name="Text2_2" 
                     TextAlignment="Center" 
@@ -377,15 +346,15 @@
                     Foreground="#FF566E7A" 
                     Background="#FF353434" 
                     BorderBrush="{x:Null}">
-                    Navn2
-                </TextBox>
-            </StackPanel>
-            <Rectangle 
+					Navn2
+				</TextBox>
+			</StackPanel>
+			<Rectangle 
                 Grid.Column="1" 
                 Grid.Row="2" 
                 Fill="Green">
-            </Rectangle>
-            <TextBox
+			</Rectangle>
+			<TextBox
                 IsReadOnly="True"
                 Grid.Column="1" 
                 Grid.Row="2" 
@@ -396,97 +365,110 @@
                 Background="Green"
                 Foreground="#FF353434"
                 />
-        </Grid>
-        <Grid 
+		</Grid>
+		<Grid 
             Grid.Row="0" 
             Grid.Column="2" 
-            Margin="3.2,0,309.6,0" 
+            Margin="5" 
             Grid.ColumnSpan="2">
-            <Button 
-                Margin="-908,1,1383.2,0" 
-                Foreground="#FF566E7A" 
-                Width="220" 
-                Height="50" 
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top" 
-                FontSize="26" 
-                FontWeight="Bold" 
-                BorderBrush="#FF080707"
-                Click="Giv_Op_Click" 
-                Content="Giv Op">
-                <Button.Background>
-                    <SolidColorBrush 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="50"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid Margin="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Button 
+					Grid.Column="1"
+					Foreground="#FF566E7A"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch" 
+					Margin="0.75, 1, 1, 0"
+					FontSize="26" 
+					FontWeight="Bold"
+					BorderBrush="#FF080707"
+					Click="Nyt_Spil_Click"
+					Content="Opstil Nyt Spil">
+					<Button.Background>
+						<SolidColorBrush Color="Black" Opacity="0.15"/>
+					</Button.Background>
+				</Button>
+				<Button 
+					Grid.Column="2"
+					Foreground="#FF566E7A"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch" 
+					Margin="0.75, 1, 1, 0"
+					FontSize="26" 
+					FontWeight="Bold"
+					BorderBrush="#FF080707"
+					Click="Regler_Click" 
+					Content="Regler">
+					<Button.Background>
+						<SolidColorBrush 
                         Color="Black" 
                         Opacity="0.15"/>
-                </Button.Background>
-            </Button>
-            <Button 
-                Margin="122,1,353.2,0" 
-                Foreground="#FF566E7A" 
-                Width="220" 
-                Height="50" 
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top" 
-                FontSize="26" 
-                FontWeight="Bold"
-                BorderBrush="#FF080707"
-                Click="Nyt_Spil_Click"
-                Content="Opstil Nyt Spil">
-                <Button.Background>
-                    <SolidColorBrush Color="Black" Opacity="0.15"/>
-                </Button.Background>
-            </Button>
-            <Button 
-                Margin="342,1,133.2,0" 
-                Foreground="#FF566E7A" 
-                Width="220" Height="50" 
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top" 
-                FontSize="26" 
-                FontWeight="Bold"
-                BorderBrush="#FF080707"
-                Click="Regler_Click" 
-                Content="Regler">
-                <Button.Background>
-                    <SolidColorBrush 
-                        Color="Black" 
-                        Opacity="0.15"/>
-                </Button.Background>
-            </Button>
-        </Grid>
-        <Button 
-            Margin="62.4,1,221.6,0" 
-            Foreground="#FF566E7A" 
-            Width="220" Height="50" 
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top" 
-            FontSize="26" 
-            FontWeight="Bold" 
-            OpacityMask="#FF0E0909"
-            BorderBrush="#FF080707"
-            Click="Indstillinger_Click" 
-            Content="Indstillinger" 
-            Grid.Column="3">
-            <Button.Background>
-                <SolidColorBrush Color="Black" Opacity="0.15"/>
-            </Button.Background>
-        </Button>
-        <Button 
-            Margin="283.4,1,0.6,0" 
+					</Button.Background>
+				</Button>
+				<Button 
+					Grid.Column="3"
+					Foreground="#FF566E7A"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch" 
+					Margin="0.75, 1, 1, 0"
+					FontSize="26" 
+					FontWeight="Bold" 
+					OpacityMask="#FF0E0909"
+					BorderBrush="#FF080707"
+					Click="Indstillinger_Click" 
+					Content="Indstillinger">
+					<Button.Background>
+						<SolidColorBrush Color="Black" Opacity="0.15"/>
+					</Button.Background>
+				</Button>
+				<Button
+					Grid.Column="4"
+					Foreground="#FF566E7A"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch" 
+					Margin="0.75, 1, 1, 0"
+					FontSize="26" 
+					FontWeight="Bold" 
+					BorderBrush="#FF080707"
+					Click="FAQ_Click" 
+					Content="FAQ" 
+            >
+					<Button.Background>
+						<SolidColorBrush Color="Black" Opacity="0.15"/>
+					</Button.Background>
+				</Button>
+			</Grid>
+		</Grid>
+		<Button 
+			Grid.Column="0"
+			Grid.Row="0"
             Foreground="#FF566E7A" 
             Width="220" 
             Height="50" 
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top" 
+			Margin="3,4"
             FontSize="26" 
             FontWeight="Bold" 
             BorderBrush="#FF080707"
-            Click="FAQ_Click" 
-            Content="FAQ" 
-            Grid.Column="3">
-            <Button.Background>
-                <SolidColorBrush Color="Black" Opacity="0.15"/>
-            </Button.Background>
-        </Button>
-    </Grid>
+            Click="Giv_Op_Click" 
+            Content="Giv Op">
+			<Button.Background>
+				<SolidColorBrush 
+                        Color="Black" 
+                        Opacity="0.15"/>
+			</Button.Background>
+
+		</Button>
+	</Grid>
 </Window>

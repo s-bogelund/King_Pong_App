@@ -42,29 +42,31 @@ namespace King_Pong_GUI_v0._1
             Text1_2.Text = Player1_2.PrintHits();
             Text2_1.Text = Player2_1.PrintHits();
             Text2_2.Text = Player2_2.PrintHits();
-        }
 
-        private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
+			CupHitEvent(Ellipse06);
+			CupHitEvent(Ellipse1);
+
+		}
+
+		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
         {
-            bool gameInProgress = false;
+            bool gameInProgress = true;
 
             if (gameInProgress)
                 MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
             else
             {
-                MessageBoxButton OkButton;
+                //MessageBoxButton OkButton;
                 MessageBox.Show("Forestil dig, at et spil går i gang. Brug din fantasi");
                 
             }
 
         }
-        public void EllipseColor(object sender, RoutedEventArgs e)
-        {
-            bool ellipseHit = true;
-
-            Ellipse1.Fill = ellipseHit ? Brushes.Red : Brushes.Green;
-        }
-        private void Regler_Click(object sender, RoutedEventArgs e)
+		public void CupHitEvent(Ellipse ellipse)
+		{
+			ellipse.Fill = new SolidColorBrush(Colors.Red);
+		}
+		private void Regler_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Regler kan findes via dette link: https://kingpong_rules.com");
         }
