@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:King_Pong_GUI"
         mc:Ignorable="d"
+		WindowState="Maximized"
        Title="King Pong v0.1" Height="1200" Width="1920">
 	<Window.Background>
 		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -111,6 +112,7 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Ellipse 
+					x:Name="Ellipse1_10"
                     Grid.Row="0" 
                     Grid.Column="3" 
                     Width="55" 
@@ -118,7 +120,8 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-				<Ellipse 
+				<Ellipse
+					x:Name="Ellipse1_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
                     Width="55" 
@@ -127,6 +130,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse1_8"
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Width="55" 
@@ -135,6 +139,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse1_7"
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Width="55" 
@@ -143,7 +148,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
-					x:Name="Ellipse06"
+					x:Name="Ellipse1_6"
 					Opacity="90"
                     Grid.Row="1" 
                     Grid.Column="2"
@@ -153,6 +158,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
+					x:Name="Ellipse1_5"
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Width="55" 
@@ -161,6 +167,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
+					x:Name="Ellipse1_4"
                     Grid.Row="1" 
                     Grid.Column="0" 
                     Width="55" Height="55" 
@@ -168,6 +175,7 @@
                     Canvas.Left="10"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
+					x:Name="Ellipse1_3"
                     Grid.Row="2" 
                     Grid.Column="2" 
                     Width="55" Height="55" 
@@ -175,6 +183,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse1_2"
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Width="55" 
@@ -182,7 +191,8 @@
                     Fill="Green" 
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
-				<Ellipse 
+				<Ellipse  
+					x:Name="Ellipse1_1"
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Width="55" 
@@ -206,6 +216,7 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Ellipse 
+					x:Name="Ellipse2_10"
                     Grid.Row="0" 
                     Grid.Column="3" 
                     Width="55" 
@@ -214,6 +225,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse2_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
                     Width="55" 
@@ -222,6 +234,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse2_8"
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Width="55" 
@@ -230,6 +243,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse2_7"
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Width="55" 
@@ -238,6 +252,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse2_6"
                     Grid.Row="1" 
                     Grid.Column="2"
                     Width="55" 
@@ -246,7 +261,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="2"/>
 				<Ellipse
-                    x:Name="Ellipse1"
+					x:Name="Ellipse2_5"
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Width="55" 
@@ -256,6 +271,7 @@
                     Grid.ColumnSpan="2">
 				</Ellipse>
 				<Ellipse 
+					x:Name="Ellipse2_4"
                     Grid.Row="1" 
                     Grid.Column="0" 
                     Width="55" Height="55" 
@@ -263,6 +279,7 @@
                     Canvas.Left="10"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
+					x:Name="Ellipse2_3"
                     Grid.Row="2" 
                     Grid.Column="2" 
                     Width="55" Height="55" 
@@ -270,6 +287,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse2_2"
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Width="55" 
@@ -278,6 +296,7 @@
                     Canvas.Left="10" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
+					x:Name="Ellipse2_1"
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Width="55" 

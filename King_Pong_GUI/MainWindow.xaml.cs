@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Input;
 
 namespace King_Pong_GUI
 {
@@ -43,22 +44,20 @@ namespace King_Pong_GUI
 			Text2_1.Text = Player2_1.PrintHits();
 			Text2_2.Text = Player2_2.PrintHits();
 
-			CupHitEvent(Ellipse06);
-			CupHitEvent(Ellipse1);
-
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
-			bool gameInProgress = true;
+			bool gameInProgress = false;
 
 			if (gameInProgress)
 				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
 			else
 			{
-				//MessageBoxButton OkButton;
-				MessageBox.Show("Forestil dig, at et spil går i gang. Brug din fantasi");
-
+				NewGameWindow GameStartWindow = new NewGameWindow();
+				GameStartWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen; // centers the new window
+				GameStartWindow.Owner = this; // sets MainWindow as owner so that if it closes, GameStartWindow also closes
+				GameStartWindow.Show();
 			}
 
 		}
@@ -89,7 +88,8 @@ namespace King_Pong_GUI
 
 		public void BeginNewGame()
 		{
-
 		}
+
+		
 	}
 }
