@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using King_Pong_GUI.Properties;
 
 namespace King_Pong_GUI
 {
-	public class GameSettings
+	public static class GameSettings
 	{
 
-		public int NumberOfCups { get; set; }
-		public int NumberOfPlayers { get; set; }
+		public static int NumberOfCups { get; set; }
+		public static int NumberOfPlayers { get; set; }
 	}
-
 }

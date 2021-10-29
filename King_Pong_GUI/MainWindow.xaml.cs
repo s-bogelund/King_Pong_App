@@ -12,20 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Input;
+using King_Pong_GUI.Properties;
 
 namespace King_Pong_GUI
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
+	
 	public partial class MainWindow : Window
 	{
+		
 		public MainWindow()
 		{
 			InitializeComponent();
-
-			Player Player1_1 = new Player("Luyen", 1, 1, 2);
+			List<Ellipse> tenCupsList = new List<Ellipse> { Ellipse1_7, Ellipse1_8, Ellipse1_9, Ellipse1_10, Ellipse2_7, Ellipse2_8, Ellipse2_9, Ellipse2_10 };
+		Player Player1_1 = new Player("Luyen", 1, 1, 2);
 			DataContext = Player1_1;
 
 			Player Player1_2 = new Player("Simon", 0, 2, 1);
@@ -44,8 +43,11 @@ namespace King_Pong_GUI
 			Text2_1.Text = Player2_1.PrintHits();
 			Text2_2.Text = Player2_2.PrintHits();
 
+			BeginNewGame(6, tenCupsList);
+			
 		}
 
+		
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
 			bool gameInProgress = false;
@@ -56,7 +58,7 @@ namespace King_Pong_GUI
 			{
 				NewGameWindow GameStartWindow = new NewGameWindow();
 				GameStartWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen; // centers the new window
-				GameStartWindow.Owner = this; // sets MainWindow as owner so that if it closes, GameStartWindow also closes
+				GameStartWindow.Owner = this;	// sets MainWindow as owner so that if it closes, GameStartWindow also closes
 				GameStartWindow.Show();
 			}
 
@@ -86,8 +88,10 @@ namespace King_Pong_GUI
 			MessageBox.Show("Det får du fandme ikke lov til. Kæmp til det sidste din taber!");
 		}
 
-		public void BeginNewGame()
+		public static void BeginNewGame(int numberOfCups, List<Ellipse> circleList)
 		{
+			if (GameSettings.NumberOfCups == 6)
+				circleList.ForEach(i => i.Visibility = Visibility.Hidden);  //hides the last four cups if only six cups are chosen
 		}
 
 		

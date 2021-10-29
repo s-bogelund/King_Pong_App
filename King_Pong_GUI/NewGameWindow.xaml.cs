@@ -20,6 +20,7 @@ namespace King_Pong_GUI
 	/// </summary>
 	public partial class NewGameWindow : Window
 	{
+		public static int numberOfCups;
 		public NewGameWindow()
 		{
 			InitializeComponent();
@@ -30,10 +31,14 @@ namespace King_Pong_GUI
 			if(!(bool)TenCupButton.IsChecked && !(bool)SixCupButton.IsChecked)
 				MessageBox.Show("Du skal vælge, hvor mange kopper der skal bruges i spillet");
 			
-			if ((bool)SixCupButton.IsChecked)
-				MessageBox.Show("This needs to assign a value to the instance of GameSettings");
-			if ((bool)TenCupButton.IsChecked)
-				MessageBox.Show("This needs to assign a value to the instance of GameSettings");
+			if ((bool)SixCupButton.IsChecked) numberOfCups = 6;
+			if ((bool)TenCupButton.IsChecked) numberOfCups = 10;
+		}
+
+		public static void BeginNewGame(int numberOfCups, List<Ellipse> circleList)
+		{
+			if (numberOfCups == 6)
+				circleList.ForEach(i => i.Visibility = Visibility.Hidden);  //hides the last four cups if only six cups are chosen
 		}
 	}
 
