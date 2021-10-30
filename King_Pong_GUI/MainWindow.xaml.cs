@@ -24,11 +24,15 @@ namespace King_Pong_GUI
 		{
 			InitializeComponent();
 			List<Ellipse> tenCupsList = new List<Ellipse> { Ellipse1_7, Ellipse1_8, Ellipse1_9, Ellipse1_10, Ellipse2_7, Ellipse2_8, Ellipse2_9, Ellipse2_10 };
-		Player Player1_1 = new Player("Luyen", 1, 1, 2);
-			DataContext = Player1_1;
+			App.Team1Turn = true;
+			TurnOver(TurnIndictor1);
+
+			if (App.NumberOfCups == 6)
+				tenCupsList.ForEach(i => i.Visibility = Visibility.Hidden);
+
+			Player Player1_1 = new Player("Luyen", 1, 1, 2);
 
 			Player Player1_2 = new Player("Simon", 0, 2, 1);
-			DataContext = Player1_2;
 
 			Team Team1 = new Team("Team1", Player1_1, Player1_2);
 
@@ -43,7 +47,7 @@ namespace King_Pong_GUI
 			Text2_1.Text = Player2_1.PrintHits();
 			Text2_2.Text = Player2_2.PrintHits();
 
-			BeginNewGame(6, tenCupsList);
+			CupHitEvent(Ellipse1_1);
 			
 		}
 
@@ -58,8 +62,9 @@ namespace King_Pong_GUI
 			{
 				NewGameWindow GameStartWindow = new NewGameWindow();
 				GameStartWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen; // centers the new window
-				GameStartWindow.Owner = this;	// sets MainWindow as owner so that if it closes, GameStartWindow also closes
+				GameStartWindow.Owner = this;   // sets MainWindow as owner so that if it closes, GameStartWindow also closes
 				GameStartWindow.Show();
+				BeginNewGame(App.NumberOfCups);
 			}
 
 		}
@@ -88,12 +93,23 @@ namespace King_Pong_GUI
 			MessageBox.Show("Det får du fandme ikke lov til. Kæmp til det sidste din taber!");
 		}
 
-		public static void BeginNewGame(int numberOfCups, List<Ellipse> circleList)
+		public static void BeginNewGame(int numberOfCups)
 		{
-			if (GameSettings.NumberOfCups == 6)
-				circleList.ForEach(i => i.Visibility = Visibility.Hidden);  //hides the last four cups if only six cups are chosen
+			  //hides the last four cups if only six cups are chosen
 		}
 
-		
+		public static void TurnOver(Rectangle rectangle)
+		{
+			if (App.Team1Turn)
+			{
+				App.Team1Turn = false;
+				rectangle.Opacity = 0;
+			}
+			else
+			{
+				App.Team1Turn = true;
+				rectangle.Opacity = 0;
+			}
+		}
 	}
 }

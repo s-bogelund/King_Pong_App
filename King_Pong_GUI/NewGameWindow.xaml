@@ -51,6 +51,7 @@
 			Grid.RowSpan="2"
 			Grid.Row="2"
 			VerticalAlignment="Center" 
+			HorizontalAlignment="Left"
 			Grid.ColumnSpan="4" 
 			Margin="175,40,175,40">
 			<StackPanel>
@@ -78,13 +79,9 @@
 			Click="ConfirmCups_Click"
 			Grid.Column="1"
 			Grid.Row="4"
-			Foreground="#FF566E7A"
 			HorizontalAlignment="Right"
 			VerticalAlignment="Bottom" 
-			Margin="0,0,0.2,0.2"
-			FontSize="26" 
-			FontWeight="Bold"
-			BorderBrush="#FF080707"
+			Style="{StaticResource popUpWindowButton}"
 			Content="Bekræft" 
 			Grid.ColumnSpan="2">
 			<Button.Background>

@@ -6,97 +6,66 @@
         xmlns:local="clr-namespace:King_Pong_GUI"
         mc:Ignorable="d"
 		WindowState="Maximized"
-       Title="King Pong v0.1" Height="1200" Width="1920">
+       Title="King Pong v0.1" Height="1080" Width="1920">
 	<Window.Background>
 		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 			<GradientStop Color="#FF24292C" Offset="0"/>
 			<GradientStop Color="#FF353434" Offset="0.07"/>
 		</LinearGradientBrush>
 	</Window.Background>
-	<Grid ShowGridLines="True">
+	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="565*"/>
-			<ColumnDefinition Width="0*"/>
-			<ColumnDefinition Width="314*"/>
-			<ColumnDefinition Width="314*"/>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="3.5*"/>
+			<ColumnDefinition Width="1*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="350.4"/>
-			<RowDefinition/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="2*"/>
 		</Grid.RowDefinitions>
-		<Rectangle 
-            Grid.Row="0" 
-            Grid.Column="0" 
-            Fill="Black" 
-            Height="10" 
-            Opacity="10"
-            Margin="0,181,6.4,168.4"/>
-		<Rectangle 
-            Grid.Row="0" 
-            Grid.Column="0" 
-            Fill="Black" 
-            Height="5" 
-            Margin="0,100,6.4,249.4"/>
-		<StackPanel 
-            Grid.Row="0" 
-            Grid.Column="0" 
-            Height="Auto" 
-            Width="Auto" 
-            Margin="0,0,6.8,0" 
-            VerticalAlignment="Stretch">
-			<TextBox 
-                IsReadOnly="True"
-                Margin="5" 
-                Width="Auto" 
-                Height="Auto" 
-                FontSize="64" 
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="1.5*"/>
+				<RowDefinition Height="1*"/>
+				<RowDefinition Height="1*"/>
+			</Grid.RowDefinitions>
+			<TextBlock
+                FontSize="110" 
                 FontWeight="Bold" 
                 TextAlignment="Center" 
-                Background="#FF353434" 
-                Foreground="#FF566E7A" 
-                BorderBrush="{x:Null}">
+                Foreground="{StaticResource DarkModeForeground}">
 				Score
-			</TextBox>
-			<TextBox
-                IsReadOnly="True"
-                Margin="5" 
-                HorizontalAlignment="Stretch" 
-                Width="Auto" 
-                Height="Auto" 
-                FontSize="54" 
+			</TextBlock>
+			<TextBlock
+				x:Name="ScoreTrackerBlock"
+				Grid.Row="1"
+                FontSize="65" 
                 FontWeight="Bold" 
-                TextAlignment="Center" 
-                Background="#FF353434" 
-                Foreground="#FF566E7A" 
-                BorderBrush="{x:Null}">
-				TS  6 : 5  HF
-			</TextBox>
-			<TextBox 
-                IsReadOnly="True"
-                Width="Auto" 
-                Height="Auto" 
-                FontSize="55" 
+                TextAlignment="Center"
+                Foreground="{StaticResource DarkModeForeground}">
+				TS  10 : 9  HF
+			</TextBlock>
+			<TextBlock
+				Grid.Row="2"
+				x:Name="turnTextBlock"
+                FontSize="65" 
                 FontWeight="Bold" 
-                TextAlignment="Center" 
-                BorderBrush="{x:Null}" 
-                VerticalAlignment="Bottom" 
-                Background="#FF353434" 
-                Foreground="#FF566E7A">
+                TextAlignment="Center"
+                Foreground="{StaticResource DarkModeForeground}">
 				Magnex's Tur
-			</TextBox>
-		</StackPanel>
+			</TextBlock>
+		</Grid>
 		<Grid 
             Grid.Row="1" 
-            ShowGridLines="True" 
-            Margin="0,0,6.8,-0.2">
+			Grid.Column="1" 
+            Margin="2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="4*"/>
-				<RowDefinition Height="2*"/>
-				<RowDefinition Height="3*"/>
+				<RowDefinition Height="1.5*"/>
+				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			<Grid Grid.Row="0" Grid.Column="0">
 				<Grid.ColumnDefinitions>
@@ -115,90 +84,62 @@
 					x:Name="Ellipse1_10"
                     Grid.Row="0" 
                     Grid.Column="3" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse
 					x:Name="Ellipse1_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse1_8"
                     Grid.Row="0" 
                     Grid.Column="1" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse1_7"
                     Grid.Row="0" 
                     Grid.Column="0" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse1_6"
 					Opacity="90"
                     Grid.Row="1" 
                     Grid.Column="2"
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
 					x:Name="Ellipse1_5"
                     Grid.Row="1" 
                     Grid.Column="1" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}" 
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
 					x:Name="Ellipse1_4"
                     Grid.Row="1" 
                     Grid.Column="0" 
-                    Width="55" Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10"
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
 					x:Name="Ellipse1_3"
                     Grid.Row="2" 
                     Grid.Column="2" 
-                    Width="55" Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse1_2"
                     Grid.Row="2" 
                     Grid.Column="1" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse  
 					x:Name="Ellipse1_1"
                     Grid.Row="3" 
                     Grid.Column="1" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="2"/>
 
 			</Grid>
@@ -219,265 +160,153 @@
 					x:Name="Ellipse2_10"
                     Grid.Row="0" 
                     Grid.Column="3" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse2_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse2_8"
                     Grid.Row="0" 
                     Grid.Column="1" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse2_7"
                     Grid.Row="0" 
                     Grid.Column="0" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse2_6"
                     Grid.Row="1" 
                     Grid.Column="2"
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse
 					x:Name="Ellipse2_5"
                     Grid.Row="1" 
                     Grid.Column="1" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green"
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="2">
 				</Ellipse>
 				<Ellipse 
 					x:Name="Ellipse2_4"
                     Grid.Row="1" 
                     Grid.Column="0" 
-                    Width="55" Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10"
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
 					x:Name="Ellipse2_3"
                     Grid.Row="2" 
                     Grid.Column="2" 
-                    Width="55" Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}" 
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse2_2"
                     Grid.Row="2" 
                     Grid.Column="1" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="Ellipse2_1"
                     Grid.Row="3" 
                     Grid.Column="1" 
-                    Width="55" 
-                    Height="55" 
-                    Fill="Green" 
-                    Canvas.Left="10" 
+                    Style="{StaticResource cupCircles}" 
                     Grid.ColumnSpan="2"/>
 			</Grid>
 			<StackPanel 
-				Orientation="Vertical"
                 Grid.Row="1" 
                 Grid.Column="0" 
                 Width="Auto"
-				VerticalAlignment="Stretch">
-				<TextBox 
-                    IsReadOnly="True"
+				VerticalAlignment="Center">
+				<TextBlock
                     Name="Text1_1" 
                     TextAlignment="Center" 
-                    Margin ="5" 
-                    HorizontalAlignment="Stretch" 
-                    DataContext="Team1" 
-                    VerticalAlignment="Stretch" 
-                    FontSize="32" 
-                    Foreground="#FF566E7A" 
-                    Background="#FF353434" 
-                    BorderBrush="{x:Null}">
+                    Margin ="0 8 0 8" 
+                    FontSize="45"
+                    Foreground="{StaticResource DarkModeForeground}">
 					Team1 Player1
-				</TextBox>
-				<TextBox 
-                    IsReadOnly="True"
+				</TextBlock>
+				<TextBlock
                     Name="Text1_2" 
-                    TextAlignment="Center" 
-                    Margin="5,5,5.4,5"  
-                    VerticalAlignment="Center" 
-                    FontSize="32" 
-                    Background="#FF353434" 
-                    Foreground="#FF566E7A" 
-                    Height="60" 
-                    BorderBrush="{x:Null}">
+                    TextAlignment="Center"  
+					Margin ="0 8 0 8" 
+                    FontSize="45"
+                    Foreground="{StaticResource DarkModeForeground}">
 					Team1 Player2
-				</TextBox>
+				</TextBlock>
 			</StackPanel>
 			<StackPanel 
                 Grid.Row="1" 
-                Grid.Column="1" 
-                Width="Auto">
-				<TextBox 
-                    Name="Text2_1" 
-                    IsReadOnly="True" 
+                Grid.Column="1"
+				VerticalAlignment="Center">
+				<TextBlock 
+                    Name="Text2_1"
                     TextAlignment="Center" 
-                    Margin ="5" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch" 
-                    FontSize="32" 
-                    Foreground="#FF566E7A" 
-                    Background="#FF353434" 
-                    BorderBrush="{x:Null}">
+                    Margin ="0 8 0 8" 
+                    FontSize="45" 
+                    Foreground="{StaticResource DarkModeForeground}">
 					Team2 Player1
-				</TextBox>
-				<TextBox 
-                    IsReadOnly="True"
+				</TextBlock>
+				<TextBlock 
                     Name="Text2_2" 
                     TextAlignment="Center" 
-                    Margin ="5" 
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch" 
-                    FontSize="32" 
-                    Foreground="#FF566E7A" 
-                    Background="#FF353434" 
-                    BorderBrush="{x:Null}">
+                    Margin ="0 8 0 8"
+                    FontSize="45" 
+                    Foreground="{StaticResource DarkModeForeground}"> 
 					Team2 Player2
-				</TextBox>
+				</TextBlock>
 			</StackPanel>
-			<Rectangle 
-				x:Name="TurnIndictor1"
-                Grid.Column="1" 
-                Grid.Row="2" 
-                Fill="Green">
-			</Rectangle>
-			<Rectangle 
-				x:Name="TurnIndictor2"
-                Grid.Column="0" 
-                Grid.Row="2" 
-                Fill="Green">
-			</Rectangle>
 		</Grid>
-		<Grid 
-            Grid.Row="0" 
-            Grid.Column="2" 
-            Margin="5" 
-            Grid.ColumnSpan="2">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="50"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
-			<Grid Margin="1">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Button 
-					Grid.Column="1"
-					Foreground="#FF566E7A"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch" 
-					Margin="0.75, 1, 1, 0"
-					FontSize="26" 
-					FontWeight="Bold"
-					BorderBrush="#FF080707"
-					Click="Nyt_Spil_Click"
-					Content="Opstil Nyt Spil">
-					<Button.Background>
-						<SolidColorBrush Color="Black" Opacity="0.15"/>
-					</Button.Background>
-				</Button>
-				<Button 
-					Grid.Column="2"
-					Foreground="#FF566E7A"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch" 
-					Margin="0.75, 1, 1, 0"
-					FontSize="26" 
-					FontWeight="Bold"
-					BorderBrush="#FF080707"
-					Click="Regler_Click" 
-					Content="Regler">
-					<Button.Background>
-						<SolidColorBrush 
+		<Grid Margin="1"/>
+		<StackPanel 
+			Margin="0 4 4 0"
+			Grid.Column="1"
+			Orientation="Horizontal"
+			Grid.ColumnSpan="3"
+			HorizontalAlignment="Right"
+			VerticalAlignment="Top">
+			<Button
+				Style="{StaticResource defaultDarkModeButton}"
+				Click="Nyt_Spil_Click"
+				Content="Opstil Nyt Spil">
+				<Button.Background>
+					<SolidColorBrush 
+						Color="Black" 
+						Opacity="0.15"/>
+				</Button.Background>
+			</Button>
+			<Button
+				Style="{StaticResource defaultDarkModeButton}"
+				Click="Regler_Click" 
+				Content="Regler">
+				<Button.Background>
+					<SolidColorBrush 
                         Color="Black" 
                         Opacity="0.15"/>
-					</Button.Background>
-				</Button>
-				<Button 
-					Grid.Column="3"
-					Foreground="#FF566E7A"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch" 
-					Margin="0.75, 1, 1, 0"
-					FontSize="26" 
-					FontWeight="Bold" 
-					OpacityMask="#FF0E0909"
-					BorderBrush="#FF080707"
-					Click="Indstillinger_Click" 
-					Content="Indstillinger">
-					<Button.Background>
-						<SolidColorBrush Color="Black" Opacity="0.15"/>
-					</Button.Background>
-				</Button>
-				<Button
-					Grid.Column="4"
-					Foreground="#FF566E7A"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch" 
-					Margin="0.75, 1, 1, 0"
-					FontSize="26" 
-					FontWeight="Bold" 
-					BorderBrush="#FF080707"
-					Click="FAQ_Click" 
-					Content="FAQ" 
-            >
-					<Button.Background>
-						<SolidColorBrush Color="Black" Opacity="0.15"/>
-					</Button.Background>
-				</Button>
-			</Grid>
-		</Grid>
+				</Button.Background>
+			</Button>
+			<Button
+				Style="{StaticResource defaultDarkModeButton}"
+				Click="FAQ_Click" 
+				Content="FAQ" >
+				<Button.Background>
+					<SolidColorBrush 
+						Color="Black" 
+						Opacity="0.15"/>
+				</Button.Background>
+			</Button>
+		</StackPanel>
 		<Button 
 			Grid.Column="0"
 			Grid.Row="0"
-            Foreground="#FF566E7A" 
-            Width="220" 
-            Height="50" 
+			Style="{StaticResource defaultDarkModeButton}"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" 
-			Margin="3,4"
-            FontSize="26" 
-            FontWeight="Bold" 
-            BorderBrush="#FF080707"
+            VerticalAlignment="Top"
             Click="Giv_Op_Click" 
             Content="Giv Op">
 			<Button.Background>
@@ -485,7 +314,19 @@
                         Color="Black" 
                         Opacity="0.15"/>
 			</Button.Background>
-
 		</Button>
+		<Rectangle 
+			x:Name="TurnIndictor1"
+            Grid.Column="2" 
+            Grid.Row="1" 
+            Fill="Green">
+		</Rectangle>
+		<Rectangle 
+			x:Name="TurnIndictor2"
+			
+            Grid.Column="0" 
+            Grid.Row="1" 
+            Fill="Green">
+		</Rectangle>
 	</Grid>
 </Window>

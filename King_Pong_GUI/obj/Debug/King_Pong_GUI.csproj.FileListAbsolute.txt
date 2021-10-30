@@ -15,3 +15,4 @@ C:\Users\simbj\source\repos\King_Pong_GUI\King_Pong_GUI\obj\Debug\King_Pong_GUI.
 C:\Users\simbj\source\repos\King_Pong_GUI\King_Pong_GUI\obj\Debug\King_Pong_GUI.pdb
 C:\Users\simbj\source\repos\King_Pong_GUI\King_Pong_GUI\obj\Debug\NewGameWindow.g.cs
 C:\Users\simbj\source\repos\King_Pong_GUI\King_Pong_GUI\obj\Debug\NewGameWindow.baml
+C:\Users\simbj\source\repos\King_Pong_GUI\King_Pong_GUI\obj\Debug\App.baml
