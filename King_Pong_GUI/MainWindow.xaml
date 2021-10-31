@@ -162,7 +162,7 @@
                     Grid.Column="3" 
                     Style="{StaticResource cupCircles}"
                     Grid.ColumnSpan="1"/>
-				<Ellipse 
+				<Ellipse
 					x:Name="Ellipse2_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
@@ -273,7 +273,7 @@
 			<Button
 				Style="{StaticResource defaultDarkModeButton}"
 				Click="Nyt_Spil_Click"
-				Content="Opstil Nyt Spil">
+				Content="Nyt Spil">
 				<Button.Background>
 					<SolidColorBrush 
 						Color="Black" 

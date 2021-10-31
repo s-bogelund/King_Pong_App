@@ -14,7 +14,6 @@ namespace King_Pong_GUI
 		public int NumberOfHits { get; set; }
 		public int NumberOfThrows { get; set; }
 		public double HitRate { get; }
-
 		public Player() { }
 		public Player(string name, int numberOfHits, int playerNumber, int teamNumber)
 		{
@@ -27,7 +26,7 @@ namespace King_Pong_GUI
 
 		public string PrintHits()
 		{
-			return $"{Name}      -      {NumberOfHits} krus ramt";
+			return $"{Name}    -    {NumberOfHits} ramt";
 		}
 
 		public void AddThrow()

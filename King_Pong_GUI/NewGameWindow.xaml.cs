@@ -30,9 +30,15 @@ namespace King_Pong_GUI
 			if(!(bool)TenCupButton.IsChecked && !(bool)SixCupButton.IsChecked)
 				MessageBox.Show("Du skal vælge, hvor mange kopper der skal bruges i spillet");
 			
-			if ((bool)SixCupButton.IsChecked) App.NumberOfCups = 6;
-			if ((bool)TenCupButton.IsChecked) App.NumberOfCups = 10;
-			Close();
+			if ((bool)SixCupButton.IsChecked) NewGameModel.NumberOfCups = 6;
+			if ((bool)TenCupButton.IsChecked) NewGameModel.NumberOfCups = 10;
+			TeamPlayerNameWindow teamPlayerNameWindow = new TeamPlayerNameWindow();
+			teamPlayerNameWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen; // centers the new window
+			teamPlayerNameWindow.Owner = this;
+			teamPlayerNameWindow.Show();
+			
+			//Close();
+
 		}
 
 		public static void BeginNewGame(int numberOfCups, List<Ellipse> circleList)

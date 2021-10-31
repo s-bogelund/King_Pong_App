@@ -56,10 +56,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GameSettings.cs" />
+    <Compile Include="NewGameModel.cs" />
     <Compile Include="NewGameWindow.xaml.cs">
       <DependentUpon>NewGameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObservableObjectModel.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="TeamPlayerNameModel.cs" />
+    <Compile Include="TeamPlayerNameWindow.xaml.cs">
+      <DependentUpon>TeamPlayerNameWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +79,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewGameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeamPlayerNameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
