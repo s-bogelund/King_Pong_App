@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,20 +19,25 @@ using King_Pong_GUI.Properties;
 namespace King_Pong_GUI
 {
 	
-	public partial class MainWindow : Window
+	public partial class GameBoard : Window
 	{
 		
-		public MainWindow()
+		public GameBoard()
 		{
 			InitializeComponent();
 			List<Ellipse> tenCupsList = new List<Ellipse> { Ellipse1_7, Ellipse1_8, Ellipse1_9, Ellipse1_10, Ellipse2_7, Ellipse2_8, Ellipse2_9, Ellipse2_10 };
-		Player Player1_1 = new Player("Luyen", 1, 1, 2);
-			DataContext = Player1_1;
+			//NewGameModel.Team1Turn = false;
+			//TurnOver(TurnIndictor2);
+
+
+			//if (NewGameModel.NumberOfCups == 6)
+			//	tenCupsList.ForEach(i => i.Visibility = Visibility.Hidden);
+
+			//Player Player1_1 = new Player("Luyen", 1, 1, 2);
 
 			Player Player1_2 = new Player("Simon", 0, 2, 1);
-			DataContext = Player1_2;
 
-			Team Team1 = new Team("Team1", Player1_1, Player1_2);
+			//Team Team1 = new Team("Team1", Player1_1, Player1_2);
 
 			Player Player2_1 = new Player("Magnex", 0, 1, 2);
 
@@ -38,12 +45,12 @@ namespace King_Pong_GUI
 
 			Team Team2 = new Team("Team2", Player2_1, Player2_2);
 
-			Text1_1.Text = Player1_1.PrintHits();
+			//Text1_1.Text = Player1_1.PrintHits();
 			Text1_2.Text = Player1_2.PrintHits();
 			Text2_1.Text = Player2_1.PrintHits();
 			Text2_2.Text = Player2_2.PrintHits();
 
-			BeginNewGame(6, tenCupsList);
+			CupHitEvent(Ellipse1_1);
 			
 		}
 
@@ -58,8 +65,9 @@ namespace King_Pong_GUI
 			{
 				NewGameWindow GameStartWindow = new NewGameWindow();
 				GameStartWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen; // centers the new window
-				GameStartWindow.Owner = this;	// sets MainWindow as owner so that if it closes, GameStartWindow also closes
+				GameStartWindow.Owner = this;   // sets MainWindow as owner so that if it closes, GameStartWindow also closes
 				GameStartWindow.Show();
+				//BeginNewGame(NewGameModel.NumberOfCups);
 			}
 
 		}
@@ -67,15 +75,10 @@ namespace King_Pong_GUI
 		{
 			ellipse.Fill = new SolidColorBrush(Colors.Red);
 		}
+
 		private void Regler_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Regler kan findes via dette link: https://kingpong_rules.com");
-		}
-
-		private void Indstillinger_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("Giver det overhovedet mening at have en 'Indstillinger' boks??");
-
 		}
 
 		private void FAQ_Click(object sender, RoutedEventArgs e)
@@ -88,12 +91,23 @@ namespace King_Pong_GUI
 			MessageBox.Show("Det får du fandme ikke lov til. Kæmp til det sidste din taber!");
 		}
 
-		public static void BeginNewGame(int numberOfCups, List<Ellipse> circleList)
+		public static void BeginNewGame(int numberOfCups)
 		{
-			if (GameSettings.NumberOfCups == 6)
-				circleList.ForEach(i => i.Visibility = Visibility.Hidden);  //hides the last four cups if only six cups are chosen
+			  //hides the last four cups if only six cups are chosen
 		}
 
-		
+		//public static void TurnOver(Rectangle rectangle)
+		//{
+		//	if (NewGameModel.Team1Turn)
+		//	{
+		//		NewGameModel.Team1Turn = false;
+		//		rectangle.Opacity = 0;
+		//	}
+		//	else
+		//	{
+		//		NewGameModel.Team1Turn = true;
+		//		rectangle.Opacity = 0;
+		//	}
+		//}
 	}
 }

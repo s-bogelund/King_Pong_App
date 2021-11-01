@@ -7,7 +7,7 @@ using King_Pong_GUI.Properties;
 
 namespace King_Pong_GUI
 {
-	public static class GameSettings
+	public abstract class GameSettings
 	{
 
 		public static int NumberOfCups { get; set; }

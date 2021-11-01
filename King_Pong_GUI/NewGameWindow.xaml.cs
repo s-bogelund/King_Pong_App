@@ -20,7 +20,6 @@ namespace King_Pong_GUI
 	/// </summary>
 	public partial class NewGameWindow : Window
 	{
-		public static int numberOfCups;
 		public NewGameWindow()
 		{
 			InitializeComponent();
@@ -31,8 +30,17 @@ namespace King_Pong_GUI
 			if(!(bool)TenCupButton.IsChecked && !(bool)SixCupButton.IsChecked)
 				MessageBox.Show("Du skal vælge, hvor mange kopper der skal bruges i spillet");
 			
-			if ((bool)SixCupButton.IsChecked) numberOfCups = 6;
-			if ((bool)TenCupButton.IsChecked) numberOfCups = 10;
+			if ((bool)SixCupButton.IsChecked) NewGameModel.NumberOfCups = 6;
+			if ((bool)TenCupButton.IsChecked) NewGameModel.NumberOfCups = 10;
+
+			TeamPlayerNameWindow teamPlayerNameWindow = new TeamPlayerNameWindow();
+			teamPlayerNameWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen; // centers the new window
+			//teamPlayerNameWindow.Owner = MainWindow.BeginNewGame;
+			Close();
+			teamPlayerNameWindow.ShowDialog();
+			
+			
+
 		}
 
 		public static void BeginNewGame(int numberOfCups, List<Ellipse> circleList)
