@@ -32,12 +32,14 @@ namespace King_Pong_GUI
 			
 			if ((bool)SixCupButton.IsChecked) NewGameModel.NumberOfCups = 6;
 			if ((bool)TenCupButton.IsChecked) NewGameModel.NumberOfCups = 10;
+
 			TeamPlayerNameWindow teamPlayerNameWindow = new TeamPlayerNameWindow();
 			teamPlayerNameWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen; // centers the new window
-			teamPlayerNameWindow.Owner = this;
-			teamPlayerNameWindow.Show();
+			//teamPlayerNameWindow.Owner = MainWindow.BeginNewGame;
+			Close();
+			teamPlayerNameWindow.ShowDialog();
 			
-			//Close();
+			
 
 		}
 

@@ -24,6 +24,7 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
+			<RowDefinition Height="0.4*"/>
 		</Grid.RowDefinitions>
 		<Label
 			Margin="0 40 0 0"
@@ -63,7 +64,7 @@
 				Text="Spiller 1"
 				FontSize="18"/>
 			<TextBox
-				Text="{Binding NameTeam1}"
+				Text="Indtast her"
 				Foreground="Navy"
 				Background="Gray"
 				FontSize="15"/>
@@ -73,12 +74,12 @@
 				Text="Spiller 2"
 				FontSize="18"/>
 			<TextBox
-				Text="{Binding NameTeam1}"
+				Text="{Binding NamePlayer2}"
 				Foreground="Navy"
 				Background="Gray"
 				FontSize="15"/>
 		</StackPanel>
-				<StackPanel 
+		<StackPanel 
 			Grid.Row="0"
 			Grid.RowSpan="2"
 			VerticalAlignment="Center"
@@ -90,6 +91,7 @@
 				Text="Hold 1"
 				FontSize="20"/>
 			<TextBox
+				x:Name="Team1Name"
 				Text="{Binding NameTeam1}"
 				Foreground="Navy"
 				FontSize="18"
@@ -108,6 +110,7 @@
 				Text="Spiller 1"
 				FontSize="18"/>
 			<TextBox
+				x:Name="Player1Name"
 				Text="{Binding NamePlayer1, UpdateSourceTrigger=PropertyChanged}"
 				Foreground="Navy"
 				Background="Gray"
@@ -118,12 +121,12 @@
 				Text="Spiller 2"
 				FontSize="18"/>
 			<TextBox
+				x:Name="Player2Name"
 				Text="{Binding NamePlayer2, UpdateSourceTrigger=PropertyChanged}"
 				Foreground="Navy"
 				Background="Gray"
 				FontSize="15"/>
 		</StackPanel>
-
 
 		<StackPanel 
 			Grid.Row="0"
@@ -138,6 +141,7 @@
 				Text="Hold 2"
 				FontSize="20"/>
 			<TextBox
+				x:Name="Team2Name"
 				Text="{Binding NameTeam2, UpdateSourceTrigger=PropertyChanged}"
 				Foreground="Navy"
 				FontSize="18"
@@ -157,7 +161,8 @@
 				Text="Spiller 1"
 				FontSize="18"/>
 			<TextBox
-				Text="{Binding NamePlayer3, UpdateSourceTrigger=PropertyChanged}"
+				x:Name="Player3Name"
+				Text="{Binding NamePlayer3}"
 				Foreground="Navy"
 				Background="Gray"
 				FontSize="15"/>
@@ -167,10 +172,29 @@
 				Text="Spiller 2"
 				FontSize="18"/>
 			<TextBox
-				Text="{Binding NamePlayer4, UpdateSourceTrigger=PropertyChanged}"
+				x:Name="Player4Name"
+				Text="{Binding NamePlayer4}"
 				Foreground="Navy"
 				Background="Gray"
 				FontSize="15"/>
 		</StackPanel>
+		<Button
+			x:Name="ConfirmNames"
+			Click="ConfirmNames_Click"
+			Grid.Column="1"
+			Grid.Row="2"
+			Margin="80
+			0 0 0"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Bottom" 
+			Style="{StaticResource popUpWindowButton}"
+			Content="Bekræft" 
+			Grid.ColumnSpan="2">
+			<Button.Background>
+				<SolidColorBrush 
+                    Color="Black" 
+                    Opacity="0.15"/>
+			</Button.Background>
+		</Button>
 	</Grid>
 </Window>

@@ -19,25 +19,25 @@ using King_Pong_GUI.Properties;
 namespace King_Pong_GUI
 {
 	
-	public partial class MainWindow : Window
+	public partial class GameBoard : Window
 	{
 		
-		public MainWindow()
+		public GameBoard()
 		{
 			InitializeComponent();
 			List<Ellipse> tenCupsList = new List<Ellipse> { Ellipse1_7, Ellipse1_8, Ellipse1_9, Ellipse1_10, Ellipse2_7, Ellipse2_8, Ellipse2_9, Ellipse2_10 };
 			//NewGameModel.Team1Turn = false;
-			TurnOver(TurnIndictor2);
+			//TurnOver(TurnIndictor2);
 
 
 			//if (NewGameModel.NumberOfCups == 6)
 			//	tenCupsList.ForEach(i => i.Visibility = Visibility.Hidden);
 
-			Player Player1_1 = new Player("Luyen", 1, 1, 2);
+			//Player Player1_1 = new Player("Luyen", 1, 1, 2);
 
 			Player Player1_2 = new Player("Simon", 0, 2, 1);
 
-			Team Team1 = new Team("Team1", Player1_1, Player1_2);
+			//Team Team1 = new Team("Team1", Player1_1, Player1_2);
 
 			Player Player2_1 = new Player("Magnex", 0, 1, 2);
 
@@ -45,7 +45,7 @@ namespace King_Pong_GUI
 
 			Team Team2 = new Team("Team2", Player2_1, Player2_2);
 
-			Text1_1.Text = Player1_1.PrintHits();
+			//Text1_1.Text = Player1_1.PrintHits();
 			Text1_2.Text = Player1_2.PrintHits();
 			Text2_1.Text = Player2_1.PrintHits();
 			Text2_2.Text = Player2_2.PrintHits();
@@ -67,7 +67,7 @@ namespace King_Pong_GUI
 				GameStartWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen; // centers the new window
 				GameStartWindow.Owner = this;   // sets MainWindow as owner so that if it closes, GameStartWindow also closes
 				GameStartWindow.Show();
-				BeginNewGame(NewGameModel.NumberOfCups);
+				//BeginNewGame(NewGameModel.NumberOfCups);
 			}
 
 		}
@@ -96,18 +96,18 @@ namespace King_Pong_GUI
 			  //hides the last four cups if only six cups are chosen
 		}
 
-		public static void TurnOver(Rectangle rectangle)
-		{
-			if (NewGameModel.Team1Turn)
-			{
-				NewGameModel.Team1Turn = false;
-				rectangle.Opacity = 0;
-			}
-			else
-			{
-				NewGameModel.Team1Turn = true;
-				rectangle.Opacity = 0;
-			}
-		}
+		//public static void TurnOver(Rectangle rectangle)
+		//{
+		//	if (NewGameModel.Team1Turn)
+		//	{
+		//		NewGameModel.Team1Turn = false;
+		//		rectangle.Opacity = 0;
+		//	}
+		//	else
+		//	{
+		//		NewGameModel.Team1Turn = true;
+		//		rectangle.Opacity = 0;
+		//	}
+		//}
 	}
 }

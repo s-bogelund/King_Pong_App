@@ -20,8 +20,8 @@
 
 		<Style TargetType="Ellipse" x:Key="cupCircles">
 			<Setter Property="Fill" Value="Green"/>
-			<Setter Property="Width" Value="85"/>
-			<Setter Property="Height" Value="85"/>
+			<Setter Property="Width" Value="100"/>
+			<Setter Property="Height" Value="100"/>
 		</Style>
 		<Style TargetType="Button" x:Key="popUpWindowButton">
 			<Setter Property="BorderBrush" Value="#FF080707"/>

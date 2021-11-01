@@ -15,18 +15,18 @@ namespace King_Pong_GUI
 		public int NumberOfThrows { get; set; }
 		public double HitRate { get; }
 		public Player() { }
-		public Player(string name, int numberOfHits, int playerNumber, int teamNumber)
+		public Player(string name, int playerNumber, int teamNumber, int numberOfHits = 0)
 		{
 			Name = name;
 			NumberOfHits = numberOfHits;
 			PlayerNumber = playerNumber;
 			TeamNumber = teamNumber;
-			HitRate = (double)numberOfHits / NumberOfThrows;
+			HitRate = numberOfHits == 0 ? 0 : (double)numberOfHits / NumberOfThrows;
 		}
 
 		public string PrintHits()
 		{
-			return $"{Name}    -    {NumberOfHits} ramt";
+			return $"{Name}    -    {NumberOfHits}";
 		}
 
 		public void AddThrow()
@@ -37,5 +37,9 @@ namespace King_Pong_GUI
 		{
 			NumberOfHits++;
 		}
+	}
+
+	public interface INotifyProperChanged
+	{
 	}
 }
