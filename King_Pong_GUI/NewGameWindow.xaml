@@ -1,0 +1,93 @@
+﻿<Window x:Class="King_Pong_GUI.NewGameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:King_Pong_GUI"
+        mc:Ignorable="d"
+        Title="NewGameWindow" Height="550" Width="800">
+
+	<!--WindowStyle="None"
+		ShowInTaskbar="False"
+		AllowsTransparency="True"-->
+
+
+	<Window.Background>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="#FF24292C" Offset="0"/>
+			<GradientStop Color="#FF353434" Offset="0.07"/>
+		</LinearGradientBrush>
+	</Window.Background>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="1.8*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Viewbox
+			Grid.Column="0"
+			Grid.Row="1"
+			Grid.ColumnSpan="4"
+			Margin="40,10,39.4,10">
+			<TextBlock
+			HorizontalAlignment="Stretch"
+			FontWeight="Bold"
+			TextAlignment="Center"
+			Foreground="#FF566E7A" 
+			
+			><Run Text="Hvor mange kopper skal hver hold have?"/><LineBreak/></TextBlock>
+		</Viewbox>
+		<Viewbox
+			Height="100"
+			Grid.RowSpan="2"
+			Grid.Row="2"
+			VerticalAlignment="Center" 
+			HorizontalAlignment="Left"
+			Grid.ColumnSpan="4" 
+			Margin="175,40,175,40">
+			<StackPanel>
+				<RadioButton
+					x:Name="SixCupButton"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Center">
+					<TextBlock 
+						Text="6"
+						Foreground="#FF566E7A" />
+				</RadioButton>
+				<RadioButton 
+					Margin="0, 10"
+					x:Name="TenCupButton"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Center">
+					<TextBlock 
+						Text="10"
+						Foreground="#FF566E7A" />
+					</RadioButton>
+			</StackPanel>
+		</Viewbox>
+		<Button
+			x:Name="ConfirmCups"
+			Click="ConfirmCups_Click"
+			Grid.Column="1"
+			Grid.Row="4"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Bottom" 
+			Style="{StaticResource popUpWindowButton}"
+			Content="Bekræft" 
+			Grid.ColumnSpan="2">
+			<Button.Background>
+				<SolidColorBrush 
+                    Color="Black" 
+                    Opacity="0.15"/>
+			</Button.Background>
+		</Button>
+	</Grid>
+</Window>
