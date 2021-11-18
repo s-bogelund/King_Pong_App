@@ -48,6 +48,8 @@ namespace King_Pong_App.Models
 			HitRate = numberOfHits == 0 ? 0 : (double)numberOfHits / NumberOfThrows;
 		}
 
+		public bool Turn { get; set; }
+
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -11,34 +11,24 @@ namespace King_Pong_App.ViewModels
 	{
 		public PlayerViewModel()
 		{
-
 		}
 		public PlayerViewModel(string name, int playerNumber, int teamNumber, int numberOfHits = 0)
 				: base(name, playerNumber, teamNumber, numberOfHits)
 		{
+		}
+		public string PrintHits() => $"{Name}	{NumberOfHits}";
 
-		}
-		public string PrintHits()
-		{
-			return @$"{Name}		{NumberOfHits}";
-		}
+		public void AddThrow() => NumberOfThrows++;
 
+		public void AddHit() => NumberOfHits++;
 
-		public void AddThrow()
-		{
-			NumberOfThrows++;
-		}
-		public void AddHit()
-		{
-			NumberOfHits++;
-			//Task.Run(() =>
-			//{
-			//	while (true)
-			//	{
-			//		Debug.WriteLine($"Name Player 1: {Player1.Name}");
-			//		Thread.Sleep(1000);
-			//	}
-			//});
-		}
+		//Task.Run(() =>
+		//{
+		//	while (true)
+		//	{
+		//		Debug.WriteLine($"Name Player 1: {Player1.Name}");
+		//		Thread.Sleep(1000);
+		//	}
+		//});
 	}
 }

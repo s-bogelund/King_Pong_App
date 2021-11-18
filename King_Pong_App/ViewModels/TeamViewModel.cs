@@ -28,5 +28,11 @@ namespace King_Pong_App.ViewModels
 			}
 			
 		}
+
+		public void TurnToggle(PlayerModel currentTurn, PlayerModel nextTurn)
+		{
+			currentTurn.Turn = false;
+			nextTurn.Turn = true;
+		}
 	}
 }
