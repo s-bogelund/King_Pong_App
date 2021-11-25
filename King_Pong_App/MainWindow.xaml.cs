@@ -47,29 +47,14 @@ namespace King_Pong_App
 			{
 				CupSelection();
 				NumberOfPlayersSelection();
-				
-				
-
 				if (App.teamSize == 2)
-				{
-					
-					Team1Name.Text = App.team1.Name;
-					Team2Name.Text = App.team2.Name;
-					ScoreCount.Text = App.CurrentScore();
-				}
+					FourPlayerGame();
 				else
 					TwoPlayerGame();
-
-
-				Player1_1.Text = App.player1.PrintHits();
-				Player1_2.Text = App.player2.PrintHits();
-				Player2_1.Text = App.player3.PrintHits();
-				Player2_2.Text = App.player4.PrintHits();
-
-				//TeamPlayerNameWindow teamPlayerNameWindow = new TeamPlayerNameWindow();
-				//teamPlayerNameWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-				//teamPlayerNameWindow.ShowDialog();
 			}
+
+			PrintGameBoardInfo();
+			//gameInProgress = true;  <--- implemented when we're done :)
 		}
 
 		public void TwoPlayerGame()
@@ -79,8 +64,11 @@ namespace King_Pong_App
 			nameSelect2.Owner = this;
 			nameSelect2.ShowDialog();
 
-			Player1_1.Text = App.player1.PrintHits();
-			Player2_1.Text = App.player3.PrintHits();
+			Player1_1.Text = App.player1.Name;
+			Player2_1.Text = App.player3.Name;
+
+			Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
+			Player1_1_Hits.Text = App.player3.NumberOfHits.ToString();
 
 			App.player2.Name = string.Empty;
 			App.player4.Name = string.Empty;
@@ -94,10 +82,15 @@ namespace King_Pong_App
 			nameSelect4.Owner = this;
 			nameSelect4.ShowDialog();
 
-			Player1_1.Text = App.player1.PrintHits();
-			Player1_2.Text = App.player2.PrintHits();
-			Player2_1.Text = App.player3.PrintHits();
-			Player2_2.Text = App.player4.PrintHits();
+			Player1_1.Text = App.player1.Name;
+			Player1_2.Text = App.player2.Name;
+			Player2_1.Text = App.player3.Name;
+			Player2_2.Text = App.player4.Name;
+
+			Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
+			Player1_2_Hits.Text = App.player2.NumberOfHits.ToString();
+			Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
+			Player2_2_Hits.Text = App.player4.NumberOfHits.ToString();
 		}
 
 		public void NumberOfPlayersSelection()
@@ -116,6 +109,16 @@ namespace King_Pong_App
 
 			if (App.numberOfCups == 6)
 				backFourCups.HideEllipse(backFourCups.EllipseVisibility);
+			else
+				backFourCups.ShowEllipse(backFourCups.EllipseVisibility);
+		}
+
+		public void PrintGameBoardInfo()
+		{
+			ScoreCount.Text = App.CurrentScore();
+			Team1Name.Text = App.team1.Name;
+			Team2Name.Text = App.team2.Name;
+
 		}
 		private void Regler_Click(object sender, RoutedEventArgs e)
 		{

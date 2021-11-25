@@ -42,6 +42,12 @@ namespace King_Pong_App.ViewModels
 			return ellipseVisibility;
 		}
 
+		public Visibility ShowEllipse(Visibility visibility)
+		{
+			ellipseVisibility = Visibility.Visible;
+			OnPropertyChanged("EllipseVisibility");
+			return ellipseVisibility;
+		}
 		private SolidColorBrush ellipseColor;
 
 		public SolidColorBrush EllipseColor

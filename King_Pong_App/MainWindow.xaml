@@ -20,37 +20,39 @@
 	</Window.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="174*"/>
-			<ColumnDefinition Width="446*"/>
-			<ColumnDefinition Width="163*"/>
-			<ColumnDefinition Width="174*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="3.5*"/>
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="2*"/>
 		</Grid.RowDefinitions>
-		<Grid Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,347.6,0.4">
+		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="1.5*"/>
-				<RowDefinition Height="1*"/>
-				<RowDefinition Height="1*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			
+
 			<TextBlock
                 FontSize="110" 
+				Width="900"
                 FontWeight="Bold" 
                 TextAlignment="Center" 
+				Margin="2"
                 Foreground="{StaticResource DarkModeForeground}">
 				Score
 			</TextBlock>
-			<Grid Grid.Row="1"
-				  DataContext="{StaticResource teams}">
+			<Grid 
+				Grid.Row="1"
+				DataContext="{StaticResource teams}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="0.4*"/>
+					<ColumnDefinition Width="0.5*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-			<TextBlock
+				<TextBlock
 				x:Name="Team1Name"
 				Grid.Row="1"
                 FontSize="65" 
@@ -58,7 +60,7 @@
                 TextAlignment="Center"
                 Foreground="{StaticResource DarkModeForeground}">
 				Team1
-			</TextBlock>
+				</TextBlock>
 				<TextBlock
 				x:Name="ScoreCount"
 				Grid.Column="1"
@@ -68,7 +70,7 @@
 				Foreground="{StaticResource DarkModeForeground}">
 				Count
 				</TextBlock>
-			<TextBlock
+				<TextBlock
 				x:Name="Team2Name"
 				Grid.Column="2"
 				FontSize="65" 
@@ -76,7 +78,7 @@
 				TextAlignment="Center"
 				Foreground="{StaticResource DarkModeForeground}">
 				Team2
-			</TextBlock>
+				</TextBlock>
 			</Grid>
 			<TextBlock
 				Grid.Row="2"
@@ -91,7 +93,7 @@
 		<Grid 
             Grid.Row="1" 
 			Grid.Column="1" 
-            Margin="2,1.6,1.6,2.4" Grid.ColumnSpan="2">
+            Margin="2,1,1,2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
@@ -261,63 +263,113 @@
                     Style="{StaticResource cupCircles}" 
                     Grid.ColumnSpan="2"/>
 			</Grid>
-			<StackPanel
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="5*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<StackPanel
 				DataContext="{StaticResource playerInfo}"
-                Grid.Row="1" 
                 Grid.Column="0" 
                 Width="Auto"
 				VerticalAlignment="Center">
 
-				<TextBlock
+					<TextBlock
                     x:Name="Player1_1"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
                     FontSize="45"
                     Foreground="{StaticResource DarkModeForeground}">
-				</TextBlock>
-				<TextBlock
+					</TextBlock>
+					<TextBlock
                     x:Name="Player1_2" 
                     TextAlignment="Center"  
 					Margin ="0 8 0 8" 
                     FontSize="45"
                     Foreground="{StaticResource DarkModeForeground}">
-					Team1 Player2
-				</TextBlock>
-			</StackPanel>
-			<StackPanel 
+					</TextBlock>
+				</StackPanel>
+				<StackPanel
+                Grid.Column="1" 
+                Width="Auto"
+				VerticalAlignment="Center">
+
+					<TextBlock
+                    x:Name="Player1_1_Hits"
+                    TextAlignment="Center" 
+                    Margin ="0 8 0 8" 
+                    FontSize="45"
+                    Foreground="{StaticResource DarkModeForeground}">
+					</TextBlock>
+					<TextBlock
+                    x:Name="Player1_2_Hits"
+                    TextAlignment="Center" 
+                    Margin ="0 8 0 8" 
+                    FontSize="45"
+                    Foreground="{StaticResource DarkModeForeground}">
+					</TextBlock>
+				</StackPanel>
+			</Grid>
+			<Grid Grid.Row="1"
+				  Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="5*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<StackPanel 
 				DataContext="{StaticResource playerInfo}"
                 Grid.Row="1" 
-                Grid.Column="1"
+                Grid.Column="0"
 				VerticalAlignment="Center">
-				<TextBlock 
+					<TextBlock 
                     x:Name="Player2_1"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
                     FontSize="45" 
                     Foreground="{StaticResource DarkModeForeground}">
-					Team2 Player1
-				</TextBlock>
-				<TextBlock 
+					</TextBlock>
+					<TextBlock 
                     x:Name="Player2_2" 
                     TextAlignment="Center" 
                     Margin ="0 8 0 8"
                     FontSize="45" 
-                    Foreground="{StaticResource DarkModeForeground}"> 
-					Team2 Player2
-				</TextBlock>
-			</StackPanel>
+                    Foreground="{StaticResource DarkModeForeground}">
+					</TextBlock>
+				</StackPanel>
+				<StackPanel 
+				DataContext="{StaticResource playerInfo}"
+                Grid.Row="1" 
+                Grid.Column="1"
+				VerticalAlignment="Center">
+					<TextBlock 
+                    x:Name="Player2_1_Hits"
+                    TextAlignment="Center" 
+                    Margin ="0 8 0 8" 
+                    FontSize="45" 
+                    Foreground="{StaticResource DarkModeForeground}">
+					</TextBlock>
+					<TextBlock 
+                    x:Name="Player2_2_Hits" 
+                    TextAlignment="Center" 
+                    Margin ="0 8 0 8"
+                    FontSize="45" 
+                    Foreground="{StaticResource DarkModeForeground}">
+					</TextBlock>
+				</StackPanel>
+			</Grid>
 		</Grid>
-		<Grid Margin="1,1,1,1.4"/>
-		<StackPanel 
-			Margin="0,4,3.6,0"
-			Grid.Column="2"
-			Orientation="Horizontal"
+		<Grid Margin="1,1,1,2"/>
+		<StackPanel
+			Margin="0,4,4,0"
+			Grid.Column="1"
 			Grid.ColumnSpan="2"
+			Orientation="Horizontal"
 			HorizontalAlignment="Right"
 			VerticalAlignment="Top">
 			<Button
 				Style="{StaticResource defaultDarkModeButton}"
 				Click="Nyt_Spil_Click"
+				Grid.ColumnSpan="3"
 				Content="Nyt Spil">
 				<Button.Background>
 					<SolidColorBrush 
@@ -353,7 +405,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Giv_Op_Click" 
-            Content="Giv Op" Margin="1,1,0,0">
+            Content="Giv Op" Margin="1,1,0,0" Height="40" Width="140">
 			<Button.Background>
 				<SolidColorBrush 
                         Color="Black" 
@@ -362,12 +414,11 @@
 		</Button>
 		<Rectangle 
 			x:Name="TurnIndictor1"
-            Grid.Column="3" 
-            Fill="Green" Margin="0.4,350,-0.4,0.4" Grid.RowSpan="2"/>
+            Grid.Column="2" 
+            Fill="Green" Margin="1,330,0,0" Grid.RowSpan="2"/>
 		<Rectangle 
 			x:Name="TurnIndictor2"
-			
             Grid.Column="0" 
-            Fill="Green" Margin="0,350,0,0.4" Grid.RowSpan="2"/>
+            Fill="Green" Margin="0,320,0,0" Grid.RowSpan="2"/>
 	</Grid>
 </Window>

@@ -18,10 +18,6 @@ namespace King_Pong_App.ViewModels
 		{
 
 		}
-		public string PrintHits()
-		{
-			return @$"{Name}		{NumberOfHits}";
-		}
 
 
 		public void AddThrow()
