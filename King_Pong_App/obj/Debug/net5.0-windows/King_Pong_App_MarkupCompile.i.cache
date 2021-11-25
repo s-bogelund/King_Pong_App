@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\App.xaml
-3-188991812
+51322230157
 
-12-149013286
+14313919959
 193-1891726104
-MainWindow.xaml;Views\CupSelectWindow.xaml;Views\FourPlayerNameWindow.xaml;
+MainWindow.xaml;Views\CupSelectWindow.xaml;Views\FourPlayerNameWindow.xaml;Views\PlayerNumberSelectWindow.xaml;Views\TwoPlayerNameWindow.xaml;
 
 True
 

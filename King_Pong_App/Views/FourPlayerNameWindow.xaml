@@ -48,34 +48,6 @@
 				FontSize="18"
 				Background="Gray"/>
 		</StackPanel>
-
-		<StackPanel 
-			Grid.Row="1"
-			Margin="20"
-			Width="200"
-			VerticalAlignment="Center"
-			Grid.RowSpan="2">
-			<TextBlock
-				Foreground="{StaticResource DarkModeForeground}"
-				Margin="0 0 0 5"
-				Text="Spiller 1"
-				FontSize="18"/>
-			<TextBox
-				Text="Indtast her"
-				Foreground="Navy"
-				Background="Gray"
-				FontSize="15"/>
-			<TextBlock
-				Foreground="{StaticResource DarkModeForeground}"
-				Margin="0 5 0 5"
-				Text="Spiller 2"
-				FontSize="18"/>
-			<TextBox
-				Text="{Binding NamePlayer2}"
-				Foreground="Navy"
-				Background="Gray"
-				FontSize="15"/>
-		</StackPanel>
 		<StackPanel 
 			Grid.Row="0"
 			Grid.RowSpan="2"

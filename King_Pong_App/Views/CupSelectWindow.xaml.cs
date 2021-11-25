@@ -29,7 +29,7 @@ namespace King_Pong_App.Views
 			if (!(bool)TenCupButton.IsChecked && !(bool)SixCupButton.IsChecked)
 				MessageBox.Show("Du skal vælge, hvor mange kopper der skal bruges i spillet");
 
-			if ((bool)SixCupButton.IsChecked) App.numberOfCups = 6; // default value is 10
+			App.numberOfCups = (bool)SixCupButton.IsChecked ? 6 : 10; // default value is 10
 
 			App.team1.CupsRemaining = App.numberOfCups;
 			App.team2.CupsRemaining = App.numberOfCups;

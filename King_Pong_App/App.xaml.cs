@@ -29,6 +29,6 @@ namespace King_Pong_App
 		}
 
 		public static int numberOfCups = 10;
-
+		public static int teamSize = 2;
 	}
 }

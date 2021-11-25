@@ -26,3 +26,7 @@ C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.genruntimeconfig.cache
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.csproj.AssemblyReference.cache
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\PlayerNumberSelectWindow.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\TwoPlayerNameWindow.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\PlayerNumberSelectWindow.baml
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\TwoPlayerNameWindow.baml

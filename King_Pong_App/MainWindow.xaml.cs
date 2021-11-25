@@ -45,19 +45,21 @@ namespace King_Pong_App
 				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
 			else
 			{
-				CupSelectWindow cupSelect = new();
-				cupSelect.WindowStartupLocation = WindowStartupLocation.CenterOwner; // centers the new window
-				cupSelect.Owner = this;   // sets MainWindow as owner so that if it closes, GameStartWindow also closes
-				cupSelect.ShowDialog();
-				if (App.numberOfCups == 6)
-					backFourCups.HideEllipse(backFourCups.EllipseVisibility);
-				FourPlayerNameWindow nameSelect = new();
-				nameSelect.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-				nameSelect.Owner = this;
-				nameSelect.ShowDialog();
-				Team1Name.Text = App.team1.Name;
-				Team2Name.Text = App.team2.Name;
-				ScoreCount.Text = App.CurrentScore();
+				CupSelection();
+				NumberOfPlayersSelection();
+				
+				
+
+				if (App.teamSize == 2)
+				{
+					
+					Team1Name.Text = App.team1.Name;
+					Team2Name.Text = App.team2.Name;
+					ScoreCount.Text = App.CurrentScore();
+				}
+				else
+					TwoPlayerGame();
+
 
 				Player1_1.Text = App.player1.PrintHits();
 				Player1_2.Text = App.player2.PrintHits();
@@ -70,6 +72,51 @@ namespace King_Pong_App
 			}
 		}
 
+		public void TwoPlayerGame()
+		{
+			TwoPlayerNameWindow nameSelect2 = new();
+			nameSelect2.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			nameSelect2.Owner = this;
+			nameSelect2.ShowDialog();
+
+			Player1_1.Text = App.player1.PrintHits();
+			Player2_1.Text = App.player3.PrintHits();
+
+			App.player2.Name = string.Empty;
+			App.player4.Name = string.Empty;
+
+		}
+
+		public void FourPlayerGame()
+		{
+			FourPlayerNameWindow nameSelect4 = new();
+			nameSelect4.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			nameSelect4.Owner = this;
+			nameSelect4.ShowDialog();
+
+			Player1_1.Text = App.player1.PrintHits();
+			Player1_2.Text = App.player2.PrintHits();
+			Player2_1.Text = App.player3.PrintHits();
+			Player2_2.Text = App.player4.PrintHits();
+		}
+
+		public void NumberOfPlayersSelection()
+		{
+			PlayerNumberSelectWindow playerNumberSelectWindow = new();
+			playerNumberSelectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			playerNumberSelectWindow.Owner = this;
+			playerNumberSelectWindow.ShowDialog();
+		}
+		public void CupSelection()
+		{
+			CupSelectWindow cupSelect = new();
+			cupSelect.WindowStartupLocation = WindowStartupLocation.CenterOwner; // centers the new window
+			cupSelect.Owner = this;   // sets MainWindow as owner so that if it closes, GameStartWindow also closes
+			cupSelect.ShowDialog();
+
+			if (App.numberOfCups == 6)
+				backFourCups.HideEllipse(backFourCups.EllipseVisibility);
+		}
 		private void Regler_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Regler kan findes via dette link: https://kingpong_rules.com");
