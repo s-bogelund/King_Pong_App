@@ -30,54 +30,86 @@
 		</Grid.RowDefinitions>
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="1.5*"/>
+				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-
-			<TextBlock
-                FontSize="110" 
-				Width="900"
-                FontWeight="Bold" 
-                TextAlignment="Center" 
-				Margin="2"
-                Foreground="{StaticResource DarkModeForeground}">
-				Score
-			</TextBlock>
+			<Grid Grid.Row="0"
+				  Grid.ColumnSpan="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="6.5*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="6.5*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock
+					x:Name="Team1Name"
+					Margin="0 0 20 0"
+					Grid.Column="0"
+					FontSize="60" 
+					FontWeight="Bold" 
+					TextAlignment="Right"
+					VerticalAlignment="Center"
+					Foreground="{StaticResource DarkModeForeground}">
+				Team1
+				</TextBlock>
+				<TextBlock
+					x:Name="ScoreCount"
+					Grid.Column="1"
+					FontSize="60" 
+					FontWeight="Bold" 
+					TextAlignment="Center"
+					VerticalAlignment="Center"
+					Foreground="{StaticResource DarkModeForeground}">
+					vs
+				</TextBlock>
+				<TextBlock
+					x:Name="Team2Name"
+					Margin="20 0 0 0"
+					Grid.Column="2"
+					FontSize="60" 
+					FontWeight="Bold" 
+					TextAlignment="Left"
+					VerticalAlignment="Center"
+					Foreground="{StaticResource DarkModeForeground}">
+				Team2
+				</TextBlock>
+			</Grid>
 			<Grid 
 				Grid.Row="1"
 				DataContext="{StaticResource teams}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="0.5*"/>
+					<ColumnDefinition Width="0.25*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
 				<TextBlock
-				x:Name="Team1Name"
-				Grid.Row="1"
-                FontSize="65" 
-                FontWeight="Bold" 
-                TextAlignment="Center"
-                Foreground="{StaticResource DarkModeForeground}">
-				Team1
+					x:Name="Team1CupsLeft"
+					Grid.Row="1"
+					FontSize="75"
+					FontWeight="Bold" 
+					TextAlignment="Right"
+					VerticalAlignment="Center"
+					Foreground="{StaticResource DarkModeForeground}">
+					Team1Cups
 				</TextBlock>
 				<TextBlock
-				x:Name="ScoreCount"
-				Grid.Column="1"
-				FontSize="65" 
-				FontWeight="Bold" 
-				TextAlignment="Center"
-				Foreground="{StaticResource DarkModeForeground}">
-				Count
+					Grid.Column="1"
+					FontSize="105" 
+					FontWeight="Bold" 
+					TextAlignment="Center"
+					VerticalAlignment="Center"
+					Foreground="{StaticResource DarkModeForeground}">
+					-
 				</TextBlock>
 				<TextBlock
-				x:Name="Team2Name"
-				Grid.Column="2"
-				FontSize="65" 
-				FontWeight="Bold" 
-				TextAlignment="Center"
-				Foreground="{StaticResource DarkModeForeground}">
-				Team2
+					x:Name="Team2CupsLeft"
+					Grid.Column="2"
+					FontSize="75" 
+					FontWeight="Bold" 
+					TextAlignment="Left"
+					VerticalAlignment="Center"
+					Foreground="{StaticResource DarkModeForeground}">
+					Team2Cups
 				</TextBlock>
 			</Grid>
 			<TextBlock
@@ -86,6 +118,7 @@
                 FontSize="65" 
                 FontWeight="Bold" 
                 TextAlignment="Center"
+				VerticalAlignment="Center"
                 Foreground="{StaticResource DarkModeForeground}">
 				Magnex's Tur
 			</TextBlock>

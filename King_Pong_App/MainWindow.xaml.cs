@@ -65,14 +65,14 @@ namespace King_Pong_App
 			nameSelect2.ShowDialog();
 
 			Player1_1.Text = App.player1.Name;
+			Player1_2.Text = "";
 			Player2_1.Text = App.player3.Name;
+			Player2_2.Text = "";
 
 			Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
-			Player1_1_Hits.Text = App.player3.NumberOfHits.ToString();
-
-			App.player2.Name = string.Empty;
-			App.player4.Name = string.Empty;
-
+			Player1_2_Hits.Text = "";
+			Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
+			Player2_2_Hits.Text = "";
 		}
 
 		public void FourPlayerGame()
@@ -115,7 +115,9 @@ namespace King_Pong_App
 
 		public void PrintGameBoardInfo()
 		{
-			ScoreCount.Text = App.CurrentScore();
+			Team1CupsLeft.Text = App.team1.CupsRemaining.ToString();
+			Team2CupsLeft.Text = App.team2.CupsRemaining.ToString();
+
 			Team1Name.Text = App.team1.Name;
 			Team2Name.Text = App.team2.Name;
 
