@@ -25,10 +25,10 @@ namespace King_Pong_App
 
 		public static string CurrentScore()
 		{
-			return $"{App.team1.CupsRemaining} : {App.team2.CupsRemaining}";
+			return $"{team1.CupsRemaining} - {team2.CupsRemaining}";
 		}
 
 		public static int numberOfCups = 10;
-
+		public static int teamSize = 2;
 	}
 }
