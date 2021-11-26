@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:King_Pong_App" xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
+        xmlns:local="clr-namespace:King_Pong_App" 
+		xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
 		mc:Ignorable="d"
 		WindowState="Maximized"
         Title="MainWindow" Height="1440" Width="2560">
@@ -39,7 +40,12 @@
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="6.5*"/>
 					<ColumnDefinition Width="*"/>
+<<<<<<< HEAD
 					<ColumnDefinition Width="6.5*"/>
+=======
+					<ColumnDefinition Width="0.55*"/>
+					<ColumnDefinition Width="*"/>
+>>>>>>> master
 				</Grid.ColumnDefinitions>
 				<TextBlock
 					x:Name="Team1Name"
@@ -53,6 +59,7 @@
 				Team1
 				</TextBlock>
 				<TextBlock
+<<<<<<< HEAD
 					x:Name="ScoreCount"
 					Grid.Column="1"
 					FontSize="60" 
@@ -61,6 +68,15 @@
 					VerticalAlignment="Center"
 					Foreground="{StaticResource DarkModeForeground}">
 					vs
+=======
+				x:Name="ScoreCount"
+				Grid.Column="1"
+				FontSize="65" 
+				FontWeight="Bold" 
+				TextAlignment="Center"
+				Foreground="{StaticResource DarkModeForeground}">
+				6:6
+>>>>>>> master
 				</TextBlock>
 				<TextBlock
 					x:Name="Team2Name"
@@ -303,6 +319,11 @@
 				</Grid.ColumnDefinitions>
 				<StackPanel
 				DataContext="{StaticResource playerInfo}"
+<<<<<<< HEAD
+=======
+				Margin="20 110 20 0"
+                Grid.Row="1" 
+>>>>>>> master
                 Grid.Column="0" 
                 Width="Auto"
 				VerticalAlignment="Center">
@@ -313,13 +334,20 @@
                     Margin ="0 8 0 8" 
                     FontSize="45"
                     Foreground="{StaticResource DarkModeForeground}">
+<<<<<<< HEAD
 					</TextBlock>
 					<TextBlock
+=======
+					Team1 Player1
+				</TextBlock>
+				<TextBlock
+>>>>>>> master
                     x:Name="Player1_2" 
                     TextAlignment="Center"  
 					Margin ="0 8 0 8" 
                     FontSize="45"
                     Foreground="{StaticResource DarkModeForeground}">
+<<<<<<< HEAD
 					</TextBlock>
 				</StackPanel>
 				<StackPanel
@@ -350,6 +378,13 @@
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
 				<StackPanel 
+=======
+					Team1 Player2
+				</TextBlock>
+			</StackPanel>
+			<StackPanel 
+				Margin="20 110 20 0"
+>>>>>>> master
 				DataContext="{StaticResource playerInfo}"
                 Grid.Row="1" 
                 Grid.Column="0"
@@ -447,11 +482,24 @@
 		</Button>
 		<Rectangle 
 			x:Name="TurnIndictor1"
+<<<<<<< HEAD
             Grid.Column="2" 
             Fill="Green" Margin="1,330,0,0" Grid.RowSpan="2"/>
 		<Rectangle 
 			x:Name="TurnIndictor2"
             Grid.Column="0" 
             Fill="Green" Margin="0,320,0,0" Grid.RowSpan="2"/>
+=======
+            Grid.Column="3" 
+            Fill="Green" 
+			Margin="0,370,-0.4,0.4" 
+			Grid.RowSpan="2"/>
+		<Rectangle 
+			x:Name="TurnIndictor2"
+            Grid.Column="0" 
+            Fill="Green" 
+			Margin="0,370,0,0.4" 
+			Grid.RowSpan="2"/>
+>>>>>>> master
 	</Grid>
 </Window>

@@ -45,12 +45,37 @@ namespace King_Pong_App
 				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
 			else
 			{
+<<<<<<< HEAD
 				CupSelection();
 				NumberOfPlayersSelection();
 				if (App.teamSize == 2)
 					FourPlayerGame();
 				else
 					TwoPlayerGame();
+=======
+				CupSelectWindow cupSelect = new();
+				cupSelect.WindowStartupLocation = WindowStartupLocation.CenterOwner; // centers the new window
+				cupSelect.Owner = this;   // sets MainWindow as owner so that if it closes, GameStartWindow also closes
+				cupSelect.ShowDialog();
+				if (App.numberOfCups == 6)
+					backFourCups.HideEllipse(backFourCups.EllipseVisibility);
+				ScoreCount.Text = App.CurrentScore();
+				FourPlayerNameWindow nameSelect = new();
+				nameSelect.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+				nameSelect.Owner = this;
+				nameSelect.ShowDialog();
+				Team1Name.Text = App.team1.Name;
+				Team2Name.Text = App.team2.Name;
+
+				Player1_1.Text = App.player1.PrintHits();
+				Player1_2.Text = App.player2.PrintHits();
+				Player2_1.Text = App.player3.PrintHits();
+				Player2_2.Text = App.player4.PrintHits();
+
+				//TeamPlayerNameWindow teamPlayerNameWindow = new TeamPlayerNameWindow();
+				//teamPlayerNameWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				//teamPlayerNameWindow.ShowDialog();
+>>>>>>> master
 			}
 
 			PrintGameBoardInfo();

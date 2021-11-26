@@ -26,7 +26,6 @@ namespace King_Pong_App.Views
 
 		private void ConfirmNames_Click(object sender, RoutedEventArgs e)
 		{
-
 			if (Team1Name.Text.Length > 10 || Team2Name.Text.Length > 10 || NameOfPlayer1.Text.Length > 10 || NameOfPlayer3.Text.Length > 10)
 				MessageBox.Show("Navnene må ikke overstige 10 karakterer 🤔");
 			else if (Team1Name.Text.Length == 0 || Team2Name.Text.Length == 0 || NameOfPlayer1.Text.Length == 0 || NameOfPlayer3.Text.Length == 0)
