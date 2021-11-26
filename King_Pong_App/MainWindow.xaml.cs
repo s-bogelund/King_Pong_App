@@ -134,7 +134,8 @@ namespace King_Pong_App
 
 		private void Giv_Op_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Det får du fandme ikke lov til. Kæmp til det sidste din taber!");
+			MessageBox.Show(@"For at give op, skal begge holdknapper holdes inde i mindst 5 sekunder. 
+								Bemærk at det er holdet som der har turen, som giver op");
 		}
 	}
 }

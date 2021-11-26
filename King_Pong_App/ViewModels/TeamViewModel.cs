@@ -14,7 +14,6 @@ namespace King_Pong_App.ViewModels
 
 		}
 
-
 		public string CurrentScore()
 		{
 			return $"{App.team1.CupsRemaining} - {App.team2.CupsRemaining}";
