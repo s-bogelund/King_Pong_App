@@ -9,6 +9,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using King_Pong_App;
+using King_Pong_App.ViewModels;
 using King_Pong_App.Views;
 using System;
 using System.Diagnostics;
@@ -77,7 +79,7 @@ namespace King_Pong_App.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/King_Pong_App;component/views/cupselectwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/King_Pong_App;V1.0.0.0;component/views/cupselectwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\CupSelectWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
