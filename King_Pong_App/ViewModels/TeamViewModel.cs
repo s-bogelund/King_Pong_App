@@ -1,6 +1,7 @@
 ﻿using King_Pong_App.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +22,16 @@ namespace King_Pong_App.ViewModels
 			{
 				roster.Add(player);
 			}
-			
 		}
 
 		public string PrintInfo()
 		{
-			string allStats = String.Empty;
-			
-			roster.OrderBy(p => p.NumberOfHits);
-			roster.ForEach(p => allStats += p.PrintInfo());
+			string playerStats = "";
 
-			return allStats;
+			List<PlayerViewModel> sortedList = roster.OrderByDescending(p => p.NumberOfHits).ToList();
+			sortedList.ForEach(p => playerStats += p.PrintInfo());
+
+			return playerStats;
 		}
 	}
 }

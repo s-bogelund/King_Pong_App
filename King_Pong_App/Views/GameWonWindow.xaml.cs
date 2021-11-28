@@ -29,13 +29,17 @@ namespace King_Pong_App.Views
 
 		public void DisplayWinningTeam()
 		{
+			string losingTeamName = App.currentTeam == App.team1 ? App.team2.Name : App.team1.Name;
 			AnnounceWinnerLabel.Content = $"{App.currentTeam.Name.ToUpper()} VINDER!!";
+			WinningTeamInfo.Text = $"{App.currentTeam.Name} Stats";
+			LosingTeamInfo.Text = $"{losingTeamName} Stats";
+			
 		}
 
 		public void PlayerStats()
 		{
 			WinningPlayerStats.Text = App.currentTeam.PrintInfo();
-			LosingPlayerStats.Text = App.currentTeam == App.team1 ? App.team1.PrintInfo() : App.team2.PrintInfo();
+			LosingPlayerStats.Text = App.currentTeam == App.team1 ? App.team2.PrintInfo() : App.team1.PrintInfo();
 			
 		}
 
