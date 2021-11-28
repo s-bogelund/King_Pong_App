@@ -19,7 +19,6 @@ namespace King_Pong_App.ViewModels
 
 		}
 
-
 		public void AddThrow()
 		{
 			NumberOfThrows++;
@@ -27,14 +26,6 @@ namespace King_Pong_App.ViewModels
 		public void AddHit()
 		{
 			NumberOfHits++;
-			//Task.Run(() =>
-			//{
-			//	while (true)
-			//	{
-			//		Debug.WriteLine($"Name Player 1: {Player1.Name}");
-			//		Thread.Sleep(1000);
-			//	}
-			//});
 		}
 	}
 }

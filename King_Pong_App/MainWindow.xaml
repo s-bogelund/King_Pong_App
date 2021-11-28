@@ -401,6 +401,28 @@
 			VerticalAlignment="Top">
 			<Button
 				Style="{StaticResource defaultDarkModeButton}"
+				Click="HitEvent_Click" 
+				Content="HIT EVENT TEST"
+				Width="260">
+				<Button.Background>
+					<SolidColorBrush 
+                        Color="Black" 
+                        Opacity="0.15"/>
+				</Button.Background>
+			</Button>
+			<Button
+				Style="{StaticResource defaultDarkModeButton}"
+				Click="NextTurn_Click" 
+				Content="NEXT TURN TEST"
+				Width="260">
+				<Button.Background>
+					<SolidColorBrush 
+                        Color="Black" 
+                        Opacity="0.15"/>
+				</Button.Background>
+			</Button>
+			<Button
+				Style="{StaticResource defaultDarkModeButton}"
 				Click="Nyt_Spil_Click"
 				Grid.ColumnSpan="3"
 				Content="Nyt Spil">
@@ -446,12 +468,18 @@
 			</Button.Background>
 		</Button>
 		<Rectangle 
-			x:Name="TurnIndictor1"
+			x:Name="TurnIndicator2"
             Grid.Column="2" 
-            Fill="Green" Margin="1,330,0,0" Grid.RowSpan="2"/>
+            Fill="Green" 
+			Margin="1,330,0,0" 
+			Grid.RowSpan="2"
+			Visibility="Hidden"/>
 		<Rectangle 
-			x:Name="TurnIndictor2"
+			x:Name="TurnIndicator1"
             Grid.Column="0" 
-            Fill="Green" Margin="0,320,0,0" Grid.RowSpan="2"/>
+            Fill="Green" 
+			Margin="0,320,0,0" 
+			Grid.RowSpan="2"
+			Visibility="Hidden"/>
 	</Grid>
 </Window>

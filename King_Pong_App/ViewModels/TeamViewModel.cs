@@ -14,18 +14,15 @@ namespace King_Pong_App.ViewModels
 
 		}
 
-		public string CurrentScore()
-		{
-			return $"{App.team1.CupsRemaining} - {App.team2.CupsRemaining}";
-		}
-
-		public void AddMembers(params PlayerModel[] players)
+		public List<PlayerViewModel> roster = new();
+		public void AddMembers(params PlayerViewModel[] players)
 		{
 			foreach (var player in players)
 			{
-				TeamMembers.Add(player);
+				roster.Add(player);
 			}
 			
 		}
+
 	}
 }

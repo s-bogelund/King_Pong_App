@@ -8,7 +8,7 @@ namespace King_Pong_App.Models
 {
 	public class TeamModel : PlayerModel
 	{
-		protected List<PlayerModel> TeamMembers = new();
+		public List<PlayerModel> TeamMembers = new();
 		public PlayerModel Player1 { get; set; }
 		public PlayerModel Player2 { get; set; }
 		public bool Turn { get; set; }

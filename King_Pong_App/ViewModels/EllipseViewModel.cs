@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace King_Pong_App.ViewModels
 {
@@ -31,22 +32,18 @@ namespace King_Pong_App.ViewModels
 			ellipseColor = Brushes.Green;
 		}
 
-		public EllipseViewModel(Visibility ellipsevisibility)
+		public void HideEllipse(EllipseViewModel ellipse)
 		{
-			ellipseVisibility = ellipsevisibility;
-		}
-		public Visibility HideEllipse(Visibility visibility)
-		{
-			ellipseVisibility = Visibility.Hidden;
+			ellipse.ellipseVisibility = Visibility.Hidden;
 			OnPropertyChanged("EllipseVisibility");
-			return ellipseVisibility;
+			//return ellipseVisibility;
 		}
 
-		public Visibility ShowEllipse(Visibility visibility)
+		public void ShowEllipse(EllipseViewModel ellipse)
 		{
-			ellipseVisibility = Visibility.Visible;
+			ellipse.ellipseVisibility = Visibility.Visible;
 			OnPropertyChanged("EllipseVisibility");
-			return ellipseVisibility;
+			//return ellipseVisibility;
 		}
 		private SolidColorBrush ellipseColor;
 
@@ -60,11 +57,11 @@ namespace King_Pong_App.ViewModels
 			}
 		}
 
-		public SolidColorBrush EllipseColorChanger(SolidColorBrush color)
+		public SolidColorBrush EllipseColorChanger(Ellipse ellipse)
 		{
 			OnPropertyChanged("EllipseColorChanged");
 
-			if (color == Brushes.Green)
+			if (ellipse.Fill == Brushes.Green)
 				return Brushes.Red;
 			else
 				return Brushes.Green;

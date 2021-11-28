@@ -23,12 +23,16 @@ namespace King_Pong_App
 		public static TeamViewModel team1 = new();
 		public static TeamViewModel team2 = new();
 
-		public static string CurrentScore()
-		{
-			return $"{team1.CupsRemaining} - {team2.CupsRemaining}";
-		}
-
 		public static int numberOfCups = 10;
 		public static int teamSize = 2;
+
+		public static TeamViewModel currentTeam = team1;
+		public static int playerTurn = 1;
+
+		public static void TurnOver()
+		{
+			currentTeam = currentTeam == team1 ? team2 : team1;
+			playerTurn = 1;
+		}
 	}
 }

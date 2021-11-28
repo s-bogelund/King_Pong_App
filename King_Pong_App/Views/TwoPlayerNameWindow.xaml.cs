@@ -34,9 +34,7 @@ namespace King_Pong_App.Views
 			else
 			{
 				App.player1.Name = NameOfPlayer1.Text;
-				App.player2.Name = "";
 				App.player3.Name = NameOfPlayer3.Text;
-				App.player4.Name = "";
 
 				App.team1.Name = Team1Name.Text;
 				App.team2.Name = Team2Name.Text;
