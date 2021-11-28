@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace King_Pong_App
 {
@@ -27,12 +28,14 @@ namespace King_Pong_App
 		public static int teamSize = 2;
 
 		public static TeamViewModel currentTeam = team1;
-		public static int playerTurn = 1;
+		public static int playerTurn = 0;
 
 		public static void TurnOver()
 		{
 			currentTeam = currentTeam == team1 ? team2 : team1;
-			playerTurn = 1;
+			playerTurn = 0;
 		}
+
+		//public static List<Ellipse	>team1Cups
 	}
 }

@@ -19,6 +19,7 @@ namespace King_Pong_App.ViewModels
 
 		}
 
+
 		public void AddThrow()
 		{
 			NumberOfThrows++;
@@ -26,6 +27,17 @@ namespace King_Pong_App.ViewModels
 		public void AddHit()
 		{
 			NumberOfHits++;
+		}
+
+		public string Hitrate() => Math.Round((double)NumberOfHits / NumberOfThrows * 100, 2).ToString() + "%";
+		
+		public string PrintInfo()
+		{
+			string name = $"{Name}:";
+			string hits = $"Antal Ramte: {NumberOfHits}\n";
+			string hitrate = $"Præcision: {Hitrate()}\n";
+
+			return name + "\n" + hits + hitrate + "\n";
 		}
 	}
 }

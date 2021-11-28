@@ -28,16 +28,14 @@ namespace King_Pong_App
 		public EllipseViewModel allCups;
 		//public PlayerViewModel playerInfo;
 		//public TeamViewModel teams;
-
+		public int cupHitsTEST1 = 0;
+		public int cupHitsTEST2 = 0;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			backFourCups = Resources["backFourCups"] as EllipseViewModel;
-			
 		}
-
-		
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
@@ -121,33 +119,44 @@ namespace King_Pong_App
 			Team2Name.Text = App.team2.Name;
 		}
 
-		public void HitEvent()
+		public void HitEvent(int number)
 		{
 			List<Ellipse> team1Cups = new() { ellipse1_1, ellipse1_2, ellipse1_3, ellipse1_4, ellipse1_5, ellipse1_6, ellipse1_7, ellipse1_8, ellipse1_9, ellipse1_10 };
-			List<int> hits = new();
-			Random hit = new();
-			int num = 0;
-			
-			num = hit.Next(0,9)
-			while (true)
-			{
-				num = hit.Next(0, 9);
-				Debug.WriteLine(num);
-				if (hits.Contains(num))
-				{
+			List<Ellipse> team2Cups = new() { ellipse2_1, ellipse2_2, ellipse2_3, ellipse2_4, ellipse2_5, ellipse2_6, ellipse2_7, ellipse2_8, ellipse2_9, ellipse2_10 };
 
-				}
-				else
-				{
-					team1Cups[num].Fill = Brushes.Red;
-					hits.Add(num);
-					return;
-				}
-				Debug.WriteLine(num);
+			if(App.currentTeam == App.team1)
+			{
+				team2Cups[number].Fill = Brushes.Red;
+				App.team2.CupsRemaining--;
 			}
+			else 
+			{
+				team1Cups[number].Fill = Brushes.Red;
+				App.team1.CupsRemaining--;
+			}
+			App.currentTeam.roster[App.playerTurn].AddHit();
+
+			NextTurn();
+		}
+
+		public void NextTurn()
+		{
+			App.currentTeam.roster[App.playerTurn].NumberOfThrows++;
 			
-			
-			//ellipse.Fill = Brushes.Red;
+			if (App.teamSize <= App.playerTurn + 1)
+				App.TurnOver();
+			else
+				App.playerTurn++;
+
+			UpdateGameBoard();
+		}
+
+		public void UpdateGameBoard()
+		{
+			UpdateTurnText();
+			UpdateTurnIndicator();
+			UpdateHits();
+			UpdateCupsRemaining();
 		}
 
 		public void UpdateTurnIndicator()
@@ -162,34 +171,11 @@ namespace King_Pong_App
 				TurnIndicator2.Visibility = Visibility.Visible;
 				TurnIndicator1.Visibility = Visibility.Hidden;
 			}
-			
-		}
-
-		public void NextTurn()
-		{
-			if(App.teamSize <= App.playerTurn)
-			{
-				App.TurnOver();
-			}
-			else
-			{
-				App.playerTurn++;
-			}
-
-			UpdateGameBoard();
 		}
 
 		public void UpdateTurnText()
 		{
-			turnTextBlock.Text = App.currentTeam.roster[App.playerTurn - 1].Name + "'s tur";
-		}
-
-		public void UpdateGameBoard()
-		{
-			UpdateTurnText();
-			UpdateTurnIndicator();
-			UpdateHits();
-			UpdateCupsRemaining();
+			turnTextBlock.Text = App.currentTeam.roster[App.playerTurn].Name + "'s tur";
 		}
 
 		public void UpdateHits()
@@ -239,7 +225,32 @@ namespace King_Pong_App
 
 		private void HitEvent_Click(object sender, RoutedEventArgs e)
 		{
-			HitEvent();
+			if (App.currentTeam == App.team1)
+				HitEvent(cupHitsTEST1);
+			else
+				HitEvent(cupHitsTEST2);
+
+			if (App.currentTeam == App.team1)
+				cupHitsTEST1++;
+			else
+				cupHitsTEST2++;
+
+			if(cupHitsTEST1 >= App.numberOfCups|| cupHitsTEST2 >= App.numberOfCups)
+				MessageBox.Show($"EEEEY, you won {App.currentTeam.Name}!\n\n " +
+					$"The best player this game was Simon like always");
+
+			Debug.WriteLine(cupHitsTEST1);
+			Debug.WriteLine(cupHitsTEST2);
+
+
+		}
+
+		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
+		{
+			GameWonWindow gameWon = new();
+			gameWon.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			gameWon.Owner = this;
+			gameWon.ShowDialog();
 		}
 	}
 }

@@ -24,5 +24,14 @@ namespace King_Pong_App.ViewModels
 			
 		}
 
+		public string PrintInfo()
+		{
+			string allStats = String.Empty;
+			
+			roster.OrderBy(p => p.NumberOfHits);
+			roster.ForEach(p => allStats += p.PrintInfo());
+
+			return allStats;
+		}
 	}
 }

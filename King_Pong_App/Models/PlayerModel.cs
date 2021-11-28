@@ -13,6 +13,7 @@ namespace King_Pong_App.Models
 		public int TeamNumber { get; set; }
 		public int PlayerNumber { get; set; }
 		public int NumberOfThrows { get; set; }
+		
 		private string name;
 		public string Name
 		{

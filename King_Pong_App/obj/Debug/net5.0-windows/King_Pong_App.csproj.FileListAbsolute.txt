@@ -30,3 +30,5 @@ C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\TwoPlayerNameWindow.g.cs
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\PlayerNumberSelectWindow.baml
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\TwoPlayerNameWindow.baml
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\GameWonWindow.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\GameWonWindow.baml

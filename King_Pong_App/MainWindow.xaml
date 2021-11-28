@@ -37,15 +37,15 @@
 			<Grid Grid.Row="0"
 				  Grid.ColumnSpan="2">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="6.5*"/>
+					<ColumnDefinition Width="7.5*"/>
 					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="6.5*"/>
+					<ColumnDefinition Width="7.5*"/>
 				</Grid.ColumnDefinitions>
 				<TextBlock
 					x:Name="Team1Name"
 					Margin="0 0 20 0"
 					Grid.Column="0"
-					FontSize="60" 
+					FontSize="55" 
 					FontWeight="Bold" 
 					TextAlignment="Right"
 					VerticalAlignment="Center"
@@ -55,7 +55,7 @@
 				<TextBlock
 					x:Name="ScoreCount"
 					Grid.Column="1"
-					FontSize="60" 
+					FontSize="55" 
 					FontWeight="Bold" 
 					TextAlignment="Center"
 					VerticalAlignment="Center"
@@ -66,7 +66,7 @@
 					x:Name="Team2Name"
 					Margin="20 0 0 0"
 					Grid.Column="2"
-					FontSize="60" 
+					FontSize="55" 
 					FontWeight="Bold" 
 					TextAlignment="Left"
 					VerticalAlignment="Center"
@@ -311,14 +311,14 @@
                     x:Name="Player1_1"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45"
+                    FontSize="55"
                     Foreground="{StaticResource DarkModeForeground}">
 					</TextBlock>
 					<TextBlock
                     x:Name="Player1_2" 
                     TextAlignment="Center"  
 					Margin ="0 8 0 8" 
-                    FontSize="45"
+                    FontSize="55"
                     Foreground="{StaticResource DarkModeForeground}">
 					</TextBlock>
 				</StackPanel>
@@ -331,14 +331,16 @@
                     x:Name="Player1_1_Hits"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45"
+                    FontSize="55"
+					FontWeight="Bold"	
                     Foreground="{StaticResource DarkModeForeground}">
 					</TextBlock>
 					<TextBlock
                     x:Name="Player1_2_Hits"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45"
+                    FontSize="55"
+					FontWeight="Bold"	
                     Foreground="{StaticResource DarkModeForeground}">
 					</TextBlock>
 				</StackPanel>
@@ -358,14 +360,14 @@
                     x:Name="Player2_1"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45" 
+                    FontSize="55" 
                     Foreground="{StaticResource DarkModeForeground}">
 					</TextBlock>
 					<TextBlock 
                     x:Name="Player2_2" 
                     TextAlignment="Center" 
                     Margin ="0 8 0 8"
-                    FontSize="45" 
+                    FontSize="55" 
                     Foreground="{StaticResource DarkModeForeground}">
 					</TextBlock>
 				</StackPanel>
@@ -378,14 +380,16 @@
                     x:Name="Player2_1_Hits"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45" 
+                    FontSize="55"
+					FontWeight="Bold" 
                     Foreground="{StaticResource DarkModeForeground}">
 					</TextBlock>
 					<TextBlock 
                     x:Name="Player2_2_Hits" 
                     TextAlignment="Center" 
                     Margin ="0 8 0 8"
-                    FontSize="45" 
+                    FontSize="55"
+					FontWeight="Bold"
                     Foreground="{StaticResource DarkModeForeground}">
 					</TextBlock>
 				</StackPanel>
@@ -399,6 +403,17 @@
 			Orientation="Horizontal"
 			HorizontalAlignment="Right"
 			VerticalAlignment="Top">
+			<Button
+				Style="{StaticResource defaultDarkModeButton}"
+				Click="AutomaticWin_Click" 
+				Content="WIN SCREEN TEST"
+				Width="260">
+				<Button.Background>
+					<SolidColorBrush 
+                        Color="Black" 
+                        Opacity="0.15"/>
+				</Button.Background>
+			</Button>
 			<Button
 				Style="{StaticResource defaultDarkModeButton}"
 				Click="HitEvent_Click" 
