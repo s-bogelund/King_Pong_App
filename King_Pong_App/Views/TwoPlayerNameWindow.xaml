@@ -41,25 +41,6 @@
 			FontSize="42"
 			Foreground="{StaticResource DarkModeForeground}"
 			Content="Vælg Holdnavn og Spillernavn"/>
-
-		<StackPanel 
-			Grid.Row="1"
-			Margin="20"
-			Width="200"
-			VerticalAlignment="Center"
-			Grid.RowSpan="2">
-			<TextBlock
-				Foreground="{StaticResource DarkModeForeground}"
-				Margin="0 0 0 5"
-				Text="Spillernavn"
-				FontSize="18"/>
-			<TextBox
-				Name="NameOfPlayer1"
-				Text="{Binding NamePlayer1}"
-				Foreground="Navy"
-				Background="Gray"
-				FontSize="15"/>
-		</StackPanel>
 		<StackPanel 
 			Grid.Row="0"
 			Grid.RowSpan="2"
@@ -77,6 +58,24 @@
 				Foreground="Navy"
 				FontSize="18"
 				Background="Gray"/>
+		</StackPanel>
+		<StackPanel 
+			Grid.Row="1"
+			Margin="20"
+			Width="200"
+			VerticalAlignment="Center"
+			Grid.RowSpan="2">
+			<TextBlock
+				Foreground="{StaticResource DarkModeForeground}"
+				Margin="0 0 0 5"
+				Text="Spillernavn"
+				FontSize="18"/>
+			<TextBox
+				Name="NameOfPlayer1"
+				Text="{Binding NamePlayer1}"
+				Foreground="Navy"
+				Background="Gray"
+				FontSize="15"/>
 		</StackPanel>
 		<StackPanel 
 			Grid.Row="0"
@@ -123,8 +122,8 @@
 			Click="ConfirmNames_Click"
 			Grid.Column="1"
 			Grid.Row="2"
-			Margin="80
-			0 0 0"
+			Margin="80 0 0 0"
+			IsDefault="True"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Bottom" 
 			Style="{StaticResource popUpWindowButton}"

@@ -80,6 +80,7 @@
 		<Button
 			x:Name="ConfirmCups"
 			Click="ConfirmPlayers_Click"
+			IsDefault="True"
 			Grid.Column="1"
 			Grid.Row="4"
 			HorizontalAlignment="Center"

@@ -160,6 +160,7 @@
 		<Button
 			x:Name="ConfirmNames"
 			Click="ConfirmNames_Click"
+			IsDefault="True"
 			Grid.Column="1"
 			Grid.Row="2"
 			Margin="80

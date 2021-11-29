@@ -121,17 +121,29 @@ namespace King_Pong_App
 
 		public void HitEvent(int number)
 		{
-			List<Ellipse> team1Cups = new() { ellipse1_1, ellipse1_2, ellipse1_3, ellipse1_4, ellipse1_5, ellipse1_6, ellipse1_7, ellipse1_8, ellipse1_9, ellipse1_10 };
-			List<Ellipse> team2Cups = new() { ellipse2_1, ellipse2_2, ellipse2_3, ellipse2_4, ellipse2_5, ellipse2_6, ellipse2_7, ellipse2_8, ellipse2_9, ellipse2_10 };
+			List<Ellipse> team1TotalCups = new() { ellipse1_1, ellipse1_2, ellipse1_3, ellipse1_4, ellipse1_5, ellipse1_6, ellipse1_7, ellipse1_8, ellipse1_9, ellipse1_10 };
+			List<Ellipse> team2TotalCups = new() { ellipse2_1, ellipse2_2, ellipse2_3, ellipse2_4, ellipse2_5, ellipse2_6, ellipse2_7, ellipse2_8, ellipse2_9, ellipse2_10 };
 
-			if(App.currentTeam == App.team1)
+			List<Ellipse> team1ActualCups = new() { };
+			List<Ellipse> team2ActualCups = new() { };
+
+			for (int i = 0; i < App.numberOfCups; i++)  //ensures that we can't hit cups that aren't used if only using 6 cups
 			{
-				team2Cups[number].Fill = Brushes.Red;
+				team1ActualCups.Add(team1TotalCups[i]);
+				team2ActualCups.Add(team2TotalCups[i]);
+			}
+
+			Debug.WriteLine($"Team1ActualCups: {team1ActualCups.Count}");
+			Debug.WriteLine($"Team2ActualCups: {team2ActualCups.Count}");
+			Debug.WriteLine($"number argument = {number}");
+			if (App.currentTeam == App.team1)
+			{
+				team2ActualCups[number].Fill = Brushes.Red;
 				App.team2.CupsRemaining--;
 			}
 			else 
 			{
-				team1Cups[number].Fill = Brushes.Red;
+				team1ActualCups[number].Fill = Brushes.Red;
 				App.team1.CupsRemaining--;
 			}
 			App.currentTeam.roster[App.playerTurn].AddHit();
@@ -142,12 +154,17 @@ namespace King_Pong_App
 		public void NextTurn()
 		{
 			App.currentTeam.roster[App.playerTurn].NumberOfThrows++;
-			
-			if (App.teamSize <= App.playerTurn + 1)
-				App.TurnOver();
-			else
-				App.playerTurn++;
 
+			if (App.team1.CupsRemaining > 0 && App.team2.CupsRemaining > 0)
+			{
+				if (App.teamSize <= App.playerTurn + 1)
+					App.TurnOver();
+				else
+					App.playerTurn++;
+			}
+			else
+				GameOver();
+				
 			UpdateGameBoard();
 		}
 
@@ -221,36 +238,35 @@ namespace King_Pong_App
 		private void NextTurn_Click(object sender, RoutedEventArgs e)
 		{
 			NextTurn();
+			Debug.WriteLine($"Current team: {App.currentTeam.Name}");
 		}
 
 		private void HitEvent_Click(object sender, RoutedEventArgs e)
 		{
 			if (App.currentTeam == App.team1)
-				HitEvent(cupHitsTEST1);
+				HitEvent(App.team2.CupsRemaining-1);
 			else
-				HitEvent(cupHitsTEST2);
+				HitEvent(App.team1.CupsRemaining-1);
 
-			if (App.currentTeam == App.team1)
-				cupHitsTEST1++;
-			else
-				cupHitsTEST2++;
+			if (App.team1.CupsRemaining <= 0 || App.team2.CupsRemaining <= 0)
+				MessageBox.Show($"EEEEY, you won {App.currentTeam.Name}!\n\n");
 
-			if(cupHitsTEST1 >= App.numberOfCups|| cupHitsTEST2 >= App.numberOfCups)
-				MessageBox.Show($"EEEEY, you won {App.currentTeam.Name}!\n\n " +
-					$"The best player this game was Simon like always");
-
-			Debug.WriteLine(cupHitsTEST1);
-			Debug.WriteLine(cupHitsTEST2);
+			Debug.WriteLine($"Current team: {App.currentTeam.Name}");
+			Debug.WriteLine($"Team1 Remaining cups: {App.team1.CupsRemaining}");
+			Debug.WriteLine($"Team2 Remaining cups: {App.team2.CupsRemaining}");
 
 
 		}
-
-		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
+		public void GameOver()
 		{
 			GameWonWindow gameWon = new();
 			gameWon.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			gameWon.Owner = this;
 			gameWon.ShowDialog();
+		}
+		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
+		{
+			GameOver();
 		}
 	}
 }
