@@ -7,41 +7,14 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {
       "King_Pong_App/1.0.0": {
-        "dependencies": {
-          "WebSocketClient": "1.0.0",
-          "WebSocketServer": "1.0.0"
-        },
         "runtime": {
           "King_Pong_App.dll": {}
-        }
-      },
-      "WebSocketClient/1.0.0": {
-        "runtime": {
-          "WebSocketClient.dll": {}
-        }
-      },
-      "WebSocketServer/1.0.0": {
-        "dependencies": {
-          "WebSocketClient": "1.0.0"
-        },
-        "runtime": {
-          "WebSocketServer.dll": {}
         }
       }
     }
   },
   "libraries": {
     "King_Pong_App/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "WebSocketClient/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "WebSocketServer/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

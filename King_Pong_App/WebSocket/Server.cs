@@ -114,8 +114,6 @@ namespace King_Pong_App.WebSocket
 				{
 					Debug.WriteLine(ex.Message);
 				}
-				App.gamePlayModel.Command = cleanerData;
-				Debug.WriteLine(cleanerData);
 			});
 		}
 	}

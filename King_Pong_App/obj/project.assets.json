@@ -1,49 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net5.0-windows7.0": {
-      "WebSocketClient/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/WebSocketClient.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/WebSocketClient.dll": {}
-        }
-      },
-      "WebSocketServer/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "dependencies": {
-          "WebSocketClient": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/WebSocketServer.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/WebSocketServer.dll": {}
-        }
-      }
-    }
+    "net5.0-windows7.0": {}
   },
-  "libraries": {
-    "WebSocketClient/1.0.0": {
-      "type": "project",
-      "path": "../WebSocketClient/WebSocketClient.csproj",
-      "msbuildProject": "../WebSocketClient/WebSocketClient.csproj"
-    },
-    "WebSocketServer/1.0.0": {
-      "type": "project",
-      "path": "../WebSocketServer/WebSocketServer.csproj",
-      "msbuildProject": "../WebSocketServer/WebSocketServer.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net5.0-windows7.0": [
-      "WebSocketClient >= 1.0.0",
-      "WebSocketServer >= 1.0.0"
-    ]
+    "net5.0-windows7.0": []
   },
   "packageFolders": {
     "C:\\Users\\simbj\\.nuget\\packages\\": {},
@@ -79,14 +41,7 @@
       "frameworks": {
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
-          "projectReferences": {
-            "C:\\Users\\simbj\\source\\repos\\King_Pong_App\\WebSocketClient\\WebSocketClient.csproj": {
-              "projectPath": "C:\\Users\\simbj\\source\\repos\\King_Pong_App\\WebSocketClient\\WebSocketClient.csproj"
-            },
-            "C:\\Users\\simbj\\source\\repos\\King_Pong_App\\WebSocketServer\\WebSocketServer.csproj": {
-              "projectPath": "C:\\Users\\simbj\\source\\repos\\King_Pong_App\\WebSocketServer\\WebSocketServer.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

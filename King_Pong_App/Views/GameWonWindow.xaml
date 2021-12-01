@@ -19,7 +19,7 @@
 				Opacity="0.15"
 				>
 				<ImageBrush.RelativeTransform>
-					<ScaleTransform ScaleX=".7" ScaleY=".7" CenterX="0.5" CenterY="0.5"/>
+					<ScaleTransform ScaleX=".6" ScaleY="1.05" CenterX="0.5" CenterY="0.5"/>
 				</ImageBrush.RelativeTransform>
 			</ImageBrush>
 		</Grid.Background>
