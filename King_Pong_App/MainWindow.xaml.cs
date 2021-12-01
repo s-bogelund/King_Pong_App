@@ -3,6 +3,7 @@ using King_Pong_App.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using King_Pong_App;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using King_Pong_App.WebSocket;
+using King_Pong_App.Models;
 
 namespace King_Pong_App
 {
@@ -25,18 +28,18 @@ namespace King_Pong_App
 	public partial class MainWindow : Window
 	{
 		public EllipseViewModel backFourCups;
-		public EllipseViewModel allCups;
-		//public PlayerViewModel playerInfo;
-		//public TeamViewModel teams;
-		public int cupHitsTEST1 = 0;
-		public int cupHitsTEST2 = 0;
+		private GameSession _gameSession;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			backFourCups = Resources["backFourCups"] as EllipseViewModel;
+			Server.StartServer();
+			//turnTextBlock.Text += gamePlayModel.Command;
+			_gameSession = new();
+			DataContext = _gameSession;
 		}
-
+		
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
 			bool gameInProgress = false; // remove this when implementation is done
@@ -54,7 +57,28 @@ namespace King_Pong_App
 			}
 			PrintTeamNames();
 			UpdateGameBoard();
+			
+
 			//gameInProgress = true;  <--- implemented when we're done :)
+			//"decide starterTeam" game loop
+			//normal gameloop
+		}
+
+		public void GamePlayLoop()
+		{
+			while (true)
+			{
+				string command = App.gamePlayModel.Command;
+				
+				switch (command)
+				{
+					case "1":
+						HitEvent(int.Parse(command.Substring(1, 1)));
+						break;
+					default:
+						break;
+				}
+			}
 		}
 
 		public void TwoPlayerGame()
@@ -127,15 +151,15 @@ namespace King_Pong_App
 			List<Ellipse> team1ActualCups = new() { };
 			List<Ellipse> team2ActualCups = new() { };
 
-			for (int i = 0; i < App.numberOfCups; i++)  //ensures that we can't hit cups that aren't used if only using 6 cups
+			for (int i = 0; i < App.numberOfCups; i++)  //ensures that we can't hit cups that aren't used if using only 6 cups
 			{
 				team1ActualCups.Add(team1TotalCups[i]);
 				team2ActualCups.Add(team2TotalCups[i]);
 			}
-
-			Debug.WriteLine($"Team1ActualCups: {team1ActualCups.Count}");
-			Debug.WriteLine($"Team2ActualCups: {team2ActualCups.Count}");
-			Debug.WriteLine($"number argument = {number}");
+			
+			//Debug.WriteLine($"Team1ActualCups: {team1ActualCups.Count}");
+			//Debug.WriteLine($"Team2ActualCups: {team2ActualCups.Count}");
+			//Debug.WriteLine($"number argument = {number}");
 			if (App.currentTeam == App.team1)
 			{
 				team2ActualCups[number].Fill = Brushes.Red;
@@ -153,7 +177,7 @@ namespace King_Pong_App
 
 		public void NextTurn()
 		{
-			App.currentTeam.roster[App.playerTurn].NumberOfThrows++;
+			App.currentTeam.roster[App.playerTurn].AddThrow();
 
 			if (App.team1.CupsRemaining > 0 && App.team2.CupsRemaining > 0)
 			{
@@ -233,6 +257,11 @@ namespace King_Pong_App
 		{
 			MessageBox.Show(@"For at give op, skal begge holdknapper holdes inde i mindst 5 sekunder. 
 								Bemærk at det er holdet som der har turen, som giver op");
+
+			if (_gameSession.Cup1_1.EllipseVisibility == Visibility.Hidden)
+				_gameSession.Cup1_1.EllipseVisibility = Visibility.Visible;
+			else
+				_gameSession.Cup1_1.EllipseVisibility = Visibility.Hidden;
 		}
 
 		private void NextTurn_Click(object sender, RoutedEventArgs e)
@@ -243,18 +272,20 @@ namespace King_Pong_App
 
 		private void HitEvent_Click(object sender, RoutedEventArgs e)
 		{
-			if (App.currentTeam == App.team1)
-				HitEvent(App.team2.CupsRemaining-1);
-			else
-				HitEvent(App.team1.CupsRemaining-1);
+			//if (App.currentTeam == App.team1)
+			//	HitEvent(App.team2.CupsRemaining-1);
+			//else
+			//	HitEvent(App.team1.CupsRemaining-1);
 
-			if (App.team1.CupsRemaining <= 0 || App.team2.CupsRemaining <= 0)
-				MessageBox.Show($"EEEEY, you won {App.currentTeam.Name}!\n\n");
+			//if (App.team1.CupsRemaining <= 0 || App.team2.CupsRemaining <= 0)
+			//	MessageBox.Show($"EEEEY, you won {App.currentTeam.Name}!\n\n");
 
-			Debug.WriteLine($"Current team: {App.currentTeam.Name}");
-			Debug.WriteLine($"Team1 Remaining cups: {App.team1.CupsRemaining}");
-			Debug.WriteLine($"Team2 Remaining cups: {App.team2.CupsRemaining}");
-
+			//Debug.WriteLine($"Current team: {App.currentTeam.Name}");
+			//Debug.WriteLine($"Team1 Remaining cups: {App.team1.CupsRemaining}");
+			//Debug.WriteLine($"Team2 Remaining cups: {App.team2.CupsRemaining}");
+			App.gamePlayModel.Command = "1";
+			_gameSession.Player1.Name = "Ass";
+			_gameSession.Cup1_1.EllipseColor = Brushes.Red;
 
 		}
 		public void GameOver()

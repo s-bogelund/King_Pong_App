@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:King_Pong_App" xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
+        xmlns:local="clr-namespace:King_Pong_App" 
+		xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
 		mc:Ignorable="d"
 		WindowState="Maximized"
         Title="MainWindow" Height="1440" Width="2560">
@@ -75,8 +76,7 @@
 				</TextBlock>
 			</Grid>
 			<Grid 
-				Grid.Row="1"
-				DataContext="{StaticResource teams}">
+				Grid.Row="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="0.25*"/>
@@ -119,8 +119,9 @@
                 FontWeight="Bold" 
                 TextAlignment="Center"
 				VerticalAlignment="Center"
-                Foreground="{StaticResource DarkModeForeground}">
-				Magnex's Tur
+                Foreground="{StaticResource DarkModeForeground}"
+				Text="{Binding Player1.Name, UpdateSourceTrigger=PropertyChanged}">
+				
 			</TextBlock>
 		</Grid>
 		<Grid 
@@ -216,8 +217,7 @@
                     Grid.ColumnSpan="2"/>
 
 			</Grid>
-			<Grid Grid.Row="0" Grid.Column="1"
-				  DataContext="{StaticResource backFourCups}">
+			<Grid Grid.Row="0" Grid.Column="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
@@ -230,13 +230,14 @@
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
-				<Ellipse 
+				<Ellipse
 					x:Name="ellipse2_10"
                     Grid.Row="0" 
                     Grid.Column="3" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup1_1.EllipseColor}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup1_1.EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse
 					x:Name="ellipse2_9"
                     Grid.Row="0" 

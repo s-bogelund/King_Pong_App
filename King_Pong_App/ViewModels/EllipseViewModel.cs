@@ -53,7 +53,7 @@ namespace King_Pong_App.ViewModels
 			set
 			{
 				ellipseColor = value;
-				OnPropertyChanged("EllipseColorChanged");
+				OnPropertyChanged("EllipseColor");
 			}
 		}
 

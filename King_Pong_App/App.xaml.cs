@@ -30,12 +30,14 @@ namespace King_Pong_App
 		public static TeamViewModel currentTeam = team1;
 		public static int playerTurn = 0;
 
+		public static GamePlayModel gamePlayModel = new();
+
 		public static void TurnOver()
 		{
 			currentTeam = currentTeam == team1 ? team2 : team1;
 			playerTurn = 0;
 		}
 
-		//public static List<Ellipse	>team1Cups
+		
 	}
 }

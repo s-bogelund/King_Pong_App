@@ -20,9 +20,8 @@ namespace King_Pong_App.Models
 			get { return name; }
 			set
 			{
-				OnPropertyChanged("Name");
 				name = value;
-
+				OnPropertyChanged("Name");
 			}
 		}
 
