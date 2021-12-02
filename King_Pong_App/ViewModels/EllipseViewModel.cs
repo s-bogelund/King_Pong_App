@@ -13,59 +13,53 @@ namespace King_Pong_App.ViewModels
 {
 	public class EllipseViewModel : INotifyPropertyChanged
 	{
-
-
-		private Visibility ellipseVisibility;
-		public Visibility EllipseVisibility
+		private Visibility visibility;
+		public Visibility Visibility
 		{
-			get => ellipseVisibility;
+			get => visibility;
 			set
 			{
-				ellipseVisibility = Visibility.Visible;
-				OnPropertyChanged("EllipseVisibility");
+				visibility = value;
+				OnPropertyChanged(nameof(Visibility));
 			}
 		}
 
 		public EllipseViewModel()
 		{
-			ellipseVisibility = Visibility.Visible;
-			ellipseColor = Brushes.Green;
+			visibility = Visibility.Visible;
+			color = Brushes.Green;
 		}
 
-		public void HideEllipse(EllipseViewModel ellipse)
+		public void HideEllipse()
 		{
-			ellipse.ellipseVisibility = Visibility.Hidden;
-			OnPropertyChanged("EllipseVisibility");
-			//return ellipseVisibility;
+			Visibility = Visibility.Hidden;
 		}
 
-		public void ShowEllipse(EllipseViewModel ellipse)
+		public void ShowEllipse()
 		{
-			ellipse.ellipseVisibility = Visibility.Visible;
-			OnPropertyChanged("EllipseVisibility");
-			//return ellipseVisibility;
+			Visibility = Visibility.Visible;
 		}
-		private SolidColorBrush ellipseColor;
+		private SolidColorBrush color;
 
-		public SolidColorBrush EllipseColor
+		public SolidColorBrush Color
 		{
-			get => ellipseColor;
+			get => color;
 			set
 			{
-				ellipseColor = value;
-				OnPropertyChanged("EllipseColorChanged");
+				color = value;
+				OnPropertyChanged("Color");
 			}
 		}
 
-		public SolidColorBrush EllipseColorChanger(Ellipse ellipse)
-		{
-			OnPropertyChanged("EllipseColorChanged");
+		//public SolidColorBrush EllipseColorChanger(Ellipse ellipse)
+		//{
+		//	OnPropertyChanged("EllipseColorChanged");
 
-			if (ellipse.Fill == Brushes.Green)
-				return Brushes.Red;
-			else
-				return Brushes.Green;
-		}
+		//	if (ellipse.Fill == Brushes.Green)
+		//		return Brushes.Red;
+		//	else
+		//		return Brushes.Green;
+		//}
 
 
 		public event PropertyChangedEventHandler PropertyChanged;

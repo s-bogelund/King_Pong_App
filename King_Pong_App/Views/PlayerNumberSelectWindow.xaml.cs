@@ -32,8 +32,8 @@ namespace King_Pong_App.Views
 			}
 			else
 			{
-				App.teamSize = (bool)_1v1_radiobutton.IsChecked ? 1 : 2;
-
+				MainWindow._gameSession.teamSize = (bool)_1v1_radiobutton.IsChecked ? 1 : 2;
+				
 				Close();
 			}
 		}

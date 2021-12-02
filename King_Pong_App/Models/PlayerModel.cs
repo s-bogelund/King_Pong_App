@@ -20,9 +20,8 @@ namespace King_Pong_App.Models
 			get { return name; }
 			set
 			{
-				OnPropertyChanged("Name");
 				name = value;
-
+				OnPropertyChanged("Name");
 			}
 		}
 
@@ -34,14 +33,14 @@ namespace King_Pong_App.Models
 			set
 			{
 				numberOfHits = value;
-				OnPropertyChanged("NumberOfHits");
+				OnPropertyChanged(nameof(NumberOfHits));
 			}
 		}
 		public PlayerModel() { }
-		public PlayerModel(string name, int playerNumber, int teamNumber, int numberOfHits = 0)
+		public PlayerModel(string name, int playerNumber, int teamNumber, int _numberOfHits = 0)
 		{
 			Name = name;
-			NumberOfHits = numberOfHits;
+			numberOfHits = _numberOfHits;
 			PlayerNumber = playerNumber;
 			TeamNumber = teamNumber;
 		}
