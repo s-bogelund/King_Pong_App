@@ -15,20 +15,20 @@ namespace King_Pong_App.ViewModels
 
 		}
 
-		public List<PlayerViewModel> roster = new();
+		public List<PlayerViewModel> Roster = new();
 		public void AddMembers(params PlayerViewModel[] players)
 		{
 			foreach (var player in players)
 			{
-				roster.Add(player);
+				Roster.Add(player);
 			}
 		}
 
 		public string PrintInfo()
 		{
-			string playerStats = "";
+			string playerStats = string.Empty;
 
-			List<PlayerViewModel> sortedList = roster.OrderByDescending(p => p.NumberOfHits).ToList();
+			List<PlayerViewModel> sortedList = Roster.OrderByDescending(p => p.NumberOfHits).ToList();
 			sortedList.ForEach(p => playerStats += p.PrintInfo());
 
 			return playerStats;

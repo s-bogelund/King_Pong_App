@@ -1,9 +1,14 @@
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.csproj.AssemblyReference.cache
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\CupSelectWindow.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\FourPlayerNameWindow.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\GameWonWindow.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\PlayerNumberSelectWindow.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\TwoPlayerNameWindow.g.cs
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App_MarkupCompile.cache
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App_MarkupCompile.lref
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\FourPlayerNameWindow.g.cs
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\bin\Debug\net5.0-windows\King_Pong_App.exe
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\bin\Debug\net5.0-windows\King_Pong_App.deps.json
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\bin\Debug\net5.0-windows\King_Pong_App.runtimeconfig.json
@@ -15,6 +20,9 @@ C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\CupSelectWindow.baml
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\FourPlayerNameWindow.baml
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\GameWonWindow.baml
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\PlayerNumberSelectWindow.baml
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\TwoPlayerNameWindow.baml
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.g.resources
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.AssemblyInfoInputs.cache
@@ -24,11 +32,3 @@ C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\ref\King_Pong_App.dll
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.pdb
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.genruntimeconfig.cache
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.csproj.AssemblyReference.cache
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\PlayerNumberSelectWindow.g.cs
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\TwoPlayerNameWindow.g.cs
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\PlayerNumberSelectWindow.baml
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\TwoPlayerNameWindow.baml
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\GameWonWindow.g.cs
-C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\GameWonWindow.baml

@@ -34,15 +34,16 @@ namespace King_Pong_App.Views
 				MessageBox.Show("Husk at udfylde alle felter 😅");
 			else
 			{
-				App.player1.Name = Player1Name.Text;
-				App.player2.Name = Player2Name.Text;
-				App.player3.Name = Player3Name.Text;
-				App.player4.Name = Player4Name.Text;
-				App.team1.Name = Team1Name.Text;
-				App.team2.Name = Team2Name.Text;
+				MainWindow._gameSession.Player1.Name = Player1Name.Text;
+				MainWindow._gameSession.Player2.Name = Player2Name.Text;
+				MainWindow._gameSession.Player3.Name = Player3Name.Text;
+				MainWindow._gameSession.Player4.Name = Player4Name.Text;
 
-				App.team1.AddMembers(App.player1, App.player2);
-				App.team2.AddMembers(App.player3, App.player4);
+				MainWindow._gameSession.Team1.Name = Team1Name.Text;
+				MainWindow._gameSession.Team2.Name = Team2Name.Text;
+
+				MainWindow._gameSession.Team1.AddMembers(MainWindow._gameSession.Player1, MainWindow._gameSession.Player2);
+				MainWindow._gameSession.Team2.AddMembers(MainWindow._gameSession.Player3, MainWindow._gameSession.Player4);
 				Close();
 			}
 		}

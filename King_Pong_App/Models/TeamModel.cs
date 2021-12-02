@@ -13,7 +13,19 @@ namespace King_Pong_App.Models
 		public PlayerModel Player2 { get; set; }
 		public bool Turn { get; set; }
 
-		public int CupsRemaining { get; set; }
+
+		private int cupsRemaining;
+
+		public int CupsRemaining
+		{
+			get { return cupsRemaining; }
+			set 
+			{ 
+				cupsRemaining = value;
+				OnPropertyChanged(nameof(CupsRemaining));
+			}
+		}
+
 
 		public TeamModel() { }
 
