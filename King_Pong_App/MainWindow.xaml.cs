@@ -33,7 +33,6 @@ namespace King_Pong_App
 		{
 			InitializeComponent();
 			Server.StartServer();
-			//turnTextBlock.Text += gamePlayModel.Command;
 			_gameSession = new();
 			DataContext = _gameSession;
 		}
@@ -53,7 +52,6 @@ namespace King_Pong_App
 				else
 					TwoPlayerGame();
 			}
-			//PrintTeamNames();
 			UpdateGameBoard();
 
 
@@ -70,14 +68,7 @@ namespace King_Pong_App
 			nameSelect2.Owner = this;
 			nameSelect2.ShowDialog();
 
-			//Player1_1.Text = _gameSession.Player1.Name;
-			//Player1_2.Text = "";
-			//Player2_1.Text = App.player3.Name;
-			//Player2_2.Text = "";
-
-			//Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
 			Player1_2_Hits.Text = "";
-			//Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
 			Player2_2_Hits.Text = "";
 		}
 
@@ -88,16 +79,6 @@ namespace King_Pong_App
 			nameSelect4.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			nameSelect4.Owner = this;
 			nameSelect4.ShowDialog();
-
-			//Player1_1.Text = App.player1.Name;
-			//Player1_2.Text = App.player2.Name;
-			//Player2_1.Text = App.player3.Name;
-			//Player2_2.Text = App.player4.Name;
-
-			//Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
-			//Player1_2_Hits.Text = App.player2.NumberOfHits.ToString();
-			//Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
-			//Player2_2_Hits.Text = App.player4.NumberOfHits.ToString();
 		}
 
 		public void NumberOfPlayersSelection()
@@ -122,17 +103,8 @@ namespace King_Pong_App
 				_gameSession.backFourCups.ForEach(c => c.ShowEllipse());
 		}
 
-		//public void PrintTeamNames()
-		//{
-		//	Team1Name.Text = App.team1.Name;
-		//	Team2Name.Text = App.team2.Name;
-		//}
-
 		public void HitEvent(int number)
 		{
-			List<Ellipse> team1TotalCups = new() { ellipse1_1, ellipse1_2, ellipse1_3, ellipse1_4, ellipse1_5, ellipse1_6, ellipse1_7, ellipse1_8, ellipse1_9, ellipse1_10 };
-			List<Ellipse> team2TotalCups = new() { ellipse2_1, ellipse2_2, ellipse2_3, ellipse2_4, ellipse2_5, ellipse2_6, ellipse2_7, ellipse2_8, ellipse2_9, ellipse2_10 };
-
 			List<EllipseViewModel> allTeam1Cups = new()
 			{
 				_gameSession.Cup1_1,
@@ -231,30 +203,6 @@ namespace King_Pong_App
 			turnTextBlock.Text = _gameSession.Current.Roster[_gameSession.currentPlayer].Name + "'s tur";
 		}
 
-		//public void UpdateHits()
-		//{
-		//	if (App.teamSize == 2)
-		//	{
-		//		Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
-		//		Player1_2_Hits.Text = App.player2.NumberOfHits.ToString();
-		//		Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
-		//		Player2_2_Hits.Text = App.player4.NumberOfHits.ToString();
-		//	}
-		//	else
-		//	{
-		//		Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
-		//		Player1_2_Hits.Text = "";
-		//		Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
-		//		Player2_2_Hits.Text = "";
-		//	}
-		//}
-
-		//public void UpdateCupsRemaining()
-		//{
-		//	Team1CupsLeft.Text = App.team1.CupsRemaining.ToString();
-		//	Team2CupsLeft.Text = App.team2.CupsRemaining.ToString();
-		//}
-
 		private void Regler_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Regler kan findes via dette link: https://kingpong_rules.com");
@@ -283,9 +231,6 @@ namespace King_Pong_App
 				HitEvent(_gameSession.Team2.CupsRemaining - 1);
 			else
 				HitEvent(_gameSession.Team1.CupsRemaining - 1);
-
-			//if (App.team1.CupsRemaining <= 0 || App.team2.CupsRemaining <= 0)
-			//	MessageBox.Show($"EEEEY, you won {App.currentTeam.Name}!\n\n");
 
 			//Debug.WriteLine($"Current team: {App.currentTeam.Name}");
 			//Debug.WriteLine($"Team1 Remaining cups: {App.team1.CupsRemaining}");
