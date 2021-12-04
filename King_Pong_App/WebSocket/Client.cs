@@ -1,82 +1,111 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
+using System.Net.WebSockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace King_Pong_App.WebSocket
 {
 	class Client
 	{
-		public static void StartClient()
-		{
-			byte[] bytes = new byte[1024];
+		private static object consoleLock = new object();
+		private const int sendChunkSize = 256;
+		private const int receiveChunkSize = 64;
+		private const bool verbose = true;
+		private static readonly TimeSpan delay = TimeSpan.FromMilliseconds(1000);
+		private static string sentToString = "Hello Server!";
+		private static string receivedToString = string.Empty;
+		public static string connectPath = "ws://localhost:9000/wsDemo/";
 
+
+		public static async Task StartClient()
+		{
+			Task.Run(async () =>
+			await Connect(connectPath));
+		}
+
+		public static async Task Connect(string uri)
+		{
+			ClientWebSocket webSocket = null;
 			try
 			{
-				// Connect to a Remote server
-				// Get Host IP Address that is used to establish a connection
-				// In this case, we get one IP address of localhost that is IP : 127.0.0.1
-				// If a host has multiple addresses, you will get a list of addresses
-				IPHostEntry host = Dns.GetHostEntry("localhost");
-				IPAddress ipAddress = host.AddressList[0];
-				IPEndPoint remoteEP = new IPEndPoint(ipAddress, 10000);
-
-				// Create a TCP/IP  socket.
-				Socket sender = new Socket(ipAddress.AddressFamily,
-					SocketType.Stream, ProtocolType.Tcp);
-
-				// Connect the socket to the remote endpoint. Catch any errors.
-				try
-				{
-					// Connect to Remote EndPoint
-					sender.Connect(remoteEP);
-
-					Console.WriteLine("Socket connected to {0}",
-						sender.RemoteEndPoint.ToString());
-					string msgToSend = "";
-					do
-					{
-						msgToSend = string.Empty;
-						msgToSend = Console.ReadLine().ToString();
-
-						// Encode the data string into a byte array.
-						byte[] msg = Encoding.ASCII.GetBytes($"{msgToSend}<EOF>");
-
-						// Send the data through the socket.
-						int bytesSent = sender.Send(msg);
-
-						// Receive the response from the remote device.
-						int bytesRec = sender.Receive(bytes);
-						Console.WriteLine("Echoed test = {0}",
-							Encoding.ASCII.GetString(bytes, 0, bytesRec - 5)); // -5 removes the <EOF> tag, just a bit cleaner 
-					} while (msgToSend.ToLower() != "gameover");
-
-					// Release the socket.
-					sender.Shutdown(SocketShutdown.Both);
-					sender.Close();
-
-				}
-				catch (ArgumentNullException ane)
-				{
-					Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
-				}
-				catch (SocketException se)
-				{
-					Console.WriteLine("SocketException : {0}", se.ToString());
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine("Unexpected exception : {0}", e.ToString());
-				}
+				webSocket = new ClientWebSocket();
+				await webSocket.ConnectAsync(new Uri(uri), CancellationToken.None);
+				await Task.WhenAll(Receive(webSocket), Send(webSocket));
 
 			}
-			catch (Exception e)
+			catch (Exception ex)
 			{
-				Console.WriteLine(e.ToString());
+				Debug.WriteLine("Exception: {0}", ex);
+				Debug.WriteLine("Something went wrong with Connect");
 			}
+			finally
+			{
+				if (webSocket != null)
+					webSocket.Dispose();
+				Console.WriteLine();
+
+				lock (consoleLock)
+				{
+					Console.ForegroundColor = ConsoleColor.Red;
+					Console.WriteLine("WebSocket closed.");
+					Console.ResetColor();
+				}
+			}
+		}
+
+		private static async Task Send(ClientWebSocket webSocket)
+		{
+			Debug.WriteLine("Send something");
+			while (webSocket.State == WebSocketState.Open)
+			{
+				byte[] buffer = Encoding.ASCII.GetBytes(sentToString);
+				await webSocket.SendAsync(new ArraySegment<byte>(buffer),
+					WebSocketMessageType.Binary, false, CancellationToken.None);
+
+				await Task.Delay(delay);
+			}
+
+		}
+
+		private static async Task Receive(ClientWebSocket webSocket)
+		{
+
+			while (webSocket.State == WebSocketState.Open)
+			{
+				byte[] receivedBuffer = new byte[receiveChunkSize];
+				var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(receivedBuffer), CancellationToken.None);
+				if (result.MessageType == WebSocketMessageType.Close)
+				{
+					await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
+				}
+				else
+				{
+					receivedToString = Encoding.ASCII.GetString(receivedBuffer);
+
+					Debug.WriteLine($"Received: {receivedToString}");
+
+				}
+			}
+		}
+
+		private static void LogStatus(bool receiving, byte[] buffer, int length)
+		{
+			//lock (consoleLock)
+			//{
+			//	Console.ForegroundColor = receiving ? ConsoleColor.Green : ConsoleColor.Gray;
+			//	Console.WriteLine("{0} {1} bytes... ", receiving ? "Received" : "Sent", length);
+
+			//	if (verbose)
+			//		Console.WriteLine(BitConverter.ToString(buffer, 0, length));
+
+			//	Console.ResetColor();
+			//}
 		}
 	}
 }

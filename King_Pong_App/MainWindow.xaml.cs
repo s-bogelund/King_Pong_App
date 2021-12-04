@@ -32,9 +32,9 @@ namespace King_Pong_App
 		public MainWindow()
 		{
 			InitializeComponent();
-			Server.StartServer();
 			_gameSession = new();
 			DataContext = _gameSession;
+			Client.StartClient().Wait();
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
@@ -178,10 +178,8 @@ namespace King_Pong_App
 
 		public void UpdateGameBoard()
 		{
-			//UpdateTurnText();
+			UpdateTurnText();
 			UpdateTurnIndicator();
-			//UpdateHits();
-			//UpdateCupsRemaining();
 		}
 
 		public void UpdateTurnIndicator()

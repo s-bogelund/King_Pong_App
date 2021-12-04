@@ -34,18 +34,24 @@ namespace King_Pong_App.Views
 				MessageBox.Show("Husk at udfylde alle felter 😅");
 			else
 			{
-				MainWindow._gameSession.Player1.Name = Player1Name.Text;
-				MainWindow._gameSession.Player2.Name = Player2Name.Text;
-				MainWindow._gameSession.Player3.Name = Player3Name.Text;
-				MainWindow._gameSession.Player4.Name = Player4Name.Text;
+				FourPlayerNameAssignment();
 
-				MainWindow._gameSession.Team1.Name = Team1Name.Text;
-				MainWindow._gameSession.Team2.Name = Team2Name.Text;
-
-				MainWindow._gameSession.Team1.AddMembers(MainWindow._gameSession.Player1, MainWindow._gameSession.Player2);
-				MainWindow._gameSession.Team2.AddMembers(MainWindow._gameSession.Player3, MainWindow._gameSession.Player4);
 				Close();
 			}
+		}
+
+		public void FourPlayerNameAssignment()
+		{
+			MainWindow._gameSession.Player1.Name = Player1Name.Text;
+			MainWindow._gameSession.Player2.Name = Player2Name.Text;
+			MainWindow._gameSession.Player3.Name = Player3Name.Text;
+			MainWindow._gameSession.Player4.Name = Player4Name.Text;
+
+			MainWindow._gameSession.Team1.Name = Team1Name.Text;
+			MainWindow._gameSession.Team2.Name = Team2Name.Text;
+
+			MainWindow._gameSession.Team1.AddMembers(MainWindow._gameSession.Player1, MainWindow._gameSession.Player2);
+			MainWindow._gameSession.Team2.AddMembers(MainWindow._gameSession.Player3, MainWindow._gameSession.Player4);
 		}
 	}
 }

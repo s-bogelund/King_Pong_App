@@ -28,12 +28,13 @@ namespace King_Pong_App.Views
 		{
 			if (!(bool)TenCupButton.IsChecked && !(bool)SixCupButton.IsChecked)
 				MessageBox.Show("Du skal vælge, hvor mange kopper der skal bruges i spillet");
+			else
+			{
+				MainWindow._gameSession.numberOfCups = (bool)SixCupButton.IsChecked ? 6 : 10; // default value is 10
 
-			MainWindow._gameSession.numberOfCups = (bool)SixCupButton.IsChecked ? 6 : 10; // default value is 10
-
-			MainWindow._gameSession.Team1.CupsRemaining = MainWindow._gameSession.numberOfCups;
-			MainWindow._gameSession.Team2.CupsRemaining = MainWindow._gameSession.numberOfCups;
-
+				MainWindow._gameSession.Team1.CupsRemaining = MainWindow._gameSession.numberOfCups;
+				MainWindow._gameSession.Team2.CupsRemaining = MainWindow._gameSession.numberOfCups;
+			}
 
 			Close();
 		}
