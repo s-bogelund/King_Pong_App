@@ -23,6 +23,7 @@ namespace King_Pong_App.WebSocket
 		public static string connectPath = "ws://localhost:9000/wsDemo/";
 
 
+
 		public static async Task StartClient()
 		{
 			Task.Run(async () =>
@@ -34,9 +35,10 @@ namespace King_Pong_App.WebSocket
 			ClientWebSocket webSocket = null;
 			try
 			{
-				webSocket = new ClientWebSocket();
+				webSocket = new();
 				await webSocket.ConnectAsync(new Uri(uri), CancellationToken.None);
 				await Task.WhenAll(Receive(webSocket), Send(webSocket));
+				Debug.WriteLine("Test1");
 
 			}
 			catch (Exception ex)
@@ -59,21 +61,21 @@ namespace King_Pong_App.WebSocket
 			}
 		}
 
-		private static async Task Send(ClientWebSocket webSocket)
+		public static async Task Send(ClientWebSocket webSocket)
 		{
 			Debug.WriteLine("Send something");
 			while (webSocket.State == WebSocketState.Open)
 			{
 				byte[] buffer = Encoding.ASCII.GetBytes(sentToString);
 				await webSocket.SendAsync(new ArraySegment<byte>(buffer),
-					WebSocketMessageType.Binary, false, CancellationToken.None);
+					WebSocketMessageType.Binary, true, CancellationToken.None);
 
 				await Task.Delay(delay);
 			}
 
 		}
 
-		private static async Task Receive(ClientWebSocket webSocket)
+		public static async Task Receive(ClientWebSocket webSocket)
 		{
 
 			while (webSocket.State == WebSocketState.Open)

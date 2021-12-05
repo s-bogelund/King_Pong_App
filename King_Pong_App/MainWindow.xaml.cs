@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using King_Pong_App.WebSocket;
 using King_Pong_App.Models;
+using System.Net.WebSockets;
 
 namespace King_Pong_App
 {
@@ -29,11 +30,13 @@ namespace King_Pong_App
 	{
 		public EllipseViewModel backFourCups;
 		public static GameSession _gameSession;
+		public static ClientWebSocket client;
 		public MainWindow()
 		{
 			InitializeComponent();
 			_gameSession = new();
 			DataContext = _gameSession;
+			client = new();
 			Client.StartClient().Wait();
 		}
 
@@ -244,7 +247,7 @@ namespace King_Pong_App
 		}
 		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
 		{
-			GameOver();
+			
 		}
 	}
 }
