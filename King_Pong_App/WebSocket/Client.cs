@@ -11,103 +11,100 @@ using System.Threading.Tasks;
 
 namespace King_Pong_App.WebSocket
 {
-	class Client
+	public class Client
 	{
-		private static object consoleLock = new object();
-		private const int sendChunkSize = 256;
-		private const int receiveChunkSize = 64;
-		private const bool verbose = true;
-		private static readonly TimeSpan delay = TimeSpan.FromMilliseconds(1000);
-		private static string sentToString = "Hello Server!";
-		private static string receivedToString = string.Empty;
-		public static string connectPath = "ws://localhost:9000/wsDemo/";
+		Uri _uri;
 
-
-
-		public static async Task StartClient()
+		ClientWebSocket _client = new ClientWebSocket();
+		private int messageSentCounter = 0;
+		public Client(Uri uri, ClientWebSocket client)
 		{
-			Task.Run(async () =>
-			await Connect(connectPath));
+			_uri = uri;
+			_client = client;
 		}
 
-		public static async Task Connect(string uri)
+		public async Task Start()
 		{
-			ClientWebSocket webSocket = null;
 			try
 			{
-				webSocket = new();
-				await webSocket.ConnectAsync(new Uri(uri), CancellationToken.None);
-				await Task.WhenAll(Receive(webSocket), Send(webSocket));
-				Debug.WriteLine("Test1");
-
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine("Exception: {0}", ex);
-				Debug.WriteLine("Something went wrong with Connect");
-			}
-			finally
-			{
-				if (webSocket != null)
-					webSocket.Dispose();
-				Console.WriteLine();
-
-				lock (consoleLock)
+				await _client.ConnectAsync(_uri, CancellationToken.None);
+				while (_client.State == WebSocketState.Open)
 				{
-					Console.ForegroundColor = ConsoleColor.Red;
-					Console.WriteLine("WebSocket closed.");
-					Console.ResetColor();
+					while (messageSentCounter == 0)
+					{
+						await Send("Hi Server");
+					}
+					await Receive();
+					//if (response.EndOfMessage)
+					//	break;
 				}
+
+				await _client.CloseAsync(WebSocketCloseStatus.NormalClosure, "Message was sent successfully", CancellationToken.None);
+			}
+			catch (WebSocketException e)
+			{
+				Console.WriteLine("You've reached the general websocket exception :(");
+				Console.WriteLine(e.Message);
+				if (_client.State == WebSocketState.Open)
+					await _client.CloseAsync(WebSocketCloseStatus.Empty, null, CancellationToken.None);
 			}
 		}
 
-		public static async Task Send(ClientWebSocket webSocket)
+		public async Task Send(string sendMessage)
 		{
-			Debug.WriteLine("Send something");
-			while (webSocket.State == WebSocketState.Open)
+			//Console.WriteLine("Enter message to send");
+			//string sendMessage = Console.ReadLine().ToString();
+			int numberOfTimesRun = 0;
+			if (_client.State == WebSocketState.Open)
 			{
-				byte[] buffer = Encoding.ASCII.GetBytes(sentToString);
-				await webSocket.SendAsync(new ArraySegment<byte>(buffer),
-					WebSocketMessageType.Binary, true, CancellationToken.None);
+				byte[] messageInBytes = Encoding.UTF8.GetBytes(sendMessage);
+				Debug.WriteLine($"Trying to send message: {sendMessage}");
+				ArraySegment<byte> bytesToSend = messageInBytes;
+				await _client.SendAsync(bytesToSend, WebSocketMessageType.Binary, true, CancellationToken.None);
 
-				await Task.Delay(delay);
+				await Task.Delay(400);
+				messageSentCounter++;
+				numberOfTimesRun++;
+				Debug.WriteLine("Send has run: " + numberOfTimesRun + " number of times");
 			}
+			else
+				Start();
 
 		}
 
-		public static async Task Receive(ClientWebSocket webSocket)
+		public void SendMessage(string message)
 		{
+			Task.Run(async () => await Send(message));
+		}
 
-			while (webSocket.State == WebSocketState.Open)
+		public async Task Receive()
+		{
+			var offset = 0;
+			var packet = 1024;
+			var receiveBuffer = new byte[1024];
+			int numberOfTimesRun = 0;
+
+			Console.WriteLine("Ready to receive");
+			ArraySegment<byte> byteReceived = new(receiveBuffer, offset, packet); ;
+
+			WebSocketReceiveResult receiveMessage = await _client.ReceiveAsync(byteReceived, CancellationToken.None);
+			Debug.WriteLine("Message received");
+
+			var serverMessage = Encoding.UTF8.GetString(receiveBuffer, 0, receiveMessage.Count);
+			Debug.WriteLine(serverMessage + " <-- ServerMessage");
+
+			// checking to see if the received data is a useful command
+			if (serverMessage != "Hi Server" && serverMessage != "Message Received")
 			{
-				byte[] receivedBuffer = new byte[receiveChunkSize];
-				var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(receivedBuffer), CancellationToken.None);
-				if (result.MessageType == WebSocketMessageType.Close)
-				{
-					await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
-				}
+				if (int.TryParse(serverMessage, out int message) || serverMessage == "ff")
+					MainWindow._gameSession.Command = serverMessage;
 				else
-				{
-					receivedToString = Encoding.ASCII.GetString(receivedBuffer);
-
-					Debug.WriteLine($"Received: {receivedToString}");
-
-				}
+					Debug.WriteLine("Unknown message received from server");
 			}
-		}
+			numberOfTimesRun++;
+			Debug.WriteLine($"Receive has run: {numberOfTimesRun} times");
+			Task.Delay(100);
 
-		private static void LogStatus(bool receiving, byte[] buffer, int length)
-		{
-			//lock (consoleLock)
-			//{
-			//	Console.ForegroundColor = receiving ? ConsoleColor.Green : ConsoleColor.Gray;
-			//	Console.WriteLine("{0} {1} bytes... ", receiving ? "Received" : "Sent", length);
-
-			//	if (verbose)
-			//		Console.WriteLine(BitConverter.ToString(buffer, 0, length));
-
-			//	Console.ResetColor();
-			//}
 		}
 	}
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,10 +36,9 @@ namespace King_Pong_App.Views
 			else
 			{
 				TwoPlayerNameAssignment();
-				
+				SendInfoToServer();
 				Close();
 			}
-			
 		}
 
 		public void TwoPlayerNameAssignment()
@@ -51,5 +52,21 @@ namespace King_Pong_App.Views
 			MainWindow._gameSession.Team1.AddMembers(MainWindow._gameSession.Player1);
 			MainWindow._gameSession.Team2.AddMembers(MainWindow._gameSession.Player3);
 		}
+
+		public void SendInfoToServer()
+		{
+			string cups = $@"""NumberOfCups"": {MainWindow._gameSession.numberOfCups}";
+			string team1 = @$"""Team1"": ""{Team1Name.Text}"", ""Player1"": ""{NameOfPlayer1.Text}""";
+			string team2 = @$"""Team2"": ""{Team2Name.Text}"", ""Player1"": ""{NameOfPlayer3.Text}""";
+
+			string allInfo = $"{cups} {team1} {team2}";
+
+			MainWindow.client.Send(allInfo);
+			var serialized = JsonSerializer.Serialize(allInfo);
+			Debug.WriteLine(serialized);
+
+		}
+
+		
 	}
 }

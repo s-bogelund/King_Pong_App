@@ -13,8 +13,8 @@ namespace King_Pong_App.ViewModels
 		{
 
 		}
-		public PlayerViewModel(string name, int playerNumber, int teamNumber, int numberOfHits = 0)
-				: base(name, playerNumber, teamNumber, numberOfHits)
+		public PlayerViewModel(string name, int numberOfHits = 0)
+				: base(name, numberOfHits)
 		{
 
 		}

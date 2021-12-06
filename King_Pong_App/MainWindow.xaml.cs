@@ -28,16 +28,32 @@ namespace King_Pong_App
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		public Uri serverUri = new Uri("ws://localhost:9000/wsDemo");
+		public ClientWebSocket socket = new();
 		public EllipseViewModel backFourCups;
 		public static GameSession _gameSession;
-		public static ClientWebSocket client;
+		public static Client client;
 		public MainWindow()
 		{
 			InitializeComponent();
 			_gameSession = new();
 			DataContext = _gameSession;
-			client = new();
-			Client.StartClient().Wait();
+			client = new(serverUri, socket);
+			client.Start();
+			_gameSession.CommandReceived += _gameSession_CommandReceived;
+		}
+
+		private void _gameSession_CommandReceived(object sender, EventArgs e)
+		{
+			if (int.TryParse(_gameSession.Command, out int number))
+			{
+				if (number == 0) NextTurn();
+				else HitEvent(number - 1);
+			}
+			else if (_gameSession.Command.ToLower() == "ff")
+				Forfeit();
+			else
+				Debug.WriteLine("Command has unknown value");
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
@@ -144,9 +160,6 @@ namespace King_Pong_App
 				team2ActualCups.Add(allTeam2Cups[i]);
 			}
 			
-			//Debug.WriteLine($"Team1ActualCups: {team1ActualCups.Count}");
-			//Debug.WriteLine($"Team2ActualCups: {team2ActualCups.Count}");
-			//Debug.WriteLine($"number argument = {number}");
 			if (_gameSession.Current == _gameSession.Team1)
 			{
 				team2ActualCups[number].Color = Brushes.Red;
@@ -233,10 +246,6 @@ namespace King_Pong_App
 			else
 				HitEvent(_gameSession.Team1.CupsRemaining - 1);
 
-			//Debug.WriteLine($"Current team: {App.currentTeam.Name}");
-			//Debug.WriteLine($"Team1 Remaining cups: {App.team1.CupsRemaining}");
-			//Debug.WriteLine($"Team2 Remaining cups: {App.team2.CupsRemaining}");
-
 		}
 		public void GameOver()
 		{
@@ -247,7 +256,14 @@ namespace King_Pong_App
 		}
 		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
 		{
-			
+			client.Send("AssHatFace");
+			_gameSession.Player1.Name = _gameSession.Command;
+		}
+
+		public void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow
+		{
+			_gameSession.TurnOver();
+			GameOver();
 		}
 	}
 }

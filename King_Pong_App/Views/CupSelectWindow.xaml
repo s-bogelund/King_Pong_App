@@ -15,7 +15,7 @@
 	<Grid>
 		<Grid.Background>
 			<ImageBrush 
-				ImageSource="\Images\KingPongLogo2.png"
+				ImageSource="C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\Images\KingPongLogo2.png"
 				Opacity="0.2"
 				>
 				<ImageBrush.RelativeTransform>

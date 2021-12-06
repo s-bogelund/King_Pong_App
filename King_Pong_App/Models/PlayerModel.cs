@@ -37,12 +37,10 @@ namespace King_Pong_App.Models
 			}
 		}
 		public PlayerModel() { }
-		public PlayerModel(string name, int playerNumber, int teamNumber, int _numberOfHits = 0)
+		public PlayerModel(string name, int _numberOfHits = 0)
 		{
 			Name = name;
 			numberOfHits = _numberOfHits;
-			PlayerNumber = playerNumber;
-			TeamNumber = teamNumber;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
