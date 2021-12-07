@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +37,8 @@ namespace King_Pong_App.Views
 			else
 			{
 				FourPlayerNameAssignment();
+				SendInfoToServer();
+				MainWindow._gameSession.gameInProgress = true;
 
 				Close();
 			}
@@ -42,16 +46,24 @@ namespace King_Pong_App.Views
 
 		public void FourPlayerNameAssignment()
 		{
-			MainWindow._gameSession.Player1.Name = Player1Name.Text;
-			MainWindow._gameSession.Player2.Name = Player2Name.Text;
-			MainWindow._gameSession.Player3.Name = Player3Name.Text;
-			MainWindow._gameSession.Player4.Name = Player4Name.Text;
+			MainWindow._gameSession.Player1.PlayerName = Player1Name.Text;
+			MainWindow._gameSession.Player2.PlayerName = Player2Name.Text;
+			MainWindow._gameSession.Player3.PlayerName = Player3Name.Text;
+			MainWindow._gameSession.Player4.PlayerName = Player4Name.Text;
 
-			MainWindow._gameSession.Team1.Name = Team1Name.Text;
-			MainWindow._gameSession.Team2.Name = Team2Name.Text;
+			MainWindow._gameSession.Team1.TeamName = Team1Name.Text;
+			MainWindow._gameSession.Team2.TeamName = Team2Name.Text;
 
 			MainWindow._gameSession.Team1.AddMembers(MainWindow._gameSession.Player1, MainWindow._gameSession.Player2);
 			MainWindow._gameSession.Team2.AddMembers(MainWindow._gameSession.Player3, MainWindow._gameSession.Player4);
+		}
+
+		public void SendInfoToServer()
+		{
+			var serialized = JsonConvert.SerializeObject(MainWindow._gameSession, Formatting.Indented);
+			MainWindow.client.Send(serialized);
+
+			Debug.WriteLine(serialized);
 		}
 	}
 }

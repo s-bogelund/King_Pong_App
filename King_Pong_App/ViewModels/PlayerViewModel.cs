@@ -33,7 +33,7 @@ namespace King_Pong_App.ViewModels
 		
 		public string PrintInfo()
 		{
-			string name = $"{Name}:";
+			string name = $"{PlayerName}:";
 			string hits = $"Antal Ramte: {NumberOfHits}\n";
 			string hitrate = $"Præcision: {Hitrate()}\n";
 

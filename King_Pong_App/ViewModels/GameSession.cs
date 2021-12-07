@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
 using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace King_Pong_App.ViewModels
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class GameSession : INotifyPropertyChanged
 	{
 		public GameSession()
@@ -52,8 +54,12 @@ namespace King_Pong_App.ViewModels
 		}
 		public List<EllipseViewModel> backFourCups;
 
+		[JsonProperty]
 		public int numberOfCups = 10;
+
+		[JsonProperty]
 		public int teamSize = 2;
+
 		public int currentPlayer = 0;
 		public bool gameInProgress = false;
 
@@ -62,6 +68,7 @@ namespace King_Pong_App.ViewModels
 			Current = Current == Team1 ? Team2 : Team1;
 			currentPlayer = 0;
 		}
+
 		private string command;
 		public string Command
 		{
@@ -87,8 +94,10 @@ namespace King_Pong_App.ViewModels
 			}
 		}
 
-
+		[JsonProperty]
 		public TeamViewModel Team1 { get; set; }
+
+		[JsonProperty]
 		public TeamViewModel Team2 { get; set; }
 
 		public PlayerViewModel Player1 { get; set; }

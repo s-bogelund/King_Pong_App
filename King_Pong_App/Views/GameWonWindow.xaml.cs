@@ -29,9 +29,9 @@ namespace King_Pong_App.Views
 
 		public void DisplayWinningTeam()
 		{
-			string losingTeamName = MainWindow._gameSession.Current == MainWindow._gameSession.Team1 ? MainWindow._gameSession.Team2.Name : MainWindow._gameSession.Team1.Name;
-			AnnounceWinnerLabel.Content = $"{MainWindow._gameSession.Current.Name.ToUpper()} VINDER!!";
-			WinningTeamInfo.Text = $"{MainWindow._gameSession.Current.Name} Stats";
+			string losingTeamName = MainWindow._gameSession.Current == MainWindow._gameSession.Team1 ? MainWindow._gameSession.Team2.TeamName : MainWindow._gameSession.Team1.TeamName;
+			AnnounceWinnerLabel.Content = $"{MainWindow._gameSession.Current.TeamName.ToUpper()} VINDER!!";
+			WinningTeamInfo.Text = $"{MainWindow._gameSession.Current.TeamName} Stats";
 			LosingTeamInfo.Text = $"{losingTeamName} Stats";
 			
 		}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace King_Pong_App.Models
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class PlayerModel : INotifyPropertyChanged
 	{
-		public int TeamNumber { get; set; }
-		public int PlayerNumber { get; set; }
 		public int NumberOfThrows { get; set; }
-		
-		private string name;
-		public string Name
+
+		[JsonProperty]
+		private string playerName;
+		public string PlayerName
 		{
-			get { return name; }
+			get { return playerName; }
 			set
 			{
-				name = value;
-				OnPropertyChanged("Name");
+				playerName = value;
+				OnPropertyChanged(nameof(PlayerName));
 			}
 		}
 
@@ -39,7 +40,7 @@ namespace King_Pong_App.Models
 		public PlayerModel() { }
 		public PlayerModel(string name, int _numberOfHits = 0)
 		{
-			Name = name;
+			PlayerName = name;
 			numberOfHits = _numberOfHits;
 		}
 

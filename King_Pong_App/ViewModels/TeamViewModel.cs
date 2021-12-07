@@ -1,4 +1,5 @@
 ﻿using King_Pong_App.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace King_Pong_App.ViewModels
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class TeamViewModel : TeamModel
 	{
 		public TeamViewModel()
 		{
-
 		}
 
+		[JsonProperty]
 		public List<PlayerViewModel> Roster = new();
 		public void AddMembers(params PlayerViewModel[] players)
 		{
@@ -34,5 +36,7 @@ namespace King_Pong_App.ViewModels
 
 			return playerStats;
 		}
+
+
 	}
 }

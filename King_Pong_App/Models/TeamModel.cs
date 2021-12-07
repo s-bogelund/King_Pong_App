@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace King_Pong_App.Models
 {
-	public class TeamModel : PlayerModel
+	[JsonObject(MemberSerialization.OptIn)]
+	public class TeamModel : INotifyPropertyChanged
 	{
-		public PlayerModel Player1 { get; set; }
-		public PlayerModel Player2 { get; set; }
-		public bool Turn { get; set; }
-
 
 		private int cupsRemaining;
+
+		
 
 		public int CupsRemaining
 		{
@@ -24,15 +26,28 @@ namespace King_Pong_App.Models
 				OnPropertyChanged(nameof(CupsRemaining));
 			}
 		}
+		[JsonProperty]
+		private string teamName;
+
+		public string TeamName
+		{
+			get { return teamName; }
+			set
+			{
+				teamName = value;
+				OnPropertyChanged(nameof(TeamName));
+			}
+
+		}
 
 
 		public TeamModel() { }
 
-		public TeamModel(string name, PlayerModel player1, PlayerModel player2)
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
-			Player1 = player1;
-			Player2 = player2;
-			Name = name;
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

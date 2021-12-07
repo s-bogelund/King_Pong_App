@@ -23,16 +23,14 @@ using System.Net.WebSockets;
 
 namespace King_Pong_App
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
 	public partial class MainWindow : Window
 	{
 		public Uri serverUri = new Uri("ws://localhost:9000/wsDemo");
 		public ClientWebSocket socket = new();
-		public EllipseViewModel backFourCups;
+		public EllipseViewModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
 		public static GameSession _gameSession;
 		public static Client client;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -58,9 +56,7 @@ namespace King_Pong_App
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
-			bool gameInProgress = false; // remove this when implementation is done
-
-			if (gameInProgress)
+			if (_gameSession.gameInProgress == true)
 				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
 			else
 			{
@@ -214,7 +210,7 @@ namespace King_Pong_App
 
 		public void UpdateTurnText()
 		{
-			turnTextBlock.Text = _gameSession.Current.Roster[_gameSession.currentPlayer].Name + "'s tur";
+			turnTextBlock.Text = _gameSession.Current.Roster[_gameSession.currentPlayer].PlayerName + "'s tur";
 		}
 
 		private void Regler_Click(object sender, RoutedEventArgs e)
@@ -253,11 +249,12 @@ namespace King_Pong_App
 			gameWon.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			gameWon.Owner = this;
 			gameWon.ShowDialog();
+			_gameSession.gameInProgress = false;
 		}
 		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
 		{
 			client.Send("AssHatFace");
-			_gameSession.Player1.Name = _gameSession.Command;
+			_gameSession.Player1.PlayerName = _gameSession.Command;
 		}
 
 		public void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow

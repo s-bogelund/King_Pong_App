@@ -61,7 +61,7 @@
 					TextAlignment="Right"
 					VerticalAlignment="Center"
 					Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Team1.Name}">
+					Text="{Binding Team1.TeamName}">
 				</TextBlock>
 				<TextBlock
 					x:Name="ScoreCount"
@@ -82,7 +82,7 @@
 					TextAlignment="Left"
 					VerticalAlignment="Center"
 					Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Team2.Name}">
+					Text="{Binding Team2.TeamName}">
 				</TextBlock>
 			</Grid>
 			<Grid 
@@ -341,14 +341,14 @@
 						Margin ="0 8 0 8" 
 						FontSize="55"
 						Foreground="{StaticResource DarkModeForeground}"
-						Text="{Binding Player1.Name}"/>
+						Text="{Binding Player1.PlayerName}"/>
 					<TextBlock
                     x:Name="Player1_2" 
                     TextAlignment="Center"  
 					Margin ="0 8 0 8" 
                     FontSize="55"
                     Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Player2.Name}"/>
+					Text="{Binding Player2.PlayerName}"/>
 				</StackPanel>
 				<StackPanel
                 Grid.Column="1" 
@@ -388,14 +388,14 @@
                     Margin ="0 8 0 8" 
                     FontSize="55" 
                     Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Player3.Name}"/>
+					Text="{Binding Player3.PlayerName}"/>
 					<TextBlock 
                     x:Name="Player2_2" 
                     TextAlignment="Center" 
                     Margin ="0 8 0 8"
                     FontSize="55" 
                     Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Player4.Name}"/>
+					Text="{Binding Player4.PlayerName}"/>
 				</StackPanel>
 				<StackPanel
                 Grid.Row="1" 
