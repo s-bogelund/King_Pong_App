@@ -20,16 +20,7 @@
 		<localViewModels:TeamViewModel x:Key="teams"/>
 	</Window.Resources>
 	<Grid>
-		<Grid.Background>
-			<ImageBrush 
-				ImageSource="\Images\KingPongLogo2.png"
-				Opacity="0.1"
-				>
-				<ImageBrush.RelativeTransform>
-					<ScaleTransform ScaleX=".15" ScaleY=".25" CenterY="0.05"/>
-				</ImageBrush.RelativeTransform>
-			</ImageBrush>
-		</Grid.Background>
+		
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="3.5*"/>
@@ -420,8 +411,19 @@
 				</StackPanel>
 			</Grid>
 		</Grid>
-		<Grid Margin="1,1,1,2"/>
-		<StackPanel
+		<Grid Margin="1,60,1,2">
+			<Grid.Background>
+				<ImageBrush 
+					ImageSource="\Images\KingPongLogo2.png"
+					Opacity="0.07"
+					>
+					<ImageBrush.RelativeTransform>
+						<ScaleTransform ScaleX=".45" ScaleY=".7" CenterX=".45" />
+					</ImageBrush.RelativeTransform>
+				</ImageBrush>
+			</Grid.Background>
+		</Grid>
+			<StackPanel
 			Margin="0,4,4,0"
 			Grid.Column="1"
 			Grid.ColumnSpan="2"
@@ -521,5 +523,18 @@
 			Margin="0,320,0,0" 
 			Grid.RowSpan="2"
 			Visibility="Hidden"/>
+		<Grid
+			Grid.Column="2" Margin="1 60 1 2">
+			<Grid.Background>
+				<ImageBrush 
+				ImageSource="\Images\KingPongLogo2.png"
+				Opacity="0.07"
+				>
+					<ImageBrush.RelativeTransform>
+						<ScaleTransform ScaleX=".45" ScaleY=".7" CenterX=".5"/>
+					</ImageBrush.RelativeTransform>
+				</ImageBrush>
+			</Grid.Background>
+		</Grid>
 	</Grid>
 </Window>
