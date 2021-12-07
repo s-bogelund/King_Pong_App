@@ -43,15 +43,34 @@ namespace King_Pong_App
 
 		private void _gameSession_CommandReceived(object sender, EventArgs e)
 		{
+			// Function is ugly as sin. Should be changed if time allows...
 			if (int.TryParse(_gameSession.Command, out int number))
 			{
-				if (number == 0) NextTurn();
-				else HitEvent(number - 1);
+				if (_gameSession.starterTeamDecided)
+				{
+					if (number == 0) NextTurn();
+					else HitEvent(number - 1);
+				}
+				else
+				{
+					if (number <= 1)
+					{
+						_gameSession.Current = number == 0 ? _gameSession.Team1 : _gameSession.Team2;
+						_gameSession.starterTeamDecided = true;
+						UpdateTurnIndicator();
+					}
+					else
+					{
+						Debug.WriteLine($"Only 0 and 1 is accepted commands before the starter team has been decided");
+						Debug.WriteLine($"The command received was: {_gameSession.Command}");
+					}
+				}
+
 			}
 			else if (_gameSession.Command.ToLower() == "ff")
 				Forfeit();
 			else
-				Debug.WriteLine("Command has unknown value");
+				Debug.WriteLine($"Command has unknown value: {_gameSession.Command}");
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
@@ -67,12 +86,7 @@ namespace King_Pong_App
 				else
 					TwoPlayerGame();
 			}
-			UpdateGameBoard();
-
-
-			//gameInProgress = true;  <--- implemented when we're done :)
-			//"decide starterTeam" game loop
-			//normal gameloop
+			//UpdateGameBoard();
 		}
 
 		public void TwoPlayerGame()
@@ -215,7 +229,7 @@ namespace King_Pong_App
 
 		private void Regler_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Regler kan findes via dette link: https://kingpong_rules.com");
+			MessageBox.Show("Regler kan findes via dette link: https://kingpong-rules.com");
 		}
 
 		private void FAQ_Click(object sender, RoutedEventArgs e)
@@ -232,16 +246,19 @@ namespace King_Pong_App
 		private void NextTurn_Click(object sender, RoutedEventArgs e)
 		{
 			NextTurn();
-			//Debug.WriteLine($"Current team: {App.currentTeam.Name}");
 		}
 
 		private void HitEvent_Click(object sender, RoutedEventArgs e)
 		{
-			if (_gameSession.Current == _gameSession.Team1)
-				HitEvent(_gameSession.Team2.CupsRemaining - 1);
+			if (_gameSession.starterTeamDecided == true)
+			{
+				if (_gameSession.Current == _gameSession.Team1)
+					HitEvent(_gameSession.Team2.CupsRemaining - 1);
+				else
+					HitEvent(_gameSession.Team1.CupsRemaining - 1);
+			}
 			else
-				HitEvent(_gameSession.Team1.CupsRemaining - 1);
-
+				MessageBox.Show("Det er endnu ikke afgjort, hvem der starter endnu. Tryk AUTO DECIDE STARTER");
 		}
 		public void GameOver()
 		{
@@ -254,7 +271,9 @@ namespace King_Pong_App
 		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
 		{
 			client.Send("AssHatFace");
-			_gameSession.Player1.PlayerName = _gameSession.Command;
+			_gameSession.Command= "0";
+			_gameSession.starterTeamDecided = true;  // to be able to test
+			//_gameSession.Player1.PlayerName = _gameSession.Command;
 		}
 
 		public void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow

@@ -433,8 +433,8 @@
 			<Button
 				Style="{StaticResource defaultDarkModeButton}"
 				Click="AutomaticWin_Click" 
-				Content="WIN SCREEN TEST"
-				Width="260">
+				Content="AUTO STARTER DECIDE"
+				Width="290">
 				<Button.Background>
 					<SolidColorBrush 
                         Color="Black" 
