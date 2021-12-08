@@ -28,20 +28,26 @@ namespace King_Pong_App.Views
 
 		private void ConfirmNames_Click(object sender, RoutedEventArgs e)
 		{
+			#region Control statements
 			if (Team1Name.Text.Length > 10 || Team2Name.Text.Length > 10 || Player1Name.Text.Length > 10 ||
 				Player2Name.Text.Length > 10 || Player3Name.Text.Length > 10 || Player4Name.Text.Length > 10)
-				MessageBox.Show("Navnene må ikke overstige 10 karakterer 🤔");
-			else if (Team1Name.Text.Length == 0 || Team2Name.Text.Length == 0 || Player1Name.Text.Length == 0 ||
-				Player2Name.Text.Length == 0 || Player3Name.Text.Length == 0 || Player4Name.Text.Length == 0)
-				MessageBox.Show("Husk at udfylde alle felter 😅");
-			else
 			{
-				FourPlayerNameAssignment();
-				SendInfoToServer();
-				MainWindow._gameSession.gameInProgress = true;
-
-				Close();
+				MessageBox.Show("Navnene må ikke overstige 10 karakterer 🤔");
+				return;
 			}
+			if (Team1Name.Text.Length == 0 || Team2Name.Text.Length == 0 || Player1Name.Text.Length == 0 ||
+				Player2Name.Text.Length == 0 || Player3Name.Text.Length == 0 || Player4Name.Text.Length == 0)
+			{
+				MessageBox.Show("Husk at udfylde alle felter 😅");
+				return;
+			}
+			#endregion
+			
+			FourPlayerNameAssignment();
+			SendInfoToServer();
+			MainWindow._gameSession.gameInProgress = true;
+
+			Close();
 		}
 
 		public void FourPlayerNameAssignment()

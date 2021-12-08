@@ -13,9 +13,9 @@ namespace King_Pong_App.WebSocket
 {
 	public class Client
 	{
-		Uri _uri;
+		public Uri _uri;
 
-		ClientWebSocket _client = new ClientWebSocket();
+		public ClientWebSocket _client = new ClientWebSocket();
 		private int messageSentCounter = 0;
 
 		public Client(Uri uri, ClientWebSocket client)

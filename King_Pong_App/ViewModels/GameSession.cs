@@ -96,6 +96,8 @@ namespace King_Pong_App.ViewModels
 		public event EventHandler CommandReceived;
 
 		private TeamViewModel current;
+		
+		public bool gameOver;
 
 		public TeamViewModel Current
 		{

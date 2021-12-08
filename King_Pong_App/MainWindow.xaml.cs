@@ -57,9 +57,9 @@ namespace King_Pong_App
 			Debug.WriteLine($"Command received has unknown value: {_gameSession.Command}");
 		}
 
-		private void HitOrMiss(int number)
+		public void HitOrMiss(int number)
 		{
-			if (number is < 0 or > 10) //checking for invalid numbers
+			if (number < 0 || number > _gameSession.numberOfCups * 2) //checking for invalid numbers
 			{
 				Debug.WriteLine($"Command received was out of bounds. Command was {number}");
 				return;
@@ -83,26 +83,33 @@ namespace King_Pong_App
 		private void DecideStarter(int number)
 		{
 			// checking if the number if valid for deciding starter team
-			if (number > 1) 
+			if (number < 0 || number > _gameSession.numberOfCups * 2) 
 			{
-				Debug.WriteLine($"Only 0 and 1 is accepted commands before the starter team has been decided");
+				Debug.WriteLine($"Only command values between 0 and {_gameSession.numberOfCups * 2} accepted");
 				Debug.WriteLine($"The command received was: {_gameSession.Command}");
 				return;
 			}
 
-			_gameSession.Current = number == 0 ? _gameSession.Team1 : _gameSession.Team2;
+			
+			_gameSession.Current = number < _gameSession.numberOfCups ? _gameSession.Team1 : _gameSession.Team2;
 			_gameSession.StarterTeamDecided = true;
 			UpdateTurnIndicator();
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
-			if (_gameSession.gameInProgress == true)
+			#region Control Statements
+			if (_gameSession.gameOver)
+			{
+				MessageBox.Show("For at starte et nyt spil, skal appen genstartes!");
+				return;
+			}
+			if (_gameSession.gameInProgress)
 			{
 				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
 				return;
 			}
-			
+			#endregion
 			CupSelection();
 			NumberOfPlayersSelection();
 
@@ -198,15 +205,19 @@ namespace King_Pong_App
 			List<EllipseViewModel> team1ActualCups = new() { };
 			List<EllipseViewModel> team2ActualCups = new() { };
 
-			for (int i = 0; i < _gameSession.numberOfCups; i++)  //ensures that we can't hit cups that aren't used if using only 6 cups
+			//ensures that we can't hit cups that aren't used if using only 6 cups
+			for (int i = 0; i < _gameSession.numberOfCups; i++)  
 			{
 				team1ActualCups.Add(allTeam1Cups[i]);
 				team2ActualCups.Add(allTeam2Cups[i]);
 			}
-			
+
+			// if the current team is team 1, it is assumed that the cup hit belongs to team 2
 			if (_gameSession.Current == _gameSession.Team1)
 			{
-				team2ActualCups[number].Color = Brushes.Red;
+				// the number passed is in the range of numberOfCups*2 due to how it's structured on Rpi.
+				// so to get the actual cup from team 2 we need to subtract numberOfCups
+				team2ActualCups[number - _gameSession.numberOfCups].Color = Brushes.Red;
 				_gameSession.Team2.CupsRemaining--;
 			}
 			else 
@@ -266,11 +277,6 @@ namespace King_Pong_App
 			MessageBox.Show("Regler kan findes via dette link: https://kingpong-rules.com");
 		}
 
-		private void FAQ_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("Bare spørg Lucas :)");
-		}
-
 		private void Giv_Op_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show(@"For at give op, skal begge holdknapper holdes inde i mindst 5 sekunder. 
@@ -284,15 +290,16 @@ namespace King_Pong_App
 
 		private void HitEvent_Click(object sender, RoutedEventArgs e)
 		{
-			if (_gameSession.StarterTeamDecided == true)
+			if (!_gameSession.StarterTeamDecided == true)
 			{
-				if (_gameSession.Current == _gameSession.Team1)
-					HitEvent(_gameSession.Team2.CupsRemaining - 1);
-				else
-					HitEvent(_gameSession.Team1.CupsRemaining - 1);
-			}
-			else
 				MessageBox.Show("Det er endnu ikke afgjort, hvem der starter endnu. Tryk AUTO DECIDE STARTER");
+				return;
+			}
+
+			if (_gameSession.Current == _gameSession.Team1)
+				HitEvent(_gameSession.Team2.CupsRemaining - 1 + _gameSession.numberOfCups);
+			else
+				HitEvent(_gameSession.Team1.CupsRemaining - 1);
 		}
 		public void GameOver()
 		{
@@ -301,6 +308,7 @@ namespace King_Pong_App
 			gameWon.Owner = this;
 			gameWon.ShowDialog();
 			_gameSession.gameInProgress = false;
+			_gameSession.gameOver = true;
 		}
 		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
 		{

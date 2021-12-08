@@ -1,4 +1,5 @@
-﻿using System;
+﻿using King_Pong_App.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,8 @@ namespace King_Pong_App.Views
 
 		private void IntroRoundOver_Button_Click(object sender, RoutedEventArgs e)
 		{
+			//only for testing
+			MainWindow._gameSession.Command = "0";
 			MainWindow._gameSession.StarterTeamDecided = true;
 		}
 	}

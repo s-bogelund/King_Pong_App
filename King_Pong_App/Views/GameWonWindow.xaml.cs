@@ -39,7 +39,8 @@ namespace King_Pong_App.Views
 		public void PlayerStats()
 		{
 			WinningPlayerStats.Text = MainWindow._gameSession.Current.PrintInfo();
-			LosingPlayerStats.Text = MainWindow._gameSession.Current == MainWindow._gameSession.Team1 ? MainWindow._gameSession.Team2.PrintInfo() : MainWindow._gameSession.Team1.PrintInfo();
+			LosingPlayerStats.Text = MainWindow._gameSession.Current == MainWindow._gameSession.Team1 ? MainWindow._gameSession.Team2.PrintInfo() 
+																									  : MainWindow._gameSession.Team1.PrintInfo();
 			
 		}
 
