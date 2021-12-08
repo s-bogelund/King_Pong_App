@@ -34,3 +34,5 @@ C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.genruntimeconfig.cache
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
 C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\King_Pong_App.csproj.CopyComplete
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\IntroRoundWindow.g.cs
+C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\obj\Debug\net5.0-windows\Views\IntroRoundWindow.baml

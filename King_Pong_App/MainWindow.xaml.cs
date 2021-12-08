@@ -65,7 +65,7 @@ namespace King_Pong_App
 				return;
 			}
 
-			if (_gameSession.starterTeamDecided)
+			if (_gameSession.StarterTeamDecided)
 				NormalGameLoop(number);
 			else
 				DecideStarter(number);
@@ -91,7 +91,7 @@ namespace King_Pong_App
 			}
 
 			_gameSession.Current = number == 0 ? _gameSession.Team1 : _gameSession.Team2;
-			_gameSession.starterTeamDecided = true;
+			_gameSession.StarterTeamDecided = true;
 			UpdateTurnIndicator();
 		}
 
@@ -102,7 +102,7 @@ namespace King_Pong_App
 				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
 				return;
 			}
-
+			
 			CupSelection();
 			NumberOfPlayersSelection();
 
@@ -110,7 +110,7 @@ namespace King_Pong_App
 				FourPlayerGame();
 			else
 				TwoPlayerGame();
-			
+			IntroRound();
 			//UpdateGameBoard();
 		}
 
@@ -133,6 +133,15 @@ namespace King_Pong_App
 			nameSelect4.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			nameSelect4.Owner = this;
 			nameSelect4.ShowDialog();
+		}
+
+		public void IntroRound()
+		{
+			IntroRoundWindow intro = new();
+			intro.DataContext = _gameSession;
+			intro.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			intro.Owner = this;
+			intro.ShowDialog();
 		}
 
 		public void NumberOfPlayersSelection()
@@ -275,7 +284,7 @@ namespace King_Pong_App
 
 		private void HitEvent_Click(object sender, RoutedEventArgs e)
 		{
-			if (_gameSession.starterTeamDecided == true)
+			if (_gameSession.StarterTeamDecided == true)
 			{
 				if (_gameSession.Current == _gameSession.Team1)
 					HitEvent(_gameSession.Team2.CupsRemaining - 1);
@@ -297,7 +306,7 @@ namespace King_Pong_App
 		{
 			client.Send("AssHatFace");
 			_gameSession.Command= "1";
-			_gameSession.starterTeamDecided = true;  // to be able to test
+			_gameSession.StarterTeamDecided = true;  // to be able to test
 			//_gameSession.Player1.PlayerName = _gameSession.Command;
 		}
 

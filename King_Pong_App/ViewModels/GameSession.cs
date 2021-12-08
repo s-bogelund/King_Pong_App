@@ -60,7 +60,20 @@ namespace King_Pong_App.ViewModels
 
 		public int currentPlayer = 0;
 		public bool gameInProgress = false;
-		public bool starterTeamDecided = false;
+
+		private bool starterTeamDecided;
+
+		public bool StarterTeamDecided
+		{
+			get { return starterTeamDecided; }
+			set 
+			{ 
+				starterTeamDecided = value;
+				StarterTeamFound?.Invoke(this, EventArgs.Empty);
+			}
+		}
+
+
 		public void TurnOver()
 		{
 			Current = Current == Team1 ? Team2 : Team1;
@@ -77,6 +90,8 @@ namespace King_Pong_App.ViewModels
 				CommandReceived?.Invoke(this, EventArgs.Empty);
 			}
 		}
+
+		public event EventHandler StarterTeamFound;
 
 		public event EventHandler CommandReceived;
 

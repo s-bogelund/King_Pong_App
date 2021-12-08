@@ -77,7 +77,7 @@ namespace King_Pong_App.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/King_Pong_App;V1.0.0.0;component/views/playernumberselectwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/King_Pong_App;component/views/playernumberselectwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\PlayerNumberSelectWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
