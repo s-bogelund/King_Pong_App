@@ -43,49 +43,75 @@ namespace King_Pong_App
 
 		private void _gameSession_CommandReceived(object sender, EventArgs e)
 		{
-			// Function is ugly as sin. Should be changed if time allows...
-			if (int.TryParse(_gameSession.Command, out int number))
+			if (int.TryParse(_gameSession.Command, out int number))  // if the received command is an integer
 			{
-				if (_gameSession.starterTeamDecided)
+				if (number is < 0 or > 10) //checking for invalid numbers
 				{
-					if (number == 0) NextTurn();
-					else HitEvent(number - 1);
-				}
-				else
-				{
-					if (number <= 1)
-					{
-						_gameSession.Current = number == 0 ? _gameSession.Team1 : _gameSession.Team2;
-						_gameSession.starterTeamDecided = true;
-						UpdateTurnIndicator();
-					}
-					else
-					{
-						Debug.WriteLine($"Only 0 and 1 is accepted commands before the starter team has been decided");
-						Debug.WriteLine($"The command received was: {_gameSession.Command}");
-					}
+					Debug.WriteLine($"Command received was out of bounds. Command was {number}");
+					return;
 				}
 
+				HitOrMiss(number);
+
+				return;
 			}
-			else if (_gameSession.Command.ToLower() == "ff")
+
+			if (_gameSession.Command.ToLower() == "ff")
 				Forfeit();
+			
+			// this should never be reached
+			Debug.WriteLine($"Command received has unknown value: {_gameSession.Command}");
+		}
+
+		private void HitOrMiss(int number)
+		{
+			if (_gameSession.starterTeamDecided)
+			{
+				NormalGameLoop(number);
+			}
 			else
-				Debug.WriteLine($"Command has unknown value: {_gameSession.Command}");
+				DecideStarter(number);
+		}
+
+		private void NormalGameLoop(int number)
+		{
+			if (number == 0) 
+				NextTurn();
+			else 
+				HitEvent(number - 1);
+		}
+
+		private void DecideStarter(int number)
+		{
+			if(number > 1) // checking if the number if valid
+			{
+				Debug.WriteLine($"Only 0 and 1 is accepted commands before the starter team has been decided");
+				Debug.WriteLine($"The command received was: {_gameSession.Command}");
+				return;
+			}
+
+			_gameSession.Current = number == 0 ? _gameSession.Team1 : _gameSession.Team2;
+			_gameSession.starterTeamDecided = true;
+			UpdateTurnIndicator();
+			
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
 			if (_gameSession.gameInProgress == true)
-				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
-			else
 			{
-				CupSelection();
-				NumberOfPlayersSelection();
-				if (_gameSession.teamSize == 2)
-					FourPlayerGame();
-				else
-					TwoPlayerGame();
+				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
+				return;
 			}
+
+			CupSelection();
+			NumberOfPlayersSelection();
+
+			if (_gameSession.teamSize == 2)
+				FourPlayerGame();
+			else
+				TwoPlayerGame();
+			
 			//UpdateGameBoard();
 		}
 
@@ -271,7 +297,7 @@ namespace King_Pong_App
 		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
 		{
 			client.Send("AssHatFace");
-			_gameSession.Command= "0";
+			_gameSession.Command= "1";
 			_gameSession.starterTeamDecided = true;  // to be able to test
 			//_gameSession.Player1.PlayerName = _gameSession.Command;
 		}
