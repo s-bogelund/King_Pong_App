@@ -7,18 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace King_Pong_App.ViewModels
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class GameSession : INotifyPropertyChanged
 	{
-
 		public GameSession()
 		{
-			Player1 = new();
-			Player2 = new();
-			Player3 = new();
-			Player4 = new();
+			Player1 = new("Player1");
+			Player2 = new("Player2");
+			Player3 = new("Player3");
+			Player4 = new("Player4");
 
 			Team1 = new();
 			Team2 = new();
@@ -45,22 +47,26 @@ namespace King_Pong_App.ViewModels
 			Cup2_9 = new();
 			Cup2_10 = new();
 
-			current = Team1;
-
 			backFourCups = new() { Cup1_7, Cup1_8, Cup1_9, Cup1_10, 
 									Cup2_7, Cup2_8, Cup2_9, Cup2_10 };
 		}
 		public List<EllipseViewModel> backFourCups;
 
+		[JsonProperty]
 		public int numberOfCups = 10;
-		public int teamSize = 2;
-		public int currentPlayer = 0;
 
+		[JsonProperty]
+		public int teamSize = 2;
+
+		public int currentPlayer = 0;
+		public bool gameInProgress = false;
+		public bool starterTeamDecided = false;
 		public void TurnOver()
 		{
 			Current = Current == Team1 ? Team2 : Team1;
 			currentPlayer = 0;
 		}
+
 		private string command;
 		public string Command
 		{
@@ -68,11 +74,12 @@ namespace King_Pong_App.ViewModels
 			set 
 			{ 
 				command = value;
-				OnPropertyChanged("Command");
+				CommandReceived?.Invoke(this, EventArgs.Empty);
 			}
-
 		}
-		
+
+		public event EventHandler CommandReceived;
+
 		private TeamViewModel current;
 
 		public TeamViewModel Current
@@ -85,7 +92,10 @@ namespace King_Pong_App.ViewModels
 			}
 		}
 
+		[JsonProperty]
 		public TeamViewModel Team1 { get; set; }
+
+		[JsonProperty]
 		public TeamViewModel Team2 { get; set; }
 
 		public PlayerViewModel Player1 { get; set; }

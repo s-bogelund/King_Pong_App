@@ -19,47 +19,99 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using King_Pong_App.WebSocket;
 using King_Pong_App.Models;
+using System.Net.WebSockets;
 
 namespace King_Pong_App
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public EllipseViewModel backFourCups;
+		public Uri serverUri = new Uri("ws://localhost:9000/wsDemo");
+		public ClientWebSocket socket = new();
+		public EllipseViewModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
 		public static GameSession _gameSession;
+		public static Client client;
+
 		public MainWindow()
 		{
 			InitializeComponent();
-			Server.StartServer();
-			//turnTextBlock.Text += gamePlayModel.Command;
 			_gameSession = new();
 			DataContext = _gameSession;
+			client = new(serverUri, socket);
+			client.Start();
+			_gameSession.CommandReceived += _gameSession_CommandReceived;
+		}
+
+		private void _gameSession_CommandReceived(object sender, EventArgs e)
+		{
+			// if the received command is an integer
+			if (int.TryParse(_gameSession.Command, out int number))  
+			{
+				HitOrMiss(number);
+				return;
+			}
+
+			if (_gameSession.Command.ToLower() == "ff")
+				Forfeit();
+			
+			// this should never be reached
+			Debug.WriteLine($"Command received has unknown value: {_gameSession.Command}");
+		}
+
+		private void HitOrMiss(int number)
+		{
+			if (number is < 0 or > 10) //checking for invalid numbers
+			{
+				Debug.WriteLine($"Command received was out of bounds. Command was {number}");
+				return;
+			}
+
+			if (_gameSession.starterTeamDecided)
+				NormalGameLoop(number);
+			else
+				DecideStarter(number);
+		}
+
+		private void NormalGameLoop(int number)
+		{
+			// number is 0, it was a miss, otherwise a cup corresponding to the number received will be marked hit
+			if (number == 0) 
+				NextTurn();
+			else 
+				HitEvent(number - 1);
+		}
+
+		private void DecideStarter(int number)
+		{
+			// checking if the number if valid for deciding starter team
+			if (number > 1) 
+			{
+				Debug.WriteLine($"Only 0 and 1 is accepted commands before the starter team has been decided");
+				Debug.WriteLine($"The command received was: {_gameSession.Command}");
+				return;
+			}
+
+			_gameSession.Current = number == 0 ? _gameSession.Team1 : _gameSession.Team2;
+			_gameSession.starterTeamDecided = true;
+			UpdateTurnIndicator();
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
-			bool gameInProgress = false; // remove this when implementation is done
-
-			if (gameInProgress)
-				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
-			else
+			if (_gameSession.gameInProgress == true)
 			{
-				CupSelection();
-				NumberOfPlayersSelection();
-				if (_gameSession.teamSize == 2)
-					FourPlayerGame();
-				else
-					TwoPlayerGame();
+				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
+				return;
 			}
-			//PrintTeamNames();
-			UpdateGameBoard();
 
+			CupSelection();
+			NumberOfPlayersSelection();
 
-			//gameInProgress = true;  <--- implemented when we're done :)
-			//"decide starterTeam" game loop
-			//normal gameloop
+			if (_gameSession.teamSize == 2)
+				FourPlayerGame();
+			else
+				TwoPlayerGame();
+			
+			//UpdateGameBoard();
 		}
 
 		public void TwoPlayerGame()
@@ -70,14 +122,7 @@ namespace King_Pong_App
 			nameSelect2.Owner = this;
 			nameSelect2.ShowDialog();
 
-			//Player1_1.Text = _gameSession.Player1.Name;
-			//Player1_2.Text = "";
-			//Player2_1.Text = App.player3.Name;
-			//Player2_2.Text = "";
-
-			//Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
 			Player1_2_Hits.Text = "";
-			//Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
 			Player2_2_Hits.Text = "";
 		}
 
@@ -88,16 +133,6 @@ namespace King_Pong_App
 			nameSelect4.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			nameSelect4.Owner = this;
 			nameSelect4.ShowDialog();
-
-			//Player1_1.Text = App.player1.Name;
-			//Player1_2.Text = App.player2.Name;
-			//Player2_1.Text = App.player3.Name;
-			//Player2_2.Text = App.player4.Name;
-
-			//Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
-			//Player1_2_Hits.Text = App.player2.NumberOfHits.ToString();
-			//Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
-			//Player2_2_Hits.Text = App.player4.NumberOfHits.ToString();
 		}
 
 		public void NumberOfPlayersSelection()
@@ -122,17 +157,8 @@ namespace King_Pong_App
 				_gameSession.backFourCups.ForEach(c => c.ShowEllipse());
 		}
 
-		//public void PrintTeamNames()
-		//{
-		//	Team1Name.Text = App.team1.Name;
-		//	Team2Name.Text = App.team2.Name;
-		//}
-
 		public void HitEvent(int number)
 		{
-			List<Ellipse> team1TotalCups = new() { ellipse1_1, ellipse1_2, ellipse1_3, ellipse1_4, ellipse1_5, ellipse1_6, ellipse1_7, ellipse1_8, ellipse1_9, ellipse1_10 };
-			List<Ellipse> team2TotalCups = new() { ellipse2_1, ellipse2_2, ellipse2_3, ellipse2_4, ellipse2_5, ellipse2_6, ellipse2_7, ellipse2_8, ellipse2_9, ellipse2_10 };
-
 			List<EllipseViewModel> allTeam1Cups = new()
 			{
 				_gameSession.Cup1_1,
@@ -169,9 +195,6 @@ namespace King_Pong_App
 				team2ActualCups.Add(allTeam2Cups[i]);
 			}
 			
-			//Debug.WriteLine($"Team1ActualCups: {team1ActualCups.Count}");
-			//Debug.WriteLine($"Team2ActualCups: {team2ActualCups.Count}");
-			//Debug.WriteLine($"number argument = {number}");
 			if (_gameSession.Current == _gameSession.Team1)
 			{
 				team2ActualCups[number].Color = Brushes.Red;
@@ -206,10 +229,8 @@ namespace King_Pong_App
 
 		public void UpdateGameBoard()
 		{
-			//UpdateTurnText();
+			UpdateTurnText();
 			UpdateTurnIndicator();
-			//UpdateHits();
-			//UpdateCupsRemaining();
 		}
 
 		public void UpdateTurnIndicator()
@@ -228,36 +249,12 @@ namespace King_Pong_App
 
 		public void UpdateTurnText()
 		{
-			turnTextBlock.Text = _gameSession.Current.Roster[_gameSession.currentPlayer].Name + "'s tur";
+			turnTextBlock.Text = _gameSession.Current.Roster[_gameSession.currentPlayer].PlayerName + "'s tur";
 		}
-
-		//public void UpdateHits()
-		//{
-		//	if (App.teamSize == 2)
-		//	{
-		//		Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
-		//		Player1_2_Hits.Text = App.player2.NumberOfHits.ToString();
-		//		Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
-		//		Player2_2_Hits.Text = App.player4.NumberOfHits.ToString();
-		//	}
-		//	else
-		//	{
-		//		Player1_1_Hits.Text = App.player1.NumberOfHits.ToString();
-		//		Player1_2_Hits.Text = "";
-		//		Player2_1_Hits.Text = App.player3.NumberOfHits.ToString();
-		//		Player2_2_Hits.Text = "";
-		//	}
-		//}
-
-		//public void UpdateCupsRemaining()
-		//{
-		//	Team1CupsLeft.Text = App.team1.CupsRemaining.ToString();
-		//	Team2CupsLeft.Text = App.team2.CupsRemaining.ToString();
-		//}
 
 		private void Regler_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Regler kan findes via dette link: https://kingpong_rules.com");
+			MessageBox.Show("Regler kan findes via dette link: https://kingpong-rules.com");
 		}
 
 		private void FAQ_Click(object sender, RoutedEventArgs e)
@@ -274,23 +271,19 @@ namespace King_Pong_App
 		private void NextTurn_Click(object sender, RoutedEventArgs e)
 		{
 			NextTurn();
-			//Debug.WriteLine($"Current team: {App.currentTeam.Name}");
 		}
 
 		private void HitEvent_Click(object sender, RoutedEventArgs e)
 		{
-			if (_gameSession.Current == _gameSession.Team1)
-				HitEvent(_gameSession.Team2.CupsRemaining - 1);
+			if (_gameSession.starterTeamDecided == true)
+			{
+				if (_gameSession.Current == _gameSession.Team1)
+					HitEvent(_gameSession.Team2.CupsRemaining - 1);
+				else
+					HitEvent(_gameSession.Team1.CupsRemaining - 1);
+			}
 			else
-				HitEvent(_gameSession.Team1.CupsRemaining - 1);
-
-			//if (App.team1.CupsRemaining <= 0 || App.team2.CupsRemaining <= 0)
-			//	MessageBox.Show($"EEEEY, you won {App.currentTeam.Name}!\n\n");
-
-			//Debug.WriteLine($"Current team: {App.currentTeam.Name}");
-			//Debug.WriteLine($"Team1 Remaining cups: {App.team1.CupsRemaining}");
-			//Debug.WriteLine($"Team2 Remaining cups: {App.team2.CupsRemaining}");
-
+				MessageBox.Show("Det er endnu ikke afgjort, hvem der starter endnu. Tryk AUTO DECIDE STARTER");
 		}
 		public void GameOver()
 		{
@@ -298,9 +291,19 @@ namespace King_Pong_App
 			gameWon.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			gameWon.Owner = this;
 			gameWon.ShowDialog();
+			_gameSession.gameInProgress = false;
 		}
 		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
 		{
+			client.Send("AssHatFace");
+			_gameSession.Command= "1";
+			_gameSession.starterTeamDecided = true;  // to be able to test
+			//_gameSession.Player1.PlayerName = _gameSession.Command;
+		}
+
+		public void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow
+		{
+			_gameSession.TurnOver();
 			GameOver();
 		}
 	}

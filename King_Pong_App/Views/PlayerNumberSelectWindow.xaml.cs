@@ -28,7 +28,7 @@ namespace King_Pong_App.Views
 		{
 			if (!(bool)_1v1_radiobutton.IsChecked && !(bool)_2v2_radioButton.IsChecked)
 			{
-				MessageBox.Show("Du skal vælge, hvor mange spillere hvert hold skal have 😘");
+				MessageBox.Show("Du skal lige vælge, hvor mange spillere hvert hold skal have 😘");
 			}
 			else
 			{

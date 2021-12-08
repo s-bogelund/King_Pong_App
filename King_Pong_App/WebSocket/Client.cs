@@ -1,82 +1,113 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
+using System.Net.WebSockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace King_Pong_App.WebSocket
 {
-	class Client
+	public class Client
 	{
-		public static void StartClient()
-		{
-			byte[] bytes = new byte[1024];
+		Uri _uri;
 
+		ClientWebSocket _client = new ClientWebSocket();
+		private int messageSentCounter = 0;
+
+		public Client(Uri uri, ClientWebSocket client)
+		{
+			_uri = uri;
+			_client = client;
+		}
+
+		public async Task Start()
+		{
 			try
 			{
-				// Connect to a Remote server
-				// Get Host IP Address that is used to establish a connection
-				// In this case, we get one IP address of localhost that is IP : 127.0.0.1
-				// If a host has multiple addresses, you will get a list of addresses
-				IPHostEntry host = Dns.GetHostEntry("localhost");
-				IPAddress ipAddress = host.AddressList[0];
-				IPEndPoint remoteEP = new IPEndPoint(ipAddress, 10000);
-
-				// Create a TCP/IP  socket.
-				Socket sender = new Socket(ipAddress.AddressFamily,
-					SocketType.Stream, ProtocolType.Tcp);
-
-				// Connect the socket to the remote endpoint. Catch any errors.
-				try
+				await _client.ConnectAsync(_uri, CancellationToken.None);
+				while (_client.State == WebSocketState.Open)
 				{
-					// Connect to Remote EndPoint
-					sender.Connect(remoteEP);
-
-					Console.WriteLine("Socket connected to {0}",
-						sender.RemoteEndPoint.ToString());
-					string msgToSend = "";
-					do
+					while (messageSentCounter == 0) // should ensure that it only sends once, otherwise it sends 5-8 times
 					{
-						msgToSend = string.Empty;
-						msgToSend = Console.ReadLine().ToString();
-
-						// Encode the data string into a byte array.
-						byte[] msg = Encoding.ASCII.GetBytes($"{msgToSend}<EOF>");
-
-						// Send the data through the socket.
-						int bytesSent = sender.Send(msg);
-
-						// Receive the response from the remote device.
-						int bytesRec = sender.Receive(bytes);
-						Console.WriteLine("Echoed test = {0}",
-							Encoding.ASCII.GetString(bytes, 0, bytesRec - 5)); // -5 removes the <EOF> tag, just a bit cleaner 
-					} while (msgToSend.ToLower() != "gameover");
-
-					// Release the socket.
-					sender.Shutdown(SocketShutdown.Both);
-					sender.Close();
-
-				}
-				catch (ArgumentNullException ane)
-				{
-					Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
-				}
-				catch (SocketException se)
-				{
-					Console.WriteLine("SocketException : {0}", se.ToString());
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine("Unexpected exception : {0}", e.ToString());
+						await Send("Hi Server");
+					}
+					await Receive();
 				}
 
+				await _client.CloseAsync(WebSocketCloseStatus.NormalClosure, "Message was sent successfully", CancellationToken.None);
 			}
-			catch (Exception e)
+			catch (WebSocketException e)
 			{
-				Console.WriteLine(e.ToString());
+				Console.WriteLine("You've reached the general websocket exception :(");
+				Console.WriteLine(e.Message);
+
+				if (_client.State == WebSocketState.Open)
+					await _client.CloseAsync(WebSocketCloseStatus.Empty, null, CancellationToken.None);  // attemps to close the connection properly
 			}
+		}
+
+		public async Task Send(string sendMessage)
+		{
+			//Console.WriteLine("Enter message to send");
+			//string sendMessage = Console.ReadLine().ToString();
+			int numberOfTimesRun = 0;
+			if (_client.State == WebSocketState.Open)
+			{
+				byte[] messageInBytes = Encoding.UTF8.GetBytes(sendMessage);
+				Debug.WriteLine($"Trying to send message: {sendMessage}");
+				ArraySegment<byte> bytesToSend = messageInBytes;
+				await _client.SendAsync(bytesToSend, WebSocketMessageType.Binary, true, CancellationToken.None);
+
+				// trying to ensure that it only sends once:
+				await Task.Delay(400);
+				messageSentCounter++;
+
+				//debug
+				numberOfTimesRun++;
+				Debug.WriteLine($"Send has run {numberOfTimesRun} times");
+			}
+			else
+				Start();
+
+		}
+
+		public void SendMessage(string message)  // function just ensures that Send runs in a new thread, probably not necessary
+		{
+			Task.Run(async () => await Send(message));
+		}
+
+		public async Task Receive()
+		{
+			var offset = 0;
+			var packet = 1024;
+			var receiveBuffer = new byte[1024];
+			int numberOfTimesRun = 0;
+
+			Console.WriteLine("Ready to receive");
+			ArraySegment<byte> byteReceived = new(receiveBuffer, offset, packet); ;
+
+			WebSocketReceiveResult receiveMessage = await _client.ReceiveAsync(byteReceived, CancellationToken.None);
+			Debug.WriteLine("Message received");
+
+			var serverMessage = Encoding.UTF8.GetString(receiveBuffer, 0, receiveMessage.Count);
+			Debug.WriteLine(serverMessage + " <-- Received from server");
+
+			// checking to see if the received data is a useful command
+			if (serverMessage != "Hi Server" && serverMessage != "Message Received") // this check should be changed to rpi messages
+			{
+				if (int.TryParse(serverMessage, out int message) || serverMessage == "ff")
+					MainWindow._gameSession.Command = serverMessage;
+				else
+					Debug.WriteLine($"Unknown message received from server: {serverMessage}");
+			}
+			numberOfTimesRun++;
+			Debug.WriteLine($"Receive has run {numberOfTimesRun} times");
+			Task.Delay(100);
+
 		}
 	}
 }

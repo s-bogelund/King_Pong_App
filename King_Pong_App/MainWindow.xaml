@@ -7,7 +7,7 @@
 		xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
 		mc:Ignorable="d"
 		WindowState="Maximized"
-        Title="MainWindow" Height="1440" Width="2560">
+        Title="MainWindow" Height="1080" Width="1920">
 	<Window.Background>
 		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 			<GradientStop Color="#FF24292C" Offset="0"/>
@@ -20,16 +20,6 @@
 		<localViewModels:TeamViewModel x:Key="teams"/>
 	</Window.Resources>
 	<Grid>
-		<Grid.Background>
-			<ImageBrush 
-				ImageSource="C:\Users\simbj\source\repos\King_Pong_App\King_Pong_App\Images\KingPongLogo2.png"
-				Opacity="0.1"
-				>
-				<ImageBrush.RelativeTransform>
-					<ScaleTransform ScaleX=".15" ScaleY=".25" CenterY="0.05"/>
-				</ImageBrush.RelativeTransform>
-			</ImageBrush>
-		</Grid.Background>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="3.5*"/>
@@ -61,7 +51,7 @@
 					TextAlignment="Right"
 					VerticalAlignment="Center"
 					Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Team1.Name}">
+					Text="{Binding Team1.TeamName}">
 				</TextBlock>
 				<TextBlock
 					x:Name="ScoreCount"
@@ -82,7 +72,7 @@
 					TextAlignment="Left"
 					VerticalAlignment="Center"
 					Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Team2.Name}">
+					Text="{Binding Team2.TeamName}">
 				</TextBlock>
 			</Grid>
 			<Grid 
@@ -341,14 +331,14 @@
 						Margin ="0 8 0 8" 
 						FontSize="55"
 						Foreground="{StaticResource DarkModeForeground}"
-						Text="{Binding Player1.Name}"/>
+						Text="{Binding Player1.PlayerName}"/>
 					<TextBlock
                     x:Name="Player1_2" 
                     TextAlignment="Center"  
 					Margin ="0 8 0 8" 
                     FontSize="55"
                     Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Player2.Name}"/>
+					Text="{Binding Player2.PlayerName}"/>
 				</StackPanel>
 				<StackPanel
                 Grid.Column="1" 
@@ -388,14 +378,14 @@
                     Margin ="0 8 0 8" 
                     FontSize="55" 
                     Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Player3.Name}"/>
+					Text="{Binding Player3.PlayerName}"/>
 					<TextBlock 
                     x:Name="Player2_2" 
                     TextAlignment="Center" 
                     Margin ="0 8 0 8"
                     FontSize="55" 
                     Foreground="{StaticResource DarkModeForeground}"
-					Text="{Binding Player4.Name}"/>
+					Text="{Binding Player4.PlayerName}"/>
 				</StackPanel>
 				<StackPanel
                 Grid.Row="1" 
@@ -420,8 +410,19 @@
 				</StackPanel>
 			</Grid>
 		</Grid>
-		<Grid Margin="1,1,1,2"/>
-		<StackPanel
+		<Grid Margin="1,60,1,2">
+			<Grid.Background>
+				<ImageBrush 
+					ImageSource="\Images\KingPongLogo2.png"
+					Opacity="0.07"
+					>
+					<ImageBrush.RelativeTransform>
+						<ScaleTransform ScaleX=".45" ScaleY=".7" CenterX=".45" />
+					</ImageBrush.RelativeTransform>
+				</ImageBrush>
+			</Grid.Background>
+		</Grid>
+			<StackPanel
 			Margin="0,4,4,0"
 			Grid.Column="1"
 			Grid.ColumnSpan="2"
@@ -431,8 +432,8 @@
 			<Button
 				Style="{StaticResource defaultDarkModeButton}"
 				Click="AutomaticWin_Click" 
-				Content="WIN SCREEN TEST"
-				Width="260">
+				Content="AUTO STARTER DECIDE"
+				Width="290">
 				<Button.Background>
 					<SolidColorBrush 
                         Color="Black" 
@@ -521,5 +522,18 @@
 			Margin="0,320,0,0" 
 			Grid.RowSpan="2"
 			Visibility="Hidden"/>
+		<Grid
+			Grid.Column="2" Margin="1 60 1 2">
+			<Grid.Background>
+				<ImageBrush 
+				ImageSource="\Images\KingPongLogo2.png"
+				Opacity="0.07"
+				>
+					<ImageBrush.RelativeTransform>
+						<ScaleTransform ScaleX=".45" ScaleY=".7" CenterX=".5"/>
+					</ImageBrush.RelativeTransform>
+				</ImageBrush>
+			</Grid.Background>
+		</Grid>
 	</Grid>
 </Window>

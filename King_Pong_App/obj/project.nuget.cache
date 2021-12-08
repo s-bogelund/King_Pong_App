@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "TRPvk98yVFdRYexDkqGrQmAPJ7SuixDiJp+7iASrDgTfdYb3690LR7S8aHuNojryKzp2s+sRId8qUvo5M3Fjqg==",
+  "dgSpecHash": "JrqgZUorEL/Yt7tkTWyzpWiu+gW1muLOuZY5XJqCN7goSFBdG5uId4lvherNWd7L0l0Mik24HxpRKwlVdjuwcA==",
   "success": true,
   "projectFilePath": "C:\\Users\\simbj\\source\\repos\\King_Pong_App\\King_Pong_App\\King_Pong_App.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\simbj\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

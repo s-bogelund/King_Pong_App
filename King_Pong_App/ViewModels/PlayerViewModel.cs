@@ -13,8 +13,8 @@ namespace King_Pong_App.ViewModels
 		{
 
 		}
-		public PlayerViewModel(string name, int playerNumber, int teamNumber, int numberOfHits = 0)
-				: base(name, playerNumber, teamNumber, numberOfHits)
+		public PlayerViewModel(string name, int numberOfHits = 0)
+				: base(name, numberOfHits)
 		{
 
 		}
@@ -33,7 +33,7 @@ namespace King_Pong_App.ViewModels
 		
 		public string PrintInfo()
 		{
-			string name = $"{Name}:";
+			string name = $"{PlayerName}:";
 			string hits = $"Antal Ramte: {NumberOfHits}\n";
 			string hitrate = $"Præcision: {Hitrate()}\n";
 
