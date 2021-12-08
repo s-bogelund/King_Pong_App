@@ -43,16 +43,10 @@ namespace King_Pong_App
 
 		private void _gameSession_CommandReceived(object sender, EventArgs e)
 		{
-			if (int.TryParse(_gameSession.Command, out int number))  // if the received command is an integer
+			// if the received command is an integer
+			if (int.TryParse(_gameSession.Command, out int number))  
 			{
-				if (number is < 0 or > 10) //checking for invalid numbers
-				{
-					Debug.WriteLine($"Command received was out of bounds. Command was {number}");
-					return;
-				}
-
 				HitOrMiss(number);
-
 				return;
 			}
 
@@ -65,16 +59,21 @@ namespace King_Pong_App
 
 		private void HitOrMiss(int number)
 		{
-			if (_gameSession.starterTeamDecided)
+			if (number is < 0 or > 10) //checking for invalid numbers
 			{
-				NormalGameLoop(number);
+				Debug.WriteLine($"Command received was out of bounds. Command was {number}");
+				return;
 			}
+
+			if (_gameSession.starterTeamDecided)
+				NormalGameLoop(number);
 			else
 				DecideStarter(number);
 		}
 
 		private void NormalGameLoop(int number)
 		{
+			// number is 0, it was a miss, otherwise a cup corresponding to the number received will be marked hit
 			if (number == 0) 
 				NextTurn();
 			else 
@@ -83,7 +82,8 @@ namespace King_Pong_App
 
 		private void DecideStarter(int number)
 		{
-			if(number > 1) // checking if the number if valid
+			// checking if the number if valid for deciding starter team
+			if (number > 1) 
 			{
 				Debug.WriteLine($"Only 0 and 1 is accepted commands before the starter team has been decided");
 				Debug.WriteLine($"The command received was: {_gameSession.Command}");
@@ -93,7 +93,6 @@ namespace King_Pong_App
 			_gameSession.Current = number == 0 ? _gameSession.Team1 : _gameSession.Team2;
 			_gameSession.starterTeamDecided = true;
 			UpdateTurnIndicator();
-			
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)

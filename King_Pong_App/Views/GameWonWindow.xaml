@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:King_Pong_App.Views"
         mc:Ignorable="d"
-        Title="GameWonWindow" Height="1000" Width="1400">
+        Title="GameWonWindow" Height="800" Width="1130">
 	<Window.Background>
 		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 			<GradientStop Color="#FF24292C" Offset="0"/>

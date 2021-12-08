@@ -47,8 +47,6 @@ namespace King_Pong_App.ViewModels
 			Cup2_9 = new();
 			Cup2_10 = new();
 
-			//current = Team1;
-
 			backFourCups = new() { Cup1_7, Cup1_8, Cup1_9, Cup1_10, 
 									Cup2_7, Cup2_8, Cup2_9, Cup2_10 };
 		}

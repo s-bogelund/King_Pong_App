@@ -7,7 +7,7 @@
 		xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
 		mc:Ignorable="d"
 		WindowState="Maximized"
-        Title="MainWindow" Height="1440" Width="2560">
+        Title="MainWindow" Height="1080" Width="1920">
 	<Window.Background>
 		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 			<GradientStop Color="#FF24292C" Offset="0"/>
@@ -20,7 +20,6 @@
 		<localViewModels:TeamViewModel x:Key="teams"/>
 	</Window.Resources>
 	<Grid>
-		
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="3.5*"/>
