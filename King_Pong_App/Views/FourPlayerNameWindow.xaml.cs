@@ -68,8 +68,24 @@ namespace King_Pong_App.Views
 		{
 			var serialized = JsonConvert.SerializeObject(MainWindow._gameSession, Formatting.Indented);
 			MainWindow.client.Send(serialized);
+			//ugly quick json fix
+			serialized = ReplaceFirst(serialized, "playerName", "player1");
+			serialized = ReplaceFirst(serialized, "playerName", "player2");
+			serialized = ReplaceFirst(serialized, "playerName", "player3");
+			serialized = ReplaceFirst(serialized, "playerName", "player4");
 
 			Debug.WriteLine(serialized);
+		}
+
+		// quick fix to issues with decoding json on server
+		public string ReplaceFirst(string text, string search, string replace)
+		{
+			int pos = text.IndexOf(search);
+			if (pos < 0)
+			{
+				return text;
+			}
+			return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
 		}
 	}
 }
