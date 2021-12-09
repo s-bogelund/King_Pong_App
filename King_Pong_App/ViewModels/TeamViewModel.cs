@@ -10,14 +10,12 @@ using System.Threading.Tasks;
 
 namespace King_Pong_App.ViewModels
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public class TeamViewModel : TeamModel
 	{
 		public TeamViewModel()
 		{
 		}
 
-		[JsonProperty]
 		public List<PlayerViewModel> Roster = new();
 		public void AddMembers(params PlayerViewModel[] players)
 		{

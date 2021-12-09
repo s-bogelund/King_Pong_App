@@ -109,17 +109,22 @@ namespace King_Pong_App.ViewModels
 			}
 		}
 
+		#region
+		[JsonProperty]
+		public PlayerViewModel Player1 { get; set; }
+		[JsonProperty]
+		public PlayerViewModel Player2 { get; set; }
+		[JsonProperty]
+		public PlayerViewModel Player3 { get; set; }
+		[JsonProperty]
+		public PlayerViewModel Player4 { get; set; }
+
 		[JsonProperty]
 		public TeamViewModel Team1 { get; set; }
 
 		[JsonProperty]
 		public TeamViewModel Team2 { get; set; }
-
-		public PlayerViewModel Player1 { get; set; }
-		public PlayerViewModel Player2 { get; set; }
-		public PlayerViewModel Player3 { get; set; }
-		public PlayerViewModel Player4 { get; set; }
-
+		#endregion
 		public EllipseViewModel Cup1_1 { get; set; }
 		public EllipseViewModel Cup1_2 { get; set; }
 		public EllipseViewModel Cup1_3 { get; set; }
