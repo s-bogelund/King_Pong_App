@@ -67,13 +67,15 @@ namespace King_Pong_App.Views
 		public void SendInfoToServer()
 		{
 			var serialized = JsonConvert.SerializeObject(MainWindow._gameSession, Formatting.Indented);
-			MainWindow.client.Send(serialized);
+			
+
 			//ugly quick json fix
 			serialized = ReplaceFirst(serialized, "playerName", "player1");
 			serialized = ReplaceFirst(serialized, "playerName", "player2");
 			serialized = ReplaceFirst(serialized, "playerName", "player3");
 			serialized = ReplaceFirst(serialized, "playerName", "player4");
 
+			MainWindow.client.Send(serialized);
 			Debug.WriteLine(serialized);
 		}
 
