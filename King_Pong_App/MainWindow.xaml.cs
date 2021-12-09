@@ -25,7 +25,7 @@ namespace King_Pong_App
 {
 	public partial class MainWindow : Window
 	{
-		public Uri serverUri = new Uri("ws://localhost:9000/wsDemo");
+		public Uri serverUri = new Uri("ws://10.9.8:9000/");
 		public ClientWebSocket socket = new();
 		public EllipseViewModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
 		public static GameSession _gameSession;

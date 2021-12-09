@@ -75,9 +75,9 @@ namespace King_Pong_App.Views
 			serialized = ReplaceFirst(serialized, "playerName", "player2");
 			serialized = ReplaceFirst(serialized, "playerName", "player3");
 			serialized = ReplaceFirst(serialized, "playerName", "player4");
-
-			MainWindow.client.Send(serialized);
-			Debug.WriteLine(serialized);
+			
+			MainWindow.client.Send(JsonFixer());
+			Debug.WriteLine(JsonFixer());
 		}
 
 		// quick fix to issues with decoding json on server
@@ -89,6 +89,20 @@ namespace King_Pong_App.Views
 				return text;
 			}
 			return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
+		}
+
+		public string JsonFixer()
+		{
+			string team1 = @$"""team1"": ""{MainWindow._gameSession.Team1.TeamName}""," + "\n";
+			string team2 = @$"""team2"": ""{MainWindow._gameSession.Team2.TeamName}""," + "\n";
+			string player1 = @$"""player1"": ""{MainWindow._gameSession.Player1.PlayerName}""," + "\n";
+			string player2 = @$"""player2"": ""{MainWindow._gameSession.Player2.PlayerName}""," + "\n";
+			string player3 = @$"""player3"": ""{MainWindow._gameSession.Player3.PlayerName}""," + "\n";
+			string player4 = @$"""player4"": ""{MainWindow._gameSession.Player4.PlayerName}""" + "\n";
+
+			return "[\n" + team1 + team2 + player1 + player2 + player3 + player4 + "]";
+
+
 		}
 	}
 }

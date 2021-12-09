@@ -109,7 +109,7 @@ namespace King_Pong_App.ViewModels
 			}
 		}
 
-		#region
+		#region Players and teams
 		[JsonProperty]
 		public PlayerViewModel Player1 { get; set; }
 		[JsonProperty]
@@ -125,6 +125,7 @@ namespace King_Pong_App.ViewModels
 		[JsonProperty]
 		public TeamViewModel Team2 { get; set; }
 		#endregion
+		#region Cups
 		public EllipseViewModel Cup1_1 { get; set; }
 		public EllipseViewModel Cup1_2 { get; set; }
 		public EllipseViewModel Cup1_3 { get; set; }
@@ -145,7 +146,7 @@ namespace King_Pong_App.ViewModels
 		public EllipseViewModel Cup2_8 { get; set; }
 		public EllipseViewModel Cup2_9 { get; set; }
 		public EllipseViewModel Cup2_10 { get; set; }
-
+		#endregion
 		public event PropertyChangedEventHandler PropertyChanged;
 		public virtual void OnPropertyChanged(string propertyName)
 		{
