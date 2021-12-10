@@ -28,20 +28,27 @@ namespace King_Pong_App.Views
 
 		private void ConfirmNames_Click(object sender, RoutedEventArgs e)
 		{
+			#region Control statements
 			if (Team1Name.Text.Length > 10 || Team2Name.Text.Length > 10 || Player1Name.Text.Length > 10 ||
 				Player2Name.Text.Length > 10 || Player3Name.Text.Length > 10 || Player4Name.Text.Length > 10)
-				MessageBox.Show("Navnene må ikke overstige 10 karakterer 🤔");
-			else if (Team1Name.Text.Length == 0 || Team2Name.Text.Length == 0 || Player1Name.Text.Length == 0 ||
-				Player2Name.Text.Length == 0 || Player3Name.Text.Length == 0 || Player4Name.Text.Length == 0)
-				MessageBox.Show("Husk at udfylde alle felter 😅");
-			else
 			{
-				FourPlayerNameAssignment();
-				SendInfoToServer();
-				MainWindow._gameSession.gameInProgress = true;
-
-				Close();
+				MessageBox.Show("Navnene må ikke overstige 10 karakterer 🤔");
+				return;
 			}
+			if (Team1Name.Text.Length == 0 || Team2Name.Text.Length == 0 || Player1Name.Text.Length == 0 ||
+				Player2Name.Text.Length == 0 || Player3Name.Text.Length == 0 || Player4Name.Text.Length == 0)
+			{
+				MessageBox.Show("Husk at udfylde alle felter 😅");
+				return;
+			}
+			#endregion
+			
+			FourPlayerNameAssignment();
+			SendInfoToServer();
+			MainWindow._gameSession.gameInProgress = true;
+			MainWindow._gameSession.playersCreated = true;
+
+			Close();
 		}
 
 		public void FourPlayerNameAssignment()
@@ -61,9 +68,42 @@ namespace King_Pong_App.Views
 		public void SendInfoToServer()
 		{
 			var serialized = JsonConvert.SerializeObject(MainWindow._gameSession, Formatting.Indented);
-			MainWindow.client.Send(serialized);
 
-			Debug.WriteLine(serialized);
+
+			//Debug.WriteLine(serialized);
+			//ugly quick json fix
+			serialized = ReplaceFirst(serialized, "playerName", "player1");
+			serialized = ReplaceFirst(serialized, "playerName", "player2");
+			serialized = ReplaceFirst(serialized, "playerName", "player3");
+			serialized = ReplaceFirst(serialized, "playerName", "player4");
+			
+			MainWindow.client.Send(JsonFixer());
+			Debug.WriteLine(JsonFixer());
+		}
+
+		// quick fix to issues with decoding json on server
+		public string ReplaceFirst(string text, string search, string replace)
+		{
+			int pos = text.IndexOf(search);
+			if (pos < 0)
+			{
+				return text;
+			}
+			return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
+		}
+
+		public string JsonFixer()
+		{
+			string team1 = @$"""team1"": ""{MainWindow._gameSession.Team1.TeamName}""," + "\n";
+			string team2 = @$"""team2"": ""{MainWindow._gameSession.Team2.TeamName}""," + "\n";
+			string player1 = @$"""player1"": ""{MainWindow._gameSession.Player1.PlayerName}""," + "\n";
+			string player2 = @$"""player2"": ""{MainWindow._gameSession.Player2.PlayerName}""," + "\n";
+			string player3 = @$"""player3"": ""{MainWindow._gameSession.Player3.PlayerName}""," + "\n";
+			string player4 = @$"""player4"": ""{MainWindow._gameSession.Player4.PlayerName}""" + "\n";
+
+			return "[\n" + team1 + team2 + player1 + player2 + player3 + player4 + "]";
+
+
 		}
 	}
 }

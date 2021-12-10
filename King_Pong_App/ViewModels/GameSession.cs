@@ -47,8 +47,8 @@ namespace King_Pong_App.ViewModels
 			Cup2_9 = new();
 			Cup2_10 = new();
 
-			backFourCups = new() { Cup1_7, Cup1_8, Cup1_9, Cup1_10, 
-									Cup2_7, Cup2_8, Cup2_9, Cup2_10 };
+			backFourCups = new() { Cup1_7, Cup1_8, Cup1_9, Cup1_10,
+				Cup2_7, Cup2_8, Cup2_9, Cup2_10 };
 		}
 		public List<EllipseViewModel> backFourCups;
 
@@ -56,11 +56,35 @@ namespace King_Pong_App.ViewModels
 		public int numberOfCups = 10;
 
 		[JsonProperty]
-		public int teamSize = 2;
-
+		public int teamSize = 0;
 		public int currentPlayer = 0;
+		public bool cupsChosen = false;
+		public bool playersCreated = false;
 		public bool gameInProgress = false;
-		public bool starterTeamDecided = false;
+		public bool gameOver;
+		private bool starterTeamDecided;
+
+		public bool StarterTeamDecided
+		{
+			get { return starterTeamDecided; }
+			set
+			{
+				starterTeamDecided = value;
+				StarterTeamFound?.Invoke(this, EventArgs.Empty);
+			}
+		}
+
+		public void ResetGameInfo()
+		{
+			teamSize = 0;
+			currentPlayer = 0;
+			cupsChosen = false;
+			playersCreated = false;
+			gameInProgress = false;
+			gameOver = false;
+		}
+	
+
 		public void TurnOver()
 		{
 			Current = Current == Team1 ? Team2 : Team1;
@@ -78,9 +102,12 @@ namespace King_Pong_App.ViewModels
 			}
 		}
 
+		public event EventHandler StarterTeamFound;
+
 		public event EventHandler CommandReceived;
 
 		private TeamViewModel current;
+		
 
 		public TeamViewModel Current
 		{
@@ -92,17 +119,23 @@ namespace King_Pong_App.ViewModels
 			}
 		}
 
+		#region Players and teams
+		[JsonProperty]
+		public PlayerViewModel Player1 { get; set; }
+		[JsonProperty]
+		public PlayerViewModel Player2 { get; set; }
+		[JsonProperty]
+		public PlayerViewModel Player3 { get; set; }
+		[JsonProperty]
+		public PlayerViewModel Player4 { get; set; }
+
 		[JsonProperty]
 		public TeamViewModel Team1 { get; set; }
 
 		[JsonProperty]
 		public TeamViewModel Team2 { get; set; }
-
-		public PlayerViewModel Player1 { get; set; }
-		public PlayerViewModel Player2 { get; set; }
-		public PlayerViewModel Player3 { get; set; }
-		public PlayerViewModel Player4 { get; set; }
-
+		#endregion
+		#region Cups
 		public EllipseViewModel Cup1_1 { get; set; }
 		public EllipseViewModel Cup1_2 { get; set; }
 		public EllipseViewModel Cup1_3 { get; set; }
@@ -123,7 +156,7 @@ namespace King_Pong_App.ViewModels
 		public EllipseViewModel Cup2_8 { get; set; }
 		public EllipseViewModel Cup2_9 { get; set; }
 		public EllipseViewModel Cup2_10 { get; set; }
-
+		#endregion
 		public event PropertyChangedEventHandler PropertyChanged;
 		public virtual void OnPropertyChanged(string propertyName)
 		{

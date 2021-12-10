@@ -483,16 +483,6 @@
                         Opacity="0.15"/>
 				</Button.Background>
 			</Button>
-			<Button
-				Style="{StaticResource defaultDarkModeButton}"
-				Click="FAQ_Click" 
-				Content="FAQ" >
-				<Button.Background>
-					<SolidColorBrush 
-						Color="Black" 
-						Opacity="0.15"/>
-				</Button.Background>
-			</Button>
 		</StackPanel>
 		<Button 
 			Grid.Column="0"

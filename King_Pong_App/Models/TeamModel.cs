@@ -14,9 +14,6 @@ namespace King_Pong_App.Models
 	{
 
 		private int cupsRemaining;
-
-		
-
 		public int CupsRemaining
 		{
 			get { return cupsRemaining; }

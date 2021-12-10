@@ -1,4 +1,5 @@
 ﻿using King_Pong_App.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace King_Pong_App.ViewModels
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class PlayerViewModel : PlayerModel
 	{
 		public PlayerViewModel()

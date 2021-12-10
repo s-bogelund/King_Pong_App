@@ -29,18 +29,24 @@ namespace King_Pong_App.Views
 
 		private void ConfirmNames_Click(object sender, RoutedEventArgs e)
 		{
-
+			#region
 			if (Team1Name.Text.Length > 10 || Team2Name.Text.Length > 10 || NameOfPlayer1.Text.Length > 10 || NameOfPlayer3.Text.Length > 10)
-				MessageBox.Show("Navnene må ikke overstige 10 karakterer 🤔");
-			else if (Team1Name.Text.Length == 0 || Team2Name.Text.Length == 0 || NameOfPlayer1.Text.Length == 0 || NameOfPlayer3.Text.Length == 0)
-				MessageBox.Show("Husk at udfylde alle felter 😅");
-			else
 			{
-				TwoPlayerNameAssignment();
-				SendInfoToServer();
-				MainWindow._gameSession.gameInProgress = true;
-				Close();
+				MessageBox.Show("Navnene må ikke overstige 10 karakterer 🤔");
+				return;
 			}
+			if (Team1Name.Text.Length == 0 || Team2Name.Text.Length == 0 || NameOfPlayer1.Text.Length == 0 || NameOfPlayer3.Text.Length == 0)
+			{
+				MessageBox.Show("Husk at udfylde alle felter 😅");
+				return;
+			}
+			#endregion
+
+			TwoPlayerNameAssignment();
+			SendInfoToServer();
+			MainWindow._gameSession.gameInProgress = true;
+			MainWindow._gameSession.playersCreated = true;
+			Close();
 		}
 
 		public void TwoPlayerNameAssignment()
@@ -63,10 +69,24 @@ namespace King_Pong_App.Views
 		{
 			var serialized = JsonConvert.SerializeObject(MainWindow._gameSession, Formatting.Indented);
 			MainWindow.client.Send(serialized);
-			
+
+			//ugly quick json fix
+			serialized = ReplaceFirst(serialized, "playerName", "player1");
+			serialized = ReplaceFirst(serialized, "playerName", "player2");
+
 			Debug.WriteLine(serialized);
 		}
 
-		
+		// quick fix to issues with decoding json on server
+		public string ReplaceFirst(string text, string search, string replace)
+		{
+			int pos = text.IndexOf(search);
+			if (pos < 0)
+			{
+				return text;
+			}
+			return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
+		}
+
 	}
 }

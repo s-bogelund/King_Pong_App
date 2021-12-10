@@ -25,7 +25,7 @@ namespace King_Pong_App
 {
 	public partial class MainWindow : Window
 	{
-		public Uri serverUri = new Uri("ws://localhost:9000/wsDemo");
+		public Uri serverUri = new Uri("ws://10.9.8.2:9000/");
 		public ClientWebSocket socket = new();
 		public EllipseViewModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
 		public static GameSession _gameSession;
@@ -51,21 +51,24 @@ namespace King_Pong_App
 			}
 
 			if (_gameSession.Command.ToLower() == "ff")
+			{
 				Forfeit();
-			
+				return;
+			}
+
 			// this should never be reached
 			Debug.WriteLine($"Command received has unknown value: {_gameSession.Command}");
 		}
 
-		private void HitOrMiss(int number)
+		public void HitOrMiss(int number)
 		{
-			if (number is < 0 or > 10) //checking for invalid numbers
+			if (number < 0 || number > _gameSession.numberOfCups * 2) //checking for invalid numbers
 			{
 				Debug.WriteLine($"Command received was out of bounds. Command was {number}");
 				return;
 			}
 
-			if (_gameSession.starterTeamDecided)
+			if (_gameSession.StarterTeamDecided)
 				NormalGameLoop(number);
 			else
 				DecideStarter(number);
@@ -83,26 +86,35 @@ namespace King_Pong_App
 		private void DecideStarter(int number)
 		{
 			// checking if the number if valid for deciding starter team
-			if (number > 1) 
+			if (number < 0 || number > _gameSession.numberOfCups * 2) 
 			{
-				Debug.WriteLine($"Only 0 and 1 is accepted commands before the starter team has been decided");
+				Debug.WriteLine($"Only command values between 0 and {_gameSession.numberOfCups * 2} accepted");
 				Debug.WriteLine($"The command received was: {_gameSession.Command}");
 				return;
 			}
 
-			_gameSession.Current = number == 0 ? _gameSession.Team1 : _gameSession.Team2;
-			_gameSession.starterTeamDecided = true;
+			
+			_gameSession.Current = number < _gameSession.numberOfCups ? _gameSession.Team1 : _gameSession.Team2;
+			HitWindow();
+			_gameSession.StarterTeamDecided = true;
 			UpdateTurnIndicator();
 		}
 
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
-			if (_gameSession.gameInProgress == true)
+			#region Control Statements
+			if (_gameSession.gameOver)
+			{
+				MessageBox.Show("For at starte et nyt spil, skal appen genstartes!");
+				return;
+			}
+			if (_gameSession.gameInProgress)
 			{
 				MessageBox.Show("Der er et spil i gang. Vent med at starte et nyt spil, til det igangværende spil er afsluttet");
 				return;
 			}
-
+			#endregion
+			_gameSession.ResetGameInfo();
 			CupSelection();
 			NumberOfPlayersSelection();
 
@@ -110,12 +122,16 @@ namespace King_Pong_App
 				FourPlayerGame();
 			else
 				TwoPlayerGame();
-			
+
+			IntroRound();
 			//UpdateGameBoard();
 		}
 
 		public void TwoPlayerGame()
 		{
+			if (_gameSession.teamSize == 0)
+				return;
+
 			TwoPlayerNameWindow nameSelect2 = new();
 			nameSelect2.DataContext = _gameSession;
 			nameSelect2.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -128,6 +144,9 @@ namespace King_Pong_App
 
 		public void FourPlayerGame()
 		{
+			if (_gameSession.teamSize == 0)
+				return;
+
 			FourPlayerNameWindow nameSelect4 = new();
 			nameSelect4.DataContext = _gameSession;
 			nameSelect4.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -135,8 +154,30 @@ namespace King_Pong_App
 			nameSelect4.ShowDialog();
 		}
 
+		public void IntroRound()
+		{
+			if (!_gameSession.playersCreated)
+				return;
+
+			IntroRoundWindow intro = new();
+			intro.DataContext = _gameSession;
+			intro.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			intro.Owner = this;
+			intro.ShowDialog();
+		}
+		public void HitWindow()
+		{
+			HitAnnounceWindow hit = new();
+			hit.DataContext = _gameSession;
+			hit.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			hit.Owner = this;
+			hit.ShowDialog();
+		}
 		public void NumberOfPlayersSelection()
 		{
+			if (!_gameSession.cupsChosen)
+				return;
+
 			PlayerNumberSelectWindow playerNumberSelectWindow = new();
 			playerNumberSelectWindow.DataContext = this.DataContext;
 			playerNumberSelectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -159,7 +200,11 @@ namespace King_Pong_App
 
 		public void HitEvent(int number)
 		{
-			List<EllipseViewModel> allTeam1Cups = new()
+			// to avoid crashes
+			if (_gameSession.Team1.CupsRemaining <= 0 || _gameSession.Team2.CupsRemaining <= 0)
+				return;
+
+				List<EllipseViewModel> allTeam1Cups = new()
 			{
 				_gameSession.Cup1_1,
 				_gameSession.Cup1_2,
@@ -189,15 +234,19 @@ namespace King_Pong_App
 			List<EllipseViewModel> team1ActualCups = new() { };
 			List<EllipseViewModel> team2ActualCups = new() { };
 
-			for (int i = 0; i < _gameSession.numberOfCups; i++)  //ensures that we can't hit cups that aren't used if using only 6 cups
+			//ensures that we can't hit cups that aren't used if using only 6 cups
+			for (int i = 0; i < _gameSession.numberOfCups; i++)  
 			{
 				team1ActualCups.Add(allTeam1Cups[i]);
 				team2ActualCups.Add(allTeam2Cups[i]);
 			}
-			
+
+			// if the current team is team 1, it is assumed that the cup hit belongs to team 2
 			if (_gameSession.Current == _gameSession.Team1)
 			{
-				team2ActualCups[number].Color = Brushes.Red;
+				// the number passed is in the range of numberOfCups*2 due to how it's structured on Rpi.
+				// so to get the actual cup from team 2 we need to subtract numberOfCups
+				team2ActualCups[number - _gameSession.numberOfCups].Color = Brushes.Red;
 				_gameSession.Team2.CupsRemaining--;
 			}
 			else 
@@ -206,7 +255,8 @@ namespace King_Pong_App
 				_gameSession.Team1.CupsRemaining--;
 			}
 			_gameSession.Current.Roster[_gameSession.currentPlayer].AddHit();
-
+			if (_gameSession.Team1.CupsRemaining > 0 && _gameSession.Team2.CupsRemaining > 0)
+				HitWindow();
 			NextTurn();
 		}
 
@@ -257,11 +307,6 @@ namespace King_Pong_App
 			MessageBox.Show("Regler kan findes via dette link: https://kingpong-rules.com");
 		}
 
-		private void FAQ_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("Bare spørg Lucas :)");
-		}
-
 		private void Giv_Op_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show(@"For at give op, skal begge holdknapper holdes inde i mindst 5 sekunder. 
@@ -275,15 +320,16 @@ namespace King_Pong_App
 
 		private void HitEvent_Click(object sender, RoutedEventArgs e)
 		{
-			if (_gameSession.starterTeamDecided == true)
+			if (!_gameSession.StarterTeamDecided == true)
 			{
-				if (_gameSession.Current == _gameSession.Team1)
-					HitEvent(_gameSession.Team2.CupsRemaining - 1);
-				else
-					HitEvent(_gameSession.Team1.CupsRemaining - 1);
-			}
-			else
 				MessageBox.Show("Det er endnu ikke afgjort, hvem der starter endnu. Tryk AUTO DECIDE STARTER");
+				return;
+			}
+
+			if (_gameSession.Current == _gameSession.Team1)
+				HitEvent(_gameSession.Team2.CupsRemaining - 1 + _gameSession.numberOfCups);
+			else
+				HitEvent(_gameSession.Team1.CupsRemaining - 1);
 		}
 		public void GameOver()
 		{
@@ -292,12 +338,13 @@ namespace King_Pong_App
 			gameWon.Owner = this;
 			gameWon.ShowDialog();
 			_gameSession.gameInProgress = false;
+			_gameSession.gameOver = true;
 		}
 		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
 		{
 			client.Send("AssHatFace");
 			_gameSession.Command= "1";
-			_gameSession.starterTeamDecided = true;  // to be able to test
+			_gameSession.StarterTeamDecided = true;  // to be able to test
 			//_gameSession.Player1.PlayerName = _gameSession.Command;
 		}
 

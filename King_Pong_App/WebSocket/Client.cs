@@ -13,9 +13,9 @@ namespace King_Pong_App.WebSocket
 {
 	public class Client
 	{
-		Uri _uri;
+		public Uri _uri;
 
-		ClientWebSocket _client = new ClientWebSocket();
+		public ClientWebSocket _client = new ClientWebSocket();
 		private int messageSentCounter = 0;
 
 		public Client(Uri uri, ClientWebSocket client)
@@ -33,7 +33,7 @@ namespace King_Pong_App.WebSocket
 				{
 					while (messageSentCounter == 0) // should ensure that it only sends once, otherwise it sends 5-8 times
 					{
-						await Send("Hi Server");
+						await Send("");
 					}
 					await Receive();
 				}
@@ -52,8 +52,6 @@ namespace King_Pong_App.WebSocket
 
 		public async Task Send(string sendMessage)
 		{
-			//Console.WriteLine("Enter message to send");
-			//string sendMessage = Console.ReadLine().ToString();
 			int numberOfTimesRun = 0;
 			if (_client.State == WebSocketState.Open)
 			{
@@ -70,8 +68,6 @@ namespace King_Pong_App.WebSocket
 				numberOfTimesRun++;
 				Debug.WriteLine($"Send has run {numberOfTimesRun} times");
 			}
-			else
-				Start();
 
 		}
 
@@ -97,13 +93,14 @@ namespace King_Pong_App.WebSocket
 			Debug.WriteLine(serverMessage + " <-- Received from server");
 
 			// checking to see if the received data is a useful command
-			if (serverMessage != "Hi Server" && serverMessage != "Message Received") // this check should be changed to rpi messages
-			{
-				if (int.TryParse(serverMessage, out int message) || serverMessage == "ff")
-					MainWindow._gameSession.Command = serverMessage;
-				else
-					Debug.WriteLine($"Unknown message received from server: {serverMessage}");
-			}
+			//if (serverMessage != "Hi Server" && serverMessage != "Message Received") // this check should be changed to rpi messages
+			//{
+
+			if (int.TryParse(serverMessage, out int message) || serverMessage == "ff")
+				MainWindow._gameSession.Command = serverMessage;
+			else
+				Debug.WriteLine($"Unknown message received from server: {serverMessage}");
+			//}
 			numberOfTimesRun++;
 			Debug.WriteLine($"Receive has run {numberOfTimesRun} times");
 			Task.Delay(100);
