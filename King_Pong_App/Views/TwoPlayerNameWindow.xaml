@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:King_Pong_App.Views"
         mc:Ignorable="d"
+		WindowStyle="None"
         Title="TwoPlayerNameWindow" Height="550" Width="800">
 	<Window.Background>
 		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -13,6 +14,16 @@
 		</LinearGradientBrush>
 	</Window.Background>
 	<Grid>
+		<Grid.Background>
+			<ImageBrush 
+				ImageSource="\Images\KingPongLogo2.png"
+				Opacity="0.2"
+				>
+				<ImageBrush.RelativeTransform>
+					<ScaleTransform ScaleX=".6" ScaleY="1.05" CenterX="0.5" CenterY="0.5"/>
+				</ImageBrush.RelativeTransform>
+			</ImageBrush>
+		</Grid.Background>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="*"/>
@@ -31,25 +42,6 @@
 			FontSize="42"
 			Foreground="{StaticResource DarkModeForeground}"
 			Content="Vælg Holdnavn og Spillernavn"/>
-
-		<StackPanel 
-			Grid.Row="1"
-			Margin="20"
-			Width="200"
-			VerticalAlignment="Center"
-			Grid.RowSpan="2">
-			<TextBlock
-				Foreground="{StaticResource DarkModeForeground}"
-				Margin="0 0 0 5"
-				Text="Spillernavn"
-				FontSize="18"/>
-			<TextBox
-				Name="NameOfPlayer1"
-				Text="{Binding NamePlayer1}"
-				Foreground="Navy"
-				Background="Gray"
-				FontSize="15"/>
-		</StackPanel>
 		<StackPanel 
 			Grid.Row="0"
 			Grid.RowSpan="2"
@@ -67,6 +59,24 @@
 				Foreground="Navy"
 				FontSize="18"
 				Background="Gray"/>
+		</StackPanel>
+		<StackPanel 
+			Grid.Row="1"
+			Margin="20"
+			Width="200"
+			VerticalAlignment="Center"
+			Grid.RowSpan="2">
+			<TextBlock
+				Foreground="{StaticResource DarkModeForeground}"
+				Margin="0 0 0 5"
+				Text="Spillernavn"
+				FontSize="18"/>
+			<TextBox
+				Name="NameOfPlayer1"
+				Text="{Binding NamePlayer1}"
+				Foreground="Navy"
+				Background="Gray"
+				FontSize="15"/>
 		</StackPanel>
 		<StackPanel 
 			Grid.Row="0"
@@ -113,8 +123,8 @@
 			Click="ConfirmNames_Click"
 			Grid.Column="1"
 			Grid.Row="2"
-			Margin="80
-			0 0 0"
+			Margin="80 0 0 0"
+			IsDefault="True"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Bottom" 
 			Style="{StaticResource popUpWindowButton}"

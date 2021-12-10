@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:King_Pong_App" xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
+        xmlns:local="clr-namespace:King_Pong_App" 
+		xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
 		mc:Ignorable="d"
 		WindowState="Maximized"
-        Title="MainWindow" Height="1440" Width="2560">
+        Title="MainWindow" Height="1080" Width="1920">
 	<Window.Background>
 		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 			<GradientStop Color="#FF24292C" Offset="0"/>
@@ -37,25 +38,25 @@
 			<Grid Grid.Row="0"
 				  Grid.ColumnSpan="2">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="6.5*"/>
+					<ColumnDefinition Width="7.5*"/>
 					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="6.5*"/>
+					<ColumnDefinition Width="7.5*"/>
 				</Grid.ColumnDefinitions>
 				<TextBlock
 					x:Name="Team1Name"
 					Margin="0 0 20 0"
 					Grid.Column="0"
-					FontSize="60" 
+					FontSize="55" 
 					FontWeight="Bold" 
 					TextAlignment="Right"
 					VerticalAlignment="Center"
-					Foreground="{StaticResource DarkModeForeground}">
-				Team1
+					Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Team1.TeamName}">
 				</TextBlock>
 				<TextBlock
 					x:Name="ScoreCount"
 					Grid.Column="1"
-					FontSize="60" 
+					FontSize="55" 
 					FontWeight="Bold" 
 					TextAlignment="Center"
 					VerticalAlignment="Center"
@@ -66,17 +67,16 @@
 					x:Name="Team2Name"
 					Margin="20 0 0 0"
 					Grid.Column="2"
-					FontSize="60" 
+					FontSize="55" 
 					FontWeight="Bold" 
 					TextAlignment="Left"
 					VerticalAlignment="Center"
-					Foreground="{StaticResource DarkModeForeground}">
-				Team2
+					Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Team2.TeamName}">
 				</TextBlock>
 			</Grid>
 			<Grid 
-				Grid.Row="1"
-				DataContext="{StaticResource teams}">
+				Grid.Row="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="0.25*"/>
@@ -89,8 +89,8 @@
 					FontWeight="Bold" 
 					TextAlignment="Right"
 					VerticalAlignment="Center"
-					Foreground="{StaticResource DarkModeForeground}">
-					Team1Cups
+					Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Team1.CupsRemaining, UpdateSourceTrigger=PropertyChanged}">
 				</TextBlock>
 				<TextBlock
 					Grid.Column="1"
@@ -108,8 +108,9 @@
 					FontWeight="Bold" 
 					TextAlignment="Left"
 					VerticalAlignment="Center"
-					Foreground="{StaticResource DarkModeForeground}">
-					Team2Cups
+					Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Team2.CupsRemaining}">
+					
 				</TextBlock>
 			</Grid>
 			<TextBlock
@@ -119,8 +120,9 @@
                 FontWeight="Bold" 
                 TextAlignment="Center"
 				VerticalAlignment="Center"
-                Foreground="{StaticResource DarkModeForeground}">
-				Magnex's Tur
+                Foreground="{StaticResource DarkModeForeground}"
+				Text="{Binding Current[currentPlayer].Name, UpdateSourceTrigger=PropertyChanged}">
+				
 			</TextBlock>
 		</Grid>
 		<Grid 
@@ -135,8 +137,7 @@
 				<RowDefinition Height="1.5*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<Grid Grid.Row="0" Grid.Column="0" 
-				  DataContext="{StaticResource backFourCups}">
+			<Grid Grid.Row="0" Grid.Column="0">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
@@ -153,71 +154,80 @@
 					x:Name="ellipse1_10"
                     Grid.Row="0" 
                     Grid.Column="3" 
-                    Style="{StaticResource cupCircles}" 
+                    Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup1_10.Color}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup1_10.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse
 					x:Name="ellipse1_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup1_9.Color}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup1_9.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
 					x:Name="ellipse1_8"
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}" 
+                    Fill="{Binding Cup1_8.Color}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup1_8.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
 					x:Name="ellipse1_7"
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Style="{StaticResource cupCircles}" 
+                    Fill="{Binding Cup1_7.Color}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup1_7.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
 					x:Name="ellipse1_6"
 					Opacity="90"
                     Grid.Row="1" 
                     Grid.Column="2"
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup1_6.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
 					x:Name="ellipse1_5"
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}" 
+					Fill="{Binding Cup1_5.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
 					x:Name="ellipse1_4"
                     Grid.Row="1" 
                     Grid.Column="0" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup1_4.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
 					x:Name="ellipse1_3"
                     Grid.Row="2" 
                     Grid.Column="2" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup1_3.Color}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="ellipse1_2"
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup1_2.Color}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse  
 					x:Name="ellipse1_1"
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup1_1.Color}"
                     Grid.ColumnSpan="2"/>
 
 			</Grid>
-			<Grid Grid.Row="0" Grid.Column="1"
-				  DataContext="{StaticResource backFourCups}">
+			<Grid Grid.Row="0" Grid.Column="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
@@ -230,45 +240,51 @@
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
-				<Ellipse 
+				<Ellipse
 					x:Name="ellipse2_10"
                     Grid.Row="0" 
-                    Grid.Column="3" 
+                    Grid.Column="3"
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup2_10.Color}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup2_10.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse
 					x:Name="ellipse2_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
                     Style="{StaticResource cupCircles}" 
+					Fill="{Binding Cup2_9.Color}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup2_9.Visibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
 					x:Name="ellipse2_8"
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup2_8.Color}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup2_8.Visibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
 					x:Name="ellipse2_7"
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup2_7.Color}"
                     Grid.ColumnSpan="1"
-					Visibility="{Binding EllipseVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+					Visibility="{Binding Cup2_7.Visibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
 					x:Name="ellipse2_6"
                     Grid.Row="1" 
                     Grid.Column="2"
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup2_6.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse
 					x:Name="ellipse2_5"
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup2_5.Color}"
                     Grid.ColumnSpan="2">
 				</Ellipse>
 				<Ellipse 
@@ -276,24 +292,28 @@
                     Grid.Row="1" 
                     Grid.Column="0" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup2_4.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
 					x:Name="ellipse2_3"
                     Grid.Row="2" 
                     Grid.Column="2" 
                     Style="{StaticResource cupCircles}" 
+					Fill="{Binding Cup2_3.Color}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="ellipse2_2"
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
+					Fill="{Binding Cup2_2.Color}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
 					x:Name="ellipse2_1"
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}" 
+					Fill="{Binding Cup2_1.Color}"
                     Grid.ColumnSpan="2"/>
 			</Grid>
 			<Grid Grid.Row="1">
@@ -302,45 +322,44 @@
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
 				<StackPanel
-				DataContext="{StaticResource playerInfo}"
                 Grid.Column="0" 
                 Width="Auto"
 				VerticalAlignment="Center">
-
 					<TextBlock
-                    x:Name="Player1_1"
-                    TextAlignment="Center" 
-                    Margin ="0 8 0 8" 
-                    FontSize="45"
-                    Foreground="{StaticResource DarkModeForeground}">
-					</TextBlock>
+						x:Name="Player1_1"
+						TextAlignment="Center" 
+						Margin ="0 8 0 8" 
+						FontSize="55"
+						Foreground="{StaticResource DarkModeForeground}"
+						Text="{Binding Player1.PlayerName}"/>
 					<TextBlock
                     x:Name="Player1_2" 
                     TextAlignment="Center"  
 					Margin ="0 8 0 8" 
-                    FontSize="45"
-                    Foreground="{StaticResource DarkModeForeground}">
-					</TextBlock>
+                    FontSize="55"
+                    Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Player2.PlayerName}"/>
 				</StackPanel>
 				<StackPanel
                 Grid.Column="1" 
                 Width="Auto"
 				VerticalAlignment="Center">
-
 					<TextBlock
                     x:Name="Player1_1_Hits"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45"
-                    Foreground="{StaticResource DarkModeForeground}">
-					</TextBlock>
+                    FontSize="55"
+					FontWeight="Bold"	
+                    Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Player1.NumberOfHits}"/>
 					<TextBlock
                     x:Name="Player1_2_Hits"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45"
-                    Foreground="{StaticResource DarkModeForeground}">
-					</TextBlock>
+                    FontSize="55"
+					FontWeight="Bold"	
+                    Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Player2.NumberOfHits}"/>
 				</StackPanel>
 			</Grid>
 			<Grid Grid.Row="1"
@@ -349,8 +368,7 @@
 					<ColumnDefinition Width="5*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<StackPanel 
-				DataContext="{StaticResource playerInfo}"
+				<StackPanel
                 Grid.Row="1" 
                 Grid.Column="0"
 				VerticalAlignment="Center">
@@ -358,19 +376,18 @@
                     x:Name="Player2_1"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45" 
-                    Foreground="{StaticResource DarkModeForeground}">
-					</TextBlock>
+                    FontSize="55" 
+                    Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Player3.PlayerName}"/>
 					<TextBlock 
                     x:Name="Player2_2" 
                     TextAlignment="Center" 
                     Margin ="0 8 0 8"
-                    FontSize="45" 
-                    Foreground="{StaticResource DarkModeForeground}">
-					</TextBlock>
+                    FontSize="55" 
+                    Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Player4.PlayerName}"/>
 				</StackPanel>
-				<StackPanel 
-				DataContext="{StaticResource playerInfo}"
+				<StackPanel
                 Grid.Row="1" 
                 Grid.Column="1"
 				VerticalAlignment="Center">
@@ -378,27 +395,41 @@
                     x:Name="Player2_1_Hits"
                     TextAlignment="Center" 
                     Margin ="0 8 0 8" 
-                    FontSize="45" 
-                    Foreground="{StaticResource DarkModeForeground}">
-					</TextBlock>
+                    FontSize="55"
+					FontWeight="Bold" 
+                    Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Player3.NumberOfHits}"/>
 					<TextBlock 
                     x:Name="Player2_2_Hits" 
                     TextAlignment="Center" 
                     Margin ="0 8 0 8"
-                    FontSize="45" 
-                    Foreground="{StaticResource DarkModeForeground}">
-					</TextBlock>
+                    FontSize="55"
+					FontWeight="Bold"
+                    Foreground="{StaticResource DarkModeForeground}"
+					Text="{Binding Player4.NumberOfHits}"/>
 				</StackPanel>
 			</Grid>
 		</Grid>
-		<Grid Margin="1,1,1,2"/>
-		<StackPanel
+		<Grid Margin="1,60,1,2">
+			<Grid.Background>
+				<ImageBrush 
+					ImageSource="\Images\KingPongLogo2.png"
+					Opacity="0.07"
+					>
+					<ImageBrush.RelativeTransform>
+						<ScaleTransform ScaleX=".45" ScaleY=".7" CenterX=".45" />
+					</ImageBrush.RelativeTransform>
+				</ImageBrush>
+			</Grid.Background>
+		</Grid>
+			<StackPanel
 			Margin="0,4,4,0"
 			Grid.Column="1"
 			Grid.ColumnSpan="2"
 			Orientation="Horizontal"
 			HorizontalAlignment="Right"
 			VerticalAlignment="Top">
+			
 			<Button
 				Style="{StaticResource defaultDarkModeButton}"
 				Click="Nyt_Spil_Click"
@@ -420,16 +451,6 @@
                         Opacity="0.15"/>
 				</Button.Background>
 			</Button>
-			<Button
-				Style="{StaticResource defaultDarkModeButton}"
-				Click="FAQ_Click" 
-				Content="FAQ" >
-				<Button.Background>
-					<SolidColorBrush 
-						Color="Black" 
-						Opacity="0.15"/>
-				</Button.Background>
-			</Button>
 		</StackPanel>
 		<Button 
 			Grid.Column="0"
@@ -446,12 +467,31 @@
 			</Button.Background>
 		</Button>
 		<Rectangle 
-			x:Name="TurnIndictor1"
+			x:Name="TurnIndicator2"
             Grid.Column="2" 
-            Fill="Green" Margin="1,330,0,0" Grid.RowSpan="2"/>
+            Fill="Green" 
+			Margin="1,330,0,0" 
+			Grid.RowSpan="2"
+			Visibility="Hidden"/>
 		<Rectangle 
-			x:Name="TurnIndictor2"
+			x:Name="TurnIndicator1"
             Grid.Column="0" 
-            Fill="Green" Margin="0,320,0,0" Grid.RowSpan="2"/>
+            Fill="Green" 
+			Margin="0,320,0,0" 
+			Grid.RowSpan="2"
+			Visibility="Hidden"/>
+		<Grid
+			Grid.Column="2" Margin="1 60 1 2">
+			<Grid.Background>
+				<ImageBrush 
+				ImageSource="\Images\KingPongLogo2.png"
+				Opacity="0.07"
+				>
+					<ImageBrush.RelativeTransform>
+						<ScaleTransform ScaleX=".45" ScaleY=".7" CenterX=".5"/>
+					</ImageBrush.RelativeTransform>
+				</ImageBrush>
+			</Grid.Background>
+		</Grid>
 	</Grid>
 </Window>

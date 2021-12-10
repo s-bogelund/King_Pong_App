@@ -1,8 +1,11 @@
 ﻿using King_Pong_App.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace King_Pong_App.ViewModels
@@ -11,21 +14,27 @@ namespace King_Pong_App.ViewModels
 	{
 		public TeamViewModel()
 		{
-
 		}
 
-		public string CurrentScore()
-		{
-			return $"{App.team1.CupsRemaining} - {App.team2.CupsRemaining}";
-		}
-
-		public void AddMembers(params PlayerModel[] players)
+		public List<PlayerViewModel> Roster = new();
+		public void AddMembers(params PlayerViewModel[] players)
 		{
 			foreach (var player in players)
 			{
-				TeamMembers.Add(player);
+				Roster.Add(player);
 			}
-			
 		}
+
+		public string PrintInfo()
+		{
+			string playerStats = string.Empty;
+
+			List<PlayerViewModel> sortedList = Roster.OrderByDescending(p => p.NumberOfHits).ToList();
+			sortedList.ForEach(p => playerStats += p.PrintInfo());
+
+			return playerStats;
+		}
+
+
 	}
 }

@@ -7,68 +7,59 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace King_Pong_App.ViewModels
 {
 	public class EllipseViewModel : INotifyPropertyChanged
 	{
-
-
-		private Visibility ellipseVisibility;
-		public Visibility EllipseVisibility
+		private Visibility visibility;
+		public Visibility Visibility
 		{
-			get => ellipseVisibility;
+			get => visibility;
 			set
 			{
-				ellipseVisibility = Visibility.Visible;
-				OnPropertyChanged("EllipseVisibility");
+				visibility = value;
+				OnPropertyChanged(nameof(Visibility));
 			}
 		}
 
 		public EllipseViewModel()
 		{
-			ellipseVisibility = Visibility.Visible;
-			ellipseColor = Brushes.Green;
+			visibility = Visibility.Visible;
+			color = Brushes.Green;
 		}
 
-		public EllipseViewModel(Visibility ellipsevisibility)
+		public void HideEllipse()
 		{
-			ellipseVisibility = ellipsevisibility;
-		}
-		public Visibility HideEllipse(Visibility visibility)
-		{
-			ellipseVisibility = Visibility.Hidden;
-			OnPropertyChanged("EllipseVisibility");
-			return ellipseVisibility;
+			Visibility = Visibility.Hidden;
 		}
 
-		public Visibility ShowEllipse(Visibility visibility)
+		public void ShowEllipse()
 		{
-			ellipseVisibility = Visibility.Visible;
-			OnPropertyChanged("EllipseVisibility");
-			return ellipseVisibility;
+			Visibility = Visibility.Visible;
 		}
-		private SolidColorBrush ellipseColor;
+		private SolidColorBrush color;
 
-		public SolidColorBrush EllipseColor
+		public SolidColorBrush Color
 		{
-			get => ellipseColor;
+			get => color;
 			set
 			{
-				ellipseColor = value;
-				OnPropertyChanged("EllipseColorChanged");
+				color = value;
+				OnPropertyChanged("Color");
 			}
 		}
 
-		public SolidColorBrush EllipseColorChanger(SolidColorBrush color)
-		{
-			OnPropertyChanged("EllipseColorChanged");
+		//public SolidColorBrush EllipseColorChanger(Ellipse ellipse)
+		//{
+		//	OnPropertyChanged("EllipseColorChanged");
 
-			if (color == Brushes.Green)
-				return Brushes.Red;
-			else
-				return Brushes.Green;
-		}
+		//	if (ellipse.Fill == Brushes.Green)
+		//		return Brushes.Red;
+		//	else
+		//		return Brushes.Green;
+		//}
 
 
 		public event PropertyChangedEventHandler PropertyChanged;

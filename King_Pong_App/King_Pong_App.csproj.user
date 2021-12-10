@@ -13,6 +13,15 @@
     <Compile Update="Views\FourPlayerNameWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\GameWonWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\HitAnnounceWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\IntroRoundWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\PlayerNumberSelectWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +37,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\FourPlayerNameWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GameWonWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\HitAnnounceWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\IntroRoundWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PlayerNumberSelectWindow.xaml">

@@ -27,10 +27,13 @@ namespace King_Pong_App.Views
 		private void ConfirmPlayers_Click(object sender, RoutedEventArgs e)
 		{
 			if (!(bool)_1v1_radiobutton.IsChecked && !(bool)_2v2_radioButton.IsChecked)
-				MessageBox.Show("Du skal vælge, hvor mange spillere hvert hold skal have 😘");
+			{
+				MessageBox.Show("Du skal lige vælge, hvor mange spillere hvert hold skal have 😘");
+				return;
+			}
 
-			App.teamSize = (bool)_1v1_radiobutton.IsChecked ? 1 : 2;
-
+			MainWindow._gameSession.teamSize = (bool)_1v1_radiobutton.IsChecked ? 1 : 2;
+				
 			Close();
 		}
 	}

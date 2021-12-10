@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace King_Pong_App
 {
@@ -15,20 +16,6 @@ namespace King_Pong_App
 	/// </summary>
 	public partial class App : Application
 	{
-		public static PlayerViewModel player1 = new("1", 1, 1);
-		public static PlayerViewModel player2 = new("2", 2, 1);
-		public static PlayerViewModel player3 = new("3", 3, 2);
-		public static PlayerViewModel player4 = new("4", 4, 2);
-
-		public static TeamViewModel team1 = new();
-		public static TeamViewModel team2 = new();
-
-		public static string CurrentScore()
-		{
-			return $"{team1.CupsRemaining} - {team2.CupsRemaining}";
-		}
-
-		public static int numberOfCups = 10;
-		public static int teamSize = 2;
+		
 	}
 }
