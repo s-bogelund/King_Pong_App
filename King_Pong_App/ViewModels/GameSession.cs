@@ -47,8 +47,8 @@ namespace King_Pong_App.ViewModels
 			Cup2_9 = new();
 			Cup2_10 = new();
 
-			backFourCups = new() { Cup1_7, Cup1_8, Cup1_9, Cup1_10, 
-									Cup2_7, Cup2_8, Cup2_9, Cup2_10 };
+			backFourCups = new() { Cup1_7, Cup1_8, Cup1_9, Cup1_10,
+				Cup2_7, Cup2_8, Cup2_9, Cup2_10 };
 		}
 		public List<EllipseViewModel> backFourCups;
 
@@ -56,23 +56,34 @@ namespace King_Pong_App.ViewModels
 		public int numberOfCups = 10;
 
 		[JsonProperty]
-		public int teamSize = 2;
-
+		public int teamSize = 0;
 		public int currentPlayer = 0;
+		public bool cupsChosen = false;
+		public bool playersCreated = false;
 		public bool gameInProgress = false;
-
+		public bool gameOver;
 		private bool starterTeamDecided;
 
 		public bool StarterTeamDecided
 		{
 			get { return starterTeamDecided; }
-			set 
-			{ 
+			set
+			{
 				starterTeamDecided = value;
 				StarterTeamFound?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
+		public void ResetGameInfo()
+		{
+			teamSize = 0;
+			currentPlayer = 0;
+			cupsChosen = false;
+			playersCreated = false;
+			gameInProgress = false;
+			gameOver = false;
+		}
+	
 
 		public void TurnOver()
 		{
@@ -97,7 +108,6 @@ namespace King_Pong_App.ViewModels
 
 		private TeamViewModel current;
 		
-		public bool gameOver;
 
 		public TeamViewModel Current
 		{

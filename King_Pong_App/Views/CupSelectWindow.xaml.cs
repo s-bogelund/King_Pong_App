@@ -36,7 +36,7 @@ namespace King_Pong_App.Views
 
 			MainWindow._gameSession.Team1.CupsRemaining = MainWindow._gameSession.numberOfCups;
 			MainWindow._gameSession.Team2.CupsRemaining = MainWindow._gameSession.numberOfCups;
-			
+			MainWindow._gameSession.cupsChosen = true;
 			Close();
 		}
 

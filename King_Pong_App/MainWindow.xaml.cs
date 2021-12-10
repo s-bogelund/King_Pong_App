@@ -25,7 +25,7 @@ namespace King_Pong_App
 {
 	public partial class MainWindow : Window
 	{
-		public Uri serverUri = new Uri("ws://10.9.8:9000/");
+		public Uri serverUri = new Uri("ws://10.9.8.2:9000/");
 		public ClientWebSocket socket = new();
 		public EllipseViewModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
 		public static GameSession _gameSession;
@@ -51,8 +51,11 @@ namespace King_Pong_App
 			}
 
 			if (_gameSession.Command.ToLower() == "ff")
+			{
 				Forfeit();
-			
+				return;
+			}
+
 			// this should never be reached
 			Debug.WriteLine($"Command received has unknown value: {_gameSession.Command}");
 		}
@@ -92,6 +95,7 @@ namespace King_Pong_App
 
 			
 			_gameSession.Current = number < _gameSession.numberOfCups ? _gameSession.Team1 : _gameSession.Team2;
+			HitWindow();
 			_gameSession.StarterTeamDecided = true;
 			UpdateTurnIndicator();
 		}
@@ -110,6 +114,7 @@ namespace King_Pong_App
 				return;
 			}
 			#endregion
+			_gameSession.ResetGameInfo();
 			CupSelection();
 			NumberOfPlayersSelection();
 
@@ -117,12 +122,16 @@ namespace King_Pong_App
 				FourPlayerGame();
 			else
 				TwoPlayerGame();
+
 			IntroRound();
 			//UpdateGameBoard();
 		}
 
 		public void TwoPlayerGame()
 		{
+			if (_gameSession.teamSize == 0)
+				return;
+
 			TwoPlayerNameWindow nameSelect2 = new();
 			nameSelect2.DataContext = _gameSession;
 			nameSelect2.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -135,6 +144,9 @@ namespace King_Pong_App
 
 		public void FourPlayerGame()
 		{
+			if (_gameSession.teamSize == 0)
+				return;
+
 			FourPlayerNameWindow nameSelect4 = new();
 			nameSelect4.DataContext = _gameSession;
 			nameSelect4.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -144,15 +156,28 @@ namespace King_Pong_App
 
 		public void IntroRound()
 		{
+			if (!_gameSession.playersCreated)
+				return;
+
 			IntroRoundWindow intro = new();
 			intro.DataContext = _gameSession;
 			intro.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			intro.Owner = this;
 			intro.ShowDialog();
 		}
-
+		public void HitWindow()
+		{
+			HitAnnounceWindow hit = new();
+			hit.DataContext = _gameSession;
+			hit.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			hit.Owner = this;
+			hit.ShowDialog();
+		}
 		public void NumberOfPlayersSelection()
 		{
+			if (!_gameSession.cupsChosen)
+				return;
+
 			PlayerNumberSelectWindow playerNumberSelectWindow = new();
 			playerNumberSelectWindow.DataContext = this.DataContext;
 			playerNumberSelectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -175,7 +200,11 @@ namespace King_Pong_App
 
 		public void HitEvent(int number)
 		{
-			List<EllipseViewModel> allTeam1Cups = new()
+			// to avoid crashes
+			if (_gameSession.Team1.CupsRemaining <= 0 || _gameSession.Team2.CupsRemaining <= 0)
+				return;
+
+				List<EllipseViewModel> allTeam1Cups = new()
 			{
 				_gameSession.Cup1_1,
 				_gameSession.Cup1_2,
@@ -226,7 +255,8 @@ namespace King_Pong_App
 				_gameSession.Team1.CupsRemaining--;
 			}
 			_gameSession.Current.Roster[_gameSession.currentPlayer].AddHit();
-
+			if (_gameSession.Team1.CupsRemaining > 0 && _gameSession.Team2.CupsRemaining > 0)
+				HitWindow();
 			NextTurn();
 		}
 

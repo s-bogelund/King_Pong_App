@@ -46,6 +46,7 @@ namespace King_Pong_App.Views
 			FourPlayerNameAssignment();
 			SendInfoToServer();
 			MainWindow._gameSession.gameInProgress = true;
+			MainWindow._gameSession.playersCreated = true;
 
 			Close();
 		}
