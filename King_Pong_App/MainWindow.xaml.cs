@@ -276,7 +276,20 @@ namespace King_Pong_App
 				
 			UpdateGameBoard();
 		}
-
+		public void GameOver()
+		{
+			GameWonWindow gameWon = new();
+			gameWon.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			gameWon.Owner = this;
+			gameWon.ShowDialog();
+			_gameSession.gameInProgress = false;
+			_gameSession.gameOver = true;
+		}
+		public void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow
+		{
+			_gameSession.TurnOver();
+			GameOver();
+		}
 		public void UpdateGameBoard()
 		{
 			UpdateTurnText();
@@ -313,45 +326,33 @@ namespace King_Pong_App
 								Bemærk at det er holdet som der har turen, som giver op");
 		}
 
-		private void NextTurn_Click(object sender, RoutedEventArgs e)
-		{
-			NextTurn();
-		}
+		//private void NextTurn_Click(object sender, RoutedEventArgs e)
+		//{
+		//	NextTurn();
+		//}
 
-		private void HitEvent_Click(object sender, RoutedEventArgs e)
-		{
-			if (!_gameSession.StarterTeamDecided == true)
-			{
-				MessageBox.Show("Det er endnu ikke afgjort, hvem der starter endnu. Tryk AUTO DECIDE STARTER");
-				return;
-			}
+		//private void HitEvent_Click(object sender, RoutedEventArgs e)
+		//{
+		//	if (!_gameSession.StarterTeamDecided == true)
+		//	{
+		//		MessageBox.Show("Det er endnu ikke afgjort, hvem der starter endnu. Tryk AUTO DECIDE STARTER");
+		//		return;
+		//	}
 
-			if (_gameSession.Current == _gameSession.Team1)
-				HitEvent(_gameSession.Team2.CupsRemaining - 1 + _gameSession.numberOfCups);
-			else
-				HitEvent(_gameSession.Team1.CupsRemaining - 1);
-		}
-		public void GameOver()
-		{
-			GameWonWindow gameWon = new();
-			gameWon.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-			gameWon.Owner = this;
-			gameWon.ShowDialog();
-			_gameSession.gameInProgress = false;
-			_gameSession.gameOver = true;
-		}
-		private void AutomaticWin_Click(object sender, RoutedEventArgs e)
-		{
-			client.Send("AssHatFace");
-			_gameSession.Command= "1";
-			_gameSession.StarterTeamDecided = true;  // to be able to test
-			//_gameSession.Player1.PlayerName = _gameSession.Command;
-		}
+		//	if (_gameSession.Current == _gameSession.Team1)
+		//		HitEvent(_gameSession.Team2.CupsRemaining - 1 + _gameSession.numberOfCups);
+		//	else
+		//		HitEvent(_gameSession.Team1.CupsRemaining - 1);
+		//}
+		
+		//private void AutomaticWin_Click(object sender, RoutedEventArgs e)
+		//{
+		//	client.Send("AssHatFace");
+		//	_gameSession.Command= "1";
+		//	_gameSession.StarterTeamDecided = true;  // to be able to test
+		//	//_gameSession.Player1.PlayerName = _gameSession.Command;
+		//}
 
-		public void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow
-		{
-			_gameSession.TurnOver();
-			GameOver();
-		}
+		
 	}
 }

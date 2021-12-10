@@ -429,39 +429,7 @@
 			Orientation="Horizontal"
 			HorizontalAlignment="Right"
 			VerticalAlignment="Top">
-			<Button
-				Style="{StaticResource defaultDarkModeButton}"
-				Click="AutomaticWin_Click" 
-				Content="AUTO STARTER DECIDE"
-				Width="290">
-				<Button.Background>
-					<SolidColorBrush 
-                        Color="Black" 
-                        Opacity="0.15"/>
-				</Button.Background>
-			</Button>
-			<Button
-				Style="{StaticResource defaultDarkModeButton}"
-				Click="HitEvent_Click" 
-				Content="HIT EVENT TEST"
-				Width="260">
-				<Button.Background>
-					<SolidColorBrush 
-                        Color="Black" 
-                        Opacity="0.15"/>
-				</Button.Background>
-			</Button>
-			<Button
-				Style="{StaticResource defaultDarkModeButton}"
-				Click="NextTurn_Click" 
-				Content="NEXT TURN TEST"
-				Width="260">
-				<Button.Background>
-					<SolidColorBrush 
-                        Color="Black" 
-                        Opacity="0.15"/>
-				</Button.Background>
-			</Button>
+			
 			<Button
 				Style="{StaticResource defaultDarkModeButton}"
 				Click="Nyt_Spil_Click"
