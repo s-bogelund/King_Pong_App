@@ -20,13 +20,19 @@ namespace King_Pong_App.Views
 	/// </summary>
 	public partial class GameWonWindow : Window
 	{
+		/// <summary>
+		/// When the window open methods are called so 
+		/// that game info is shown
+		/// </summary>
 		public GameWonWindow()
 		{
 			InitializeComponent();
 			DisplayWinningTeam();
 			PlayerStats();
 		}
-
+		/// <summary>
+		/// Displays the relevant stats for the game on window
+		/// </summary>
 		public void DisplayWinningTeam()
 		{
 			string losingTeamName = MainWindow._gameSession.Current == MainWindow._gameSession.Team1 ? MainWindow._gameSession.Team2.TeamName : MainWindow._gameSession.Team1.TeamName;
@@ -35,7 +41,9 @@ namespace King_Pong_App.Views
 			LosingTeamInfo.Text = $"{losingTeamName} Stats";
 			
 		}
-
+		/// <summary>
+		/// Calls the PrintInfo() method for each team
+		/// </summary>
 		public void PlayerStats()
 		{
 			WinningPlayerStats.Text = MainWindow._gameSession.Current.PrintInfo();

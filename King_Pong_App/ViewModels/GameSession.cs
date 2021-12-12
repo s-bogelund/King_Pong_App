@@ -15,6 +15,10 @@ namespace King_Pong_App.ViewModels
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GameSession : INotifyPropertyChanged
 	{
+		/// <summary>
+		/// Default constructor that initializes all the game elements needed for the game.
+		/// Is called immediately when the application starts.
+		/// </summary>
 		public GameSession()
 		{
 			Player1 = new("Player1");
@@ -73,7 +77,11 @@ namespace King_Pong_App.ViewModels
 				StarterTeamFound?.Invoke(this, EventArgs.Empty);
 			}
 		}
-
+		/// <summary>
+		/// Resets all the game info to their default values.
+		/// This is called if the new game process is disrupted by 
+		/// the user closing a window during setup of a new game
+		/// </summary>
 		public void ResetGameInfo()
 		{
 			teamSize = 0;
@@ -84,7 +92,9 @@ namespace King_Pong_App.ViewModels
 			gameOver = false;
 		}
 	
-
+		/// <summary>
+		/// Changes which team has the turn
+		/// </summary>
 		public void TurnOver()
 		{
 			Current = Current == Team1 ? Team2 : Team1;
@@ -92,6 +102,10 @@ namespace King_Pong_App.ViewModels
 		}
 
 		private string command;
+		/// <summary>
+		/// Property which value depends on what is received from the server.
+		/// It's this property that is used for calling methods in the game loop.
+		/// </summary>
 		public string Command
 		{
 			get { return command; }
@@ -101,14 +115,22 @@ namespace King_Pong_App.ViewModels
 				CommandReceived?.Invoke(this, EventArgs.Empty);
 			}
 		}
-
+		/// <summary>
+		/// Event handler that tracks whether the starter team has been found
+		/// </summary>
 		public event EventHandler StarterTeamFound;
 
+		/// <summary>
+		/// Event handler for when a command is received from the server
+		/// </summary>
 		public event EventHandler CommandReceived;
 
 		private TeamViewModel current;
 		
-
+		/// <summary>
+		/// Tracks which team's turn it currently is. 
+		/// Also implements INotifyPropertyChanged.
+		/// </summary>
 		public TeamViewModel Current
 		{
 			get { return current; }
@@ -158,6 +180,10 @@ namespace King_Pong_App.ViewModels
 		public EllipseViewModel Cup2_10 { get; set; }
 		#endregion
 		public event PropertyChangedEventHandler PropertyChanged;
+		/// <summary>
+		/// The implementation of INotifyPropertyChanged
+		/// </summary>
+		/// <param name="propertyName"></param>
 		public virtual void OnPropertyChanged(string propertyName)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

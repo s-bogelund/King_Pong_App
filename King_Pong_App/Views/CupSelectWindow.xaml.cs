@@ -24,6 +24,12 @@ namespace King_Pong_App.Views
 		{
 			InitializeComponent();
 		}
+		/// <summary>
+		/// Event handler that sets the number of cups of a game 
+		/// depending on which radiobutton is checked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void ConfirmCups_Click(object sender, RoutedEventArgs e)
 		{
 			if (!(bool)TenCupButton.IsChecked && !(bool)SixCupButton.IsChecked)

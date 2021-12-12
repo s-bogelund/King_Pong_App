@@ -25,7 +25,12 @@ namespace King_Pong_App.Views
 		{
 			InitializeComponent();
 		}
-
+		/// <summary>
+		/// When a user pushes the 'Bekræft' button, names are 
+		/// assigned and relevant information is sent to the server
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void ConfirmNames_Click(object sender, RoutedEventArgs e)
 		{
 			#region Control statements
@@ -50,7 +55,10 @@ namespace King_Pong_App.Views
 
 			Close();
 		}
-
+		/// <summary>
+		/// Updates the names of the relevant GameSession properties 
+		/// based on what is written in testboxes
+		/// </summary>
 		public void FourPlayerNameAssignment()
 		{
 			MainWindow._gameSession.Player1.PlayerName = Player1Name.Text;
@@ -64,46 +72,17 @@ namespace King_Pong_App.Views
 			MainWindow._gameSession.Team1.AddMembers(MainWindow._gameSession.Player1, MainWindow._gameSession.Player2);
 			MainWindow._gameSession.Team2.AddMembers(MainWindow._gameSession.Player3, MainWindow._gameSession.Player4);
 		}
-
+		/// <summary>
+		/// Sends relevant GameSession info to the server in Json format
+		/// </summary>
 		public void SendInfoToServer()
 		{
 			var serialized = JsonConvert.SerializeObject(MainWindow._gameSession, Formatting.Indented);
 
-
-			//Debug.WriteLine(serialized);
-			//ugly quick json fix
-			serialized = ReplaceFirst(serialized, "playerName", "player1");
-			serialized = ReplaceFirst(serialized, "playerName", "player2");
-			serialized = ReplaceFirst(serialized, "playerName", "player3");
-			serialized = ReplaceFirst(serialized, "playerName", "player4");
-			
-			MainWindow.client.Send(JsonFixer());
-			Debug.WriteLine(JsonFixer());
+			MainWindow.client.Send((serialized));
+			Debug.WriteLine(serialized);
 		}
 
-		// quick fix to issues with decoding json on server
-		public string ReplaceFirst(string text, string search, string replace)
-		{
-			int pos = text.IndexOf(search);
-			if (pos < 0)
-			{
-				return text;
-			}
-			return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
-		}
-
-		public string JsonFixer()
-		{
-			string team1 = @$"""team1"": ""{MainWindow._gameSession.Team1.TeamName}""," + "\n";
-			string team2 = @$"""team2"": ""{MainWindow._gameSession.Team2.TeamName}""," + "\n";
-			string player1 = @$"""player1"": ""{MainWindow._gameSession.Player1.PlayerName}""," + "\n";
-			string player2 = @$"""player2"": ""{MainWindow._gameSession.Player2.PlayerName}""," + "\n";
-			string player3 = @$"""player3"": ""{MainWindow._gameSession.Player3.PlayerName}""," + "\n";
-			string player4 = @$"""player4"": ""{MainWindow._gameSession.Player4.PlayerName}""" + "\n";
-
-			return "[\n" + team1 + team2 + player1 + player2 + player3 + player4 + "]";
-
-
-		}
+		
 	}
 }

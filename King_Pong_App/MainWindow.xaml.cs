@@ -31,6 +31,10 @@ namespace King_Pong_App
 		public static GameSession _gameSession;
 		public static Client client;
 
+		/// <summary>
+		/// When the application is launched this is where the Datacontext is defined.
+		/// It also initializes a websocket client and starts it.
+		/// </summary>
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -41,6 +45,12 @@ namespace King_Pong_App
 			_gameSession.CommandReceived += _gameSession_CommandReceived;
 		}
 
+		/// <summary>
+		/// Event handler for when a command is received from the server. 
+		/// This is where everything is put together and the game is controlled.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void _gameSession_CommandReceived(object sender, EventArgs e)
 		{
 			// if the received command is an integer
@@ -60,6 +70,11 @@ namespace King_Pong_App
 			Debug.WriteLine($"Command received has unknown value: {_gameSession.Command}");
 		}
 
+		/// <summary>
+		/// The number received corresponds to a certain cup and the actions taken depends on 
+		/// whether it is the pregame or primary game mode
+		/// </summary>
+		/// <param name="number"></param>
 		public void HitOrMiss(int number)
 		{
 			if (number < 0 || number > _gameSession.numberOfCups * 2) //checking for invalid numbers
@@ -73,7 +88,10 @@ namespace King_Pong_App
 			else
 				DecideStarter(number);
 		}
-
+		/// <summary>
+		/// The numbers 1-20 corresponds to a cup, and if number = 0, it is a miss and the next turn begins
+		/// </summary>
+		/// <param name="number"></param>
 		private void NormalGameLoop(int number)
 		{
 			// number is 0, it was a miss, otherwise a cup corresponding to the number received will be marked hit
@@ -83,12 +101,16 @@ namespace King_Pong_App
 				HitEvent(number - 1);
 		}
 
+		/// <summary>
+		/// Decides which team won the start. Number corresponds to the cup what was hit
+		/// </summary>
+		/// <param name="number"></param>
 		private void DecideStarter(int number)
 		{
 			// checking if the number if valid for deciding starter team
-			if (number < 0 || number > _gameSession.numberOfCups * 2) 
+			if (number < 1 || number > _gameSession.numberOfCups * 2) 
 			{
-				Debug.WriteLine($"Only command values between 0 and {_gameSession.numberOfCups * 2} accepted");
+				Debug.WriteLine($"Only command values between 1 and {_gameSession.numberOfCups * 2} accepted");
 				Debug.WriteLine($"The command received was: {_gameSession.Command}");
 				return;
 			}
@@ -100,6 +122,12 @@ namespace King_Pong_App
 			UpdateTurnIndicator();
 		}
 
+		/// <summary>
+		/// Event handler that handles the entire process of beginning 
+		/// a new game through to the end of the intro round.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Nyt_Spil_Click(object sender, RoutedEventArgs e)
 		{
 			#region Control Statements
@@ -124,9 +152,12 @@ namespace King_Pong_App
 				TwoPlayerGame();
 
 			IntroRound();
-			//UpdateGameBoard();
 		}
 
+		/// <summary>
+		/// Method is called if the chosen team size is 1.
+		/// It opens the TwoPlayerNameWindow
+		/// </summary>
 		public void TwoPlayerGame()
 		{
 			if (_gameSession.teamSize == 0)
@@ -142,6 +173,10 @@ namespace King_Pong_App
 			Player2_2_Hits.Text = "";
 		}
 
+		/// <summary>
+		/// Method is called if the chosen team size is 2.
+		/// It opens the FourPlayerNameWindow
+		/// </summary>
 		public void FourPlayerGame()
 		{
 			if (_gameSession.teamSize == 0)
@@ -154,6 +189,9 @@ namespace King_Pong_App
 			nameSelect4.ShowDialog();
 		}
 
+		/// <summary>
+		/// Opens the IntroRoundWindow
+		/// </summary>
 		public void IntroRound()
 		{
 			if (!_gameSession.playersCreated)
@@ -165,6 +203,10 @@ namespace King_Pong_App
 			intro.Owner = this;
 			intro.ShowDialog();
 		}
+
+		/// <summary>
+		/// Opens the HitAnnounceWindow
+		/// </summary>
 		public void HitWindow()
 		{
 			HitAnnounceWindow hit = new();
@@ -173,6 +215,9 @@ namespace King_Pong_App
 			hit.Owner = this;
 			hit.ShowDialog();
 		}
+		/// <summary>
+		/// Opens the PlayerNumberSelectWindow
+		/// </summary>
 		public void NumberOfPlayersSelection()
 		{
 			if (!_gameSession.cupsChosen)
@@ -184,6 +229,9 @@ namespace King_Pong_App
 			playerNumberSelectWindow.Owner = this;
 			playerNumberSelectWindow.ShowDialog();
 		}
+		/// <summary>
+		/// Opens the CupSelectWindow
+		/// </summary>
 		public void CupSelection()
 		{
 			CupSelectWindow cupSelect = new();
@@ -198,13 +246,18 @@ namespace King_Pong_App
 				_gameSession.backFourCups.ForEach(c => c.ShowEllipse());
 		}
 
+		/// <summary>
+		/// This method is called whenever a hit event occurs. 
+		/// The number received corresponds to the cup that was hit.
+		/// </summary>
+		/// <param name="number"></param>
 		public void HitEvent(int number)
 		{
 			// to avoid crashes
 			if (_gameSession.Team1.CupsRemaining <= 0 || _gameSession.Team2.CupsRemaining <= 0)
 				return;
 
-				List<EllipseViewModel> allTeam1Cups = new()
+			List<EllipseViewModel> allTeam1Cups = new()
 			{
 				_gameSession.Cup1_1,
 				_gameSession.Cup1_2,
@@ -260,6 +313,10 @@ namespace King_Pong_App
 			NextTurn();
 		}
 
+		/// <summary>
+		/// Handles the switching of turns and calls all methods relevant to that.
+		/// Also updates the game board.
+		/// </summary>
 		public void NextTurn()
 		{
 			_gameSession.Current.Roster[_gameSession.currentPlayer].AddThrow();
@@ -276,6 +333,11 @@ namespace King_Pong_App
 				
 			UpdateGameBoard();
 		}
+		/// <summary>
+		/// Is called when a team has won.
+		/// Opens the GameWonWindow and sets the value of 
+		/// relevant GameSession attributes.
+		/// </summary>
 		public void GameOver()
 		{
 			GameWonWindow gameWon = new();
@@ -285,17 +347,25 @@ namespace King_Pong_App
 			_gameSession.gameInProgress = false;
 			_gameSession.gameOver = true;
 		}
+		/// <summary>
+		/// Is called when a team has forfeited the match
+		/// </summary>
 		public void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow
 		{
 			_gameSession.TurnOver();
 			GameOver();
 		}
+		/// <summary>
+		/// Updates the elements that aren't updated automatically by event handlers
+		/// </summary>
 		public void UpdateGameBoard()
 		{
 			UpdateTurnText();
 			UpdateTurnIndicator();
 		}
-
+		/// <summary>
+		/// Changes the side that the turn indicator is shown
+		/// </summary>
 		public void UpdateTurnIndicator()
 		{
 			if (_gameSession.Current == _gameSession.Team1)
@@ -309,17 +379,28 @@ namespace King_Pong_App
 				TurnIndicator1.Visibility = Visibility.Hidden;
 			}
 		}
-
+		/// <summary>
+		/// Updates the text block showing which player's turn it is.
+		/// </summary>
 		public void UpdateTurnText()
 		{
 			turnTextBlock.Text = _gameSession.Current.Roster[_gameSession.currentPlayer].PlayerName + "'s tur";
 		}
-
+		/// <summary>
+		/// Event handler for when a user click the 'Regler' button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Regler_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Regler kan findes via dette link: https://kingpong-rules.com");
 		}
-
+		/// <summary>
+		/// Event handler for when a user click the 'Giv Op' button.
+		/// Shows instructions as to how the users forfeit the game.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Giv_Op_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show(@"For at give op, skal begge holdknapper holdes inde i mindst 5 sekunder. 

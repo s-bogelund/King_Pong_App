@@ -26,7 +26,12 @@ namespace King_Pong_App.Views
 		{
 			InitializeComponent();
 		}
-
+		/// <summary>
+		/// When a user pushes the 'Bekræft' button, names are 
+		/// assigned and relevant information is sent to the server
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void ConfirmNames_Click(object sender, RoutedEventArgs e)
 		{
 			#region
@@ -49,6 +54,10 @@ namespace King_Pong_App.Views
 			Close();
 		}
 
+		/// <summary>
+		/// Updates the names of the relevant GameSession properties 
+		/// based on what is written in testboxes
+		/// </summary>
 		public void TwoPlayerNameAssignment()
 		{
 			MainWindow._gameSession.Player1.PlayerName = NameOfPlayer1.Text;
@@ -64,28 +73,13 @@ namespace King_Pong_App.Views
 			MainWindow._gameSession.Team1.AddMembers(MainWindow._gameSession.Player1);
 			MainWindow._gameSession.Team2.AddMembers(MainWindow._gameSession.Player3);
 		}
-
+		/// <summary>
+		/// Sends relevant GameSession info to the server in Json format
+		/// </summary>
 		public void SendInfoToServer()
 		{
 			var serialized = JsonConvert.SerializeObject(MainWindow._gameSession, Formatting.Indented);
 			MainWindow.client.Send(serialized);
-
-			//ugly quick json fix
-			serialized = ReplaceFirst(serialized, "playerName", "player1");
-			serialized = ReplaceFirst(serialized, "playerName", "player2");
-
-			Debug.WriteLine(serialized);
-		}
-
-		// quick fix to issues with decoding json on server
-		public string ReplaceFirst(string text, string search, string replace)
-		{
-			int pos = text.IndexOf(search);
-			if (pos < 0)
-			{
-				return text;
-			}
-			return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
 		}
 
 	}

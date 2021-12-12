@@ -16,6 +16,9 @@ namespace King_Pong_App.Models
 
 		[JsonProperty]
 		private string playerName;
+		/// <summary>
+		/// Name property that implements INotifyPropertyChanged
+		/// </summary>
 		public string PlayerName
 		{
 			get { return playerName; }
@@ -27,7 +30,9 @@ namespace King_Pong_App.Models
 		}
 
 		private int numberOfHits;
-
+		/// <summary>
+		/// Property that tracks number of cups hit and implements INotifyPropertyChanged
+		/// </summary>
 		public int NumberOfHits
 		{
 			get { return numberOfHits; }
@@ -45,7 +50,10 @@ namespace King_Pong_App.Models
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
-
+		/// <summary>
+		/// The implementation of INotifyPropertyChanged
+		/// </summary>
+		/// <param name="propertyName"></param>
 		public void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

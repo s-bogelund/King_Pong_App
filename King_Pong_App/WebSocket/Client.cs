@@ -23,7 +23,10 @@ namespace King_Pong_App.WebSocket
 			_uri = uri;
 			_client = client;
 		}
-
+		/// <summary>
+		/// Connects to the server and has the ability to send and receive asynchronously
+		/// </summary>
+		/// <returns></returns>
 		public async Task Start()
 		{
 			try
@@ -50,6 +53,10 @@ namespace King_Pong_App.WebSocket
 			}
 		}
 
+		/// <summary>
+		/// Sends a message to a server asynchronously
+		/// </summary>
+		/// <returns></returns>
 		public async Task Send(string sendMessage)
 		{
 			int numberOfTimesRun = 0;
@@ -70,12 +77,11 @@ namespace King_Pong_App.WebSocket
 			}
 
 		}
-
-		public void SendMessage(string message)  // function just ensures that Send runs in a new thread, probably not necessary
-		{
-			Task.Run(async () => await Send(message));
-		}
-
+		/// <summary>
+		/// Listens for messages and sets the GameSession property 'Command' 
+		/// to be equal to the message received
+		/// </summary>
+		/// <returns></returns>
 		public async Task Receive()
 		{
 			var offset = 0;
@@ -83,7 +89,7 @@ namespace King_Pong_App.WebSocket
 			var receiveBuffer = new byte[1024];
 			int numberOfTimesRun = 0;
 
-			Console.WriteLine("Ready to receive");
+			Debug.WriteLine("Ready to receive");
 			ArraySegment<byte> byteReceived = new(receiveBuffer, offset, packet); ;
 
 			WebSocketReceiveResult receiveMessage = await _client.ReceiveAsync(byteReceived, CancellationToken.None);
@@ -91,10 +97,6 @@ namespace King_Pong_App.WebSocket
 
 			var serverMessage = Encoding.UTF8.GetString(receiveBuffer, 0, receiveMessage.Count);
 			Debug.WriteLine(serverMessage + " <-- Received from server");
-
-			// checking to see if the received data is a useful command
-			//if (serverMessage != "Hi Server" && serverMessage != "Message Received") // this check should be changed to rpi messages
-			//{
 
 			if (int.TryParse(serverMessage, out int message) || serverMessage == "ff")
 				MainWindow._gameSession.Command = serverMessage;

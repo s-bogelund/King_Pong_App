@@ -23,7 +23,11 @@ namespace King_Pong_App.Views
 		{
 			InitializeComponent();
 		}
-
+		/// <summary>
+		/// Sets the value of the teamSize property depending on which radiobutton is checked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void ConfirmPlayers_Click(object sender, RoutedEventArgs e)
 		{
 			if (!(bool)_1v1_radiobutton.IsChecked && !(bool)_2v2_radioButton.IsChecked)

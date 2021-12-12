@@ -20,18 +20,28 @@ namespace King_Pong_App.Views
 	/// </summary>
 	public partial class IntroRoundWindow : Window
 	{
+		/// <summary>
+		/// Prints relevant info when the window opens 
+		/// and subscribes to the StarterTeamFound event handler
+		/// </summary>
 		public IntroRoundWindow()
 		{
 			InitializeComponent();
 			RoundDescription();
 			MainWindow._gameSession.StarterTeamFound += _gameSession_StarterTeamFound;
 		}
-
+		/// <summary>
+		/// Event handler that closes the window when a starter team has been found
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void _gameSession_StarterTeamFound(object sender, EventArgs e)
 		{
 			Close();
 		}
-
+		/// <summary>
+		/// Prints info about how the intro round is played
+		/// </summary>
 		private void RoundDescription()
 		{
 			IntroRoundDescription.Text =
@@ -43,9 +53,7 @@ namespace King_Pong_App.Views
 
 		private void IntroRoundOver_Button_Click(object sender, RoutedEventArgs e)
 		{
-			//only for testing
-			MainWindow._gameSession.Command = "0";
-			MainWindow._gameSession.StarterTeamDecided = true;
+
 		}
 	}
 }
