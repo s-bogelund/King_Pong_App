@@ -16,7 +16,16 @@ namespace King_Pong_App.ViewModels
 		{
 		}
 
+		/// <summary>
+		/// A list of PlayerViewModel objects
+		/// </summary>
 		public List<PlayerViewModel> Roster = new();
+		/// <summary>
+		/// Adding any amount of players to the roster.
+		/// Done in order to use the same function for 1 or 2 player teams
+		/// without needing to overload
+		/// </summary>
+		/// <param name="players"></param>
 		public void AddMembers(params PlayerViewModel[] players)
 		{
 			foreach (var player in players)
@@ -25,6 +34,11 @@ namespace King_Pong_App.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Used to print info in the desired format on the
+		/// GameWonWindow at the end of the game
+		/// </summary>
+		/// <returns></returns>
 		public string PrintInfo()
 		{
 			string playerStats = string.Empty;
