@@ -7,18 +7,13 @@
 		xmlns:localViewModels="clr-namespace:King_Pong_App.ViewModels"
 		mc:Ignorable="d"
 		WindowState="Maximized"
-        Title="MainWindow" Height="1080" Width="1920">
+        Title="MainWindow" Height="1080" Width="1920" >
 	<Window.Background>
 		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 			<GradientStop Color="#FF24292C" Offset="0"/>
 			<GradientStop Color="#FF353434" Offset="0.07"/>
 		</LinearGradientBrush>
 	</Window.Background>
-	<Window.Resources>
-		<localViewModels:EllipseViewModel x:Key="backFourCups"/>
-		<localViewModels:PlayerViewModel x:Key="playerInfo"/>
-		<localViewModels:TeamViewModel x:Key="teams"/>
-	</Window.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
@@ -84,7 +79,6 @@
 				</Grid.ColumnDefinitions>
 				<TextBlock
 					x:Name="Team1CupsLeft"
-					Grid.Row="1"
 					FontSize="75"
 					FontWeight="Bold" 
 					TextAlignment="Right"

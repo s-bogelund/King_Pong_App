@@ -12,8 +12,8 @@ namespace King_Pong_App
 {
 	public partial class MainWindow : Window
 	{
-		public Uri serverUri = new Uri("ws://10.9.8.2:9000/");
-		public ClientWebSocket socket = new();
+		private readonly Uri _serverUri = new Uri("ws://10.9.8.2:9000/");
+		private readonly ClientWebSocket _socket = new();
 		public EllipseViewModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
 		public static GameSession _gameSession;
 		public static Client client;
@@ -27,7 +27,7 @@ namespace King_Pong_App
 			InitializeComponent();
 			_gameSession = new();
 			DataContext = _gameSession;
-			client = new(serverUri, socket);
+			client = new(_serverUri, _socket);
 			client.Start();
 			_gameSession.CommandReceived += _gameSession_CommandReceived;
 		}
@@ -95,14 +95,13 @@ namespace King_Pong_App
 		private void DecideStarter(int number)
 		{
 			// checking if the number if valid for deciding starter team
-			if (number < 1 || number > _gameSession.numberOfCups * 2) 
+			if (number < 1 || number > _gameSession.numberOfCups * 2)
 			{
 				Debug.WriteLine($"Only command values between 1 and {_gameSession.numberOfCups * 2} accepted");
 				Debug.WriteLine($"The command received was: {_gameSession.Command}");
 				return;
 			}
 
-			
 			_gameSession.Current = number < _gameSession.numberOfCups ? _gameSession.Team1 : _gameSession.Team2;
 			HitWindow();
 			_gameSession.StarterTeamDecided = true;
@@ -164,7 +163,7 @@ namespace King_Pong_App
 		/// Method is called if the chosen team size is 2.
 		/// It opens the FourPlayerNameWindow
 		/// </summary>
-		public void FourPlayerGame()
+		private void FourPlayerGame()
 		{
 			if (_gameSession.teamSize == 0)
 				return;
@@ -179,7 +178,7 @@ namespace King_Pong_App
 		/// <summary>
 		/// Opens the IntroRoundWindow
 		/// </summary>
-		public void IntroRound()
+		private void IntroRound()
 		{
 			if (!_gameSession.playersCreated)
 				return;
@@ -194,7 +193,7 @@ namespace King_Pong_App
 		/// <summary>
 		/// Opens the HitAnnounceWindow
 		/// </summary>
-		public void HitWindow()
+		private void HitWindow()
 		{
 			HitAnnounceWindow hit = new();
 			hit.DataContext = _gameSession;
@@ -205,7 +204,7 @@ namespace King_Pong_App
 		/// <summary>
 		/// Opens the PlayerNumberSelectWindow
 		/// </summary>
-		public void NumberOfPlayersSelection()
+		private void NumberOfPlayersSelection()
 		{
 			if (!_gameSession.cupsChosen)
 				return;
@@ -219,7 +218,7 @@ namespace King_Pong_App
 		/// <summary>
 		/// Opens the CupSelectWindow
 		/// </summary>
-		public void CupSelection()
+		private void CupSelection()
 		{
 			CupSelectWindow cupSelect = new();
 			cupSelect.DataContext = DataContext;
@@ -238,7 +237,7 @@ namespace King_Pong_App
 		/// The number received corresponds to the cup that was hit.
 		/// </summary>
 		/// <param name="number"></param>
-		public void HitEvent(int number)
+		private void HitEvent(int number)
 		{
 			// to avoid crashes
 			if (_gameSession.Team1.CupsRemaining <= 0 || _gameSession.Team2.CupsRemaining <= 0)
@@ -304,7 +303,7 @@ namespace King_Pong_App
 		/// Handles the switching of turns and calls all methods relevant to that.
 		/// Also updates the game board.
 		/// </summary>
-		public void NextTurn()
+		private void NextTurn()
 		{
 			_gameSession.Current.Roster[_gameSession.currentPlayer].AddThrow();
 
@@ -325,7 +324,7 @@ namespace King_Pong_App
 		/// Opens the GameWonWindow and sets the value of 
 		/// relevant GameSession attributes.
 		/// </summary>
-		public void GameOver()
+		private void GameOver()
 		{
 			GameWonWindow gameWon = new();
 			gameWon.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -337,7 +336,7 @@ namespace King_Pong_App
 		/// <summary>
 		/// Is called when a team has forfeited the match
 		/// </summary>
-		public void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow
+		private void Forfeit()  // to make sure the teams are shown correctly on GameWonWindow
 		{
 			_gameSession.TurnOver();
 			GameOver();
@@ -345,7 +344,7 @@ namespace King_Pong_App
 		/// <summary>
 		/// Updates the elements that aren't updated automatically by event handlers
 		/// </summary>
-		public void UpdateGameBoard()
+		private void UpdateGameBoard()
 		{
 			UpdateTurnText();
 			UpdateTurnIndicator();
@@ -353,7 +352,7 @@ namespace King_Pong_App
 		/// <summary>
 		/// Changes the side that the turn indicator is shown
 		/// </summary>
-		public void UpdateTurnIndicator()
+		private void UpdateTurnIndicator()
 		{
 			if (_gameSession.Current == _gameSession.Team1)
 			{
@@ -369,7 +368,7 @@ namespace King_Pong_App
 		/// <summary>
 		/// Updates the text block showing which player's turn it is.
 		/// </summary>
-		public void UpdateTurnText()
+		private void UpdateTurnText()
 		{
 			turnTextBlock.Text = _gameSession.Current.Roster[_gameSession.currentPlayer].PlayerName + "'s tur";
 		}
@@ -393,34 +392,5 @@ namespace King_Pong_App
 			MessageBox.Show(@"For at give op, skal begge holdknapper holdes inde i mindst 5 sekunder. 
 								Bemærk at det er holdet som der har turen, som giver op");
 		}
-
-		//private void NextTurn_Click(object sender, RoutedEventArgs e)
-		//{
-		//	NextTurn();
-		//}
-
-		//private void HitEvent_Click(object sender, RoutedEventArgs e)
-		//{
-		//	if (!_gameSession.StarterTeamDecided == true)
-		//	{
-		//		MessageBox.Show("Det er endnu ikke afgjort, hvem der starter endnu. Tryk AUTO DECIDE STARTER");
-		//		return;
-		//	}
-
-		//	if (_gameSession.Current == _gameSession.Team1)
-		//		HitEvent(_gameSession.Team2.CupsRemaining - 1 + _gameSession.numberOfCups);
-		//	else
-		//		HitEvent(_gameSession.Team1.CupsRemaining - 1);
-		//}
-		
-		//private void AutomaticWin_Click(object sender, RoutedEventArgs e)
-		//{
-		//	client.Send("AssHatFace");
-		//	_gameSession.Command= "1";
-		//	_gameSession.StarterTeamDecided = true;  // to be able to test
-		//	//_gameSession.Player1.PlayerName = _gameSession.Command;
-		//}
-
-		
 	}
 }

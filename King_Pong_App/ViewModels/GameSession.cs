@@ -12,181 +12,188 @@ using Newtonsoft.Json;
 
 namespace King_Pong_App.ViewModels
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	public class GameSession : INotifyPropertyChanged
-	{
-		/// <summary>
-		/// Default constructor that initializes all the game elements needed for the game.
-		/// Is called immediately when the application starts.
-		/// </summary>
-		public GameSession()
-		{
-			Player1 = new("Player1");
-			Player2 = new("Player2");
-			Player3 = new("Player3");
-			Player4 = new("Player4");
+    [JsonObject(MemberSerialization.OptIn)]
+    public class GameSession : INotifyPropertyChanged
+    {
+        /// <summary>
+        /// Default constructor that initializes all the game elements needed for the game.
+        /// Is called immediately when the application starts.
+        /// </summary>
+        public GameSession()
+        {
+            Player1 = new("Player1");
+            Player2 = new("Player2");
+            Player3 = new("Player3");
+            Player4 = new("Player4");
 
-			Team1 = new();
-			Team2 = new();
+            Team1 = new();
+            Team2 = new();
 
-			Cup1_1 = new();
-			Cup1_2 = new();
-			Cup1_3 = new();
-			Cup1_4 = new();
-			Cup1_5 = new();
-			Cup1_6 = new();
-			Cup1_7 = new();
-			Cup1_8 = new();
-			Cup1_9 = new();
-			Cup1_10 = new();
+            Cup1_1 = new();
+            Cup1_2 = new();
+            Cup1_3 = new();
+            Cup1_4 = new();
+            Cup1_5 = new();
+            Cup1_6 = new();
+            Cup1_7 = new();
+            Cup1_8 = new();
+            Cup1_9 = new();
+            Cup1_10 = new();
 
-			Cup2_1 = new();
-			Cup2_2 = new();
-			Cup2_3 = new();
-			Cup2_4 = new();
-			Cup2_5 = new();
-			Cup2_6 = new();
-			Cup2_7 = new();
-			Cup2_8 = new();
-			Cup2_9 = new();
-			Cup2_10 = new();
+            Cup2_1 = new();
+            Cup2_2 = new();
+            Cup2_3 = new();
+            Cup2_4 = new();
+            Cup2_5 = new();
+            Cup2_6 = new();
+            Cup2_7 = new();
+            Cup2_8 = new();
+            Cup2_9 = new();
+            Cup2_10 = new();
 
-			backFourCups = new() { Cup1_7, Cup1_8, Cup1_9, Cup1_10,
-				Cup2_7, Cup2_8, Cup2_9, Cup2_10 };
-		}
-		public List<EllipseViewModel> backFourCups;
+            backFourCups = new()
+            {
+                Cup1_7, Cup1_8, Cup1_9, Cup1_10,
+                Cup2_7, Cup2_8, Cup2_9, Cup2_10
+            };
+        }
 
-		[JsonProperty]
-		public int numberOfCups = 10;
+        public List<EllipseViewModel> backFourCups;
 
-		[JsonProperty]
-		public int teamSize = 0;
-		public int currentPlayer = 0;
-		public bool cupsChosen = false;
-		public bool playersCreated = false;
-		public bool gameInProgress = false;
-		public bool gameOver;
-		private bool starterTeamDecided;
+        [JsonProperty] public int numberOfCups = 10;
 
-		public bool StarterTeamDecided
-		{
-			get { return starterTeamDecided; }
-			set
-			{
-				starterTeamDecided = value;
-				StarterTeamFound?.Invoke(this, EventArgs.Empty);
-			}
-		}
-		/// <summary>
-		/// Resets all the game info to their default values.
-		/// This is called if the new game process is disrupted by 
-		/// the user closing a window during setup of a new game
-		/// </summary>
-		public void ResetGameInfo()
-		{
-			teamSize = 0;
-			currentPlayer = 0;
-			cupsChosen = false;
-			playersCreated = false;
-			gameInProgress = false;
-			gameOver = false;
-		}
-	
-		/// <summary>
-		/// Changes which team has the turn
-		/// </summary>
-		public void TurnOver()
-		{
-			Current = Current == Team1 ? Team2 : Team1;
-			currentPlayer = 0;
-		}
+        [JsonProperty] public int teamSize = 0;
 
-		private string command;
-		/// <summary>
-		/// Property which value depends on what is received from the server.
-		/// It's this property that is used for calling methods in the game loop.
-		/// </summary>
-		public string Command
-		{
-			get { return command; }
-			set 
-			{ 
-				command = value;
-				CommandReceived?.Invoke(this, EventArgs.Empty);
-			}
-		}
-		/// <summary>
-		/// Event handler that tracks whether the starter team has been found
-		/// </summary>
-		public event EventHandler StarterTeamFound;
+        public int currentPlayer = 0;
+        public bool cupsChosen = false;
+        public bool playersCreated = false;
+        public bool gameInProgress = false;
+        public bool gameOver;
+        private bool starterTeamDecided;
 
-		/// <summary>
-		/// Event handler for when a command is received from the server
-		/// </summary>
-		public event EventHandler CommandReceived;
+        public bool StarterTeamDecided
+        {
+            get { return starterTeamDecided; }
+            set
+            {
+                starterTeamDecided = value;
+                StarterTeamFound?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
-		private TeamViewModel current;
-		
-		/// <summary>
-		/// Tracks which team's turn it currently is. 
-		/// Also implements INotifyPropertyChanged.
-		/// </summary>
-		public TeamViewModel Current
-		{
-			get { return current; }
-			set 
-			{ 
-				current = value;
-				OnPropertyChanged(nameof(Current));
-			}
-		}
+        /// <summary>
+        /// Resets all the game info to their default values.
+        /// This is called if the new game process is disrupted by 
+        /// the user closing a window during setup of a new game
+        /// </summary>
+        public void ResetGameInfo()
+        {
+            teamSize = 0;
+            currentPlayer = 0;
+            cupsChosen = false;
+            playersCreated = false;
+            gameInProgress = false;
+            gameOver = false;
+        }
 
-		#region Players and teams
-		[JsonProperty]
-		public PlayerViewModel Player1 { get; set; }
-		[JsonProperty]
-		public PlayerViewModel Player2 { get; set; }
-		[JsonProperty]
-		public PlayerViewModel Player3 { get; set; }
-		[JsonProperty]
-		public PlayerViewModel Player4 { get; set; }
+        /// <summary>
+        /// Changes which team has the turn
+        /// </summary>
+        public void TurnOver()
+        {
+            Current = Current == Team1 ? Team2 : Team1;
+            currentPlayer = 0;
+        }
 
-		[JsonProperty]
-		public TeamViewModel Team1 { get; set; }
+        private string command;
 
-		[JsonProperty]
-		public TeamViewModel Team2 { get; set; }
-		#endregion
-		#region Cups
-		public EllipseViewModel Cup1_1 { get; set; }
-		public EllipseViewModel Cup1_2 { get; set; }
-		public EllipseViewModel Cup1_3 { get; set; }
-		public EllipseViewModel Cup1_4 { get; set; }
-		public EllipseViewModel Cup1_5 { get; set; }
-		public EllipseViewModel Cup1_6 { get; set; }
-		public EllipseViewModel Cup1_7 { get; set; }
-		public EllipseViewModel Cup1_8 { get; set; }
-		public EllipseViewModel Cup1_9 { get; set; }
-		public EllipseViewModel Cup1_10 { get; set; }
-		public EllipseViewModel Cup2_1 { get; set; }
-		public EllipseViewModel Cup2_2 { get; set; }
-		public EllipseViewModel Cup2_3 { get; set; }
-		public EllipseViewModel Cup2_4 { get; set; }
-		public EllipseViewModel Cup2_5 { get; set; }
-		public EllipseViewModel Cup2_6 { get; set; }
-		public EllipseViewModel Cup2_7 { get; set; }
-		public EllipseViewModel Cup2_8 { get; set; }
-		public EllipseViewModel Cup2_9 { get; set; }
-		public EllipseViewModel Cup2_10 { get; set; }
-		#endregion
-		public event PropertyChangedEventHandler PropertyChanged;
-		/// <summary>
-		/// The implementation of INotifyPropertyChanged
-		/// </summary>
-		/// <param name="propertyName"></param>
-		public virtual void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
+        /// <summary>
+        /// Property which value depends on what is received from the server.
+        /// It's this property that is used for calling methods in the game loop.
+        /// </summary>
+        public string Command
+        {
+            get { return command; }
+            set
+            {
+                command = value;
+                CommandReceived?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Event handler that tracks whether the starter team has been found
+        /// </summary>
+        public event EventHandler StarterTeamFound;
+
+        /// <summary>
+        /// Event handler for when a command is received from the server
+        /// </summary>
+        public event EventHandler CommandReceived;
+
+        private TeamViewModel current;
+
+        /// <summary>
+        /// Tracks which team's turn it currently is. 
+        /// Also implements INotifyPropertyChanged.
+        /// </summary>
+        public TeamViewModel Current
+        {
+            get { return current; }
+            set
+            {
+                current = value;
+                OnPropertyChanged(nameof(Current));
+            }
+        }
+
+        #region Players and teams
+
+        [JsonProperty] public PlayerViewModel Player1 { get; set; }
+        [JsonProperty] public PlayerViewModel Player2 { get; set; }
+        [JsonProperty] public PlayerViewModel Player3 { get; set; }
+        [JsonProperty] public PlayerViewModel Player4 { get; set; }
+
+        [JsonProperty] public TeamViewModel Team1 { get; set; }
+
+        [JsonProperty] public TeamViewModel Team2 { get; set; }
+
+        #endregion
+
+        #region Cups
+
+        public EllipseViewModel Cup1_1 { get; set; }
+        public EllipseViewModel Cup1_2 { get; set; }
+        public EllipseViewModel Cup1_3 { get; set; }
+        public EllipseViewModel Cup1_4 { get; set; }
+        public EllipseViewModel Cup1_5 { get; set; }
+        public EllipseViewModel Cup1_6 { get; set; }
+        public EllipseViewModel Cup1_7 { get; set; }
+        public EllipseViewModel Cup1_8 { get; set; }
+        public EllipseViewModel Cup1_9 { get; set; }
+        public EllipseViewModel Cup1_10 { get; set; }
+        public EllipseViewModel Cup2_1 { get; set; }
+        public EllipseViewModel Cup2_2 { get; set; }
+        public EllipseViewModel Cup2_3 { get; set; }
+        public EllipseViewModel Cup2_4 { get; set; }
+        public EllipseViewModel Cup2_5 { get; set; }
+        public EllipseViewModel Cup2_6 { get; set; }
+        public EllipseViewModel Cup2_7 { get; set; }
+        public EllipseViewModel Cup2_8 { get; set; }
+        public EllipseViewModel Cup2_9 { get; set; }
+        public EllipseViewModel Cup2_10 { get; set; }
+
+        #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// The implementation of INotifyPropertyChanged
+        /// </summary>
+        /// <param name="propertyName"></param>
+        public virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

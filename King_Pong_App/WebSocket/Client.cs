@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -13,10 +9,10 @@ namespace King_Pong_App.WebSocket
 {
 	public class Client
 	{
-		public Uri _uri;
+		private readonly Uri _uri;
 
-		public ClientWebSocket _client = new ClientWebSocket();
-		private int messageSentCounter = 0;
+		private ClientWebSocket _client = new ClientWebSocket();
+		private int _messageSentCounter = 0;
 
 		public Client(Uri uri, ClientWebSocket client)
 		{
@@ -34,7 +30,7 @@ namespace King_Pong_App.WebSocket
 				await _client.ConnectAsync(_uri, CancellationToken.None);
 				while (_client.State == WebSocketState.Open)
 				{
-					while (messageSentCounter == 0) // should ensure that it only sends once, otherwise it sends 5-8 times
+					while (_messageSentCounter == 0) // should ensure that it only sends once, otherwise it sends 5-8 times
 					{
 						await Send("");
 					}
@@ -49,7 +45,7 @@ namespace King_Pong_App.WebSocket
 				Console.WriteLine(e.Message);
 
 				if (_client.State == WebSocketState.Open)
-					await _client.CloseAsync(WebSocketCloseStatus.Empty, null, CancellationToken.None);  // attemps to close the connection properly
+					await _client.CloseAsync(WebSocketCloseStatus.Empty, null, CancellationToken.None);  // attempts to close the connection properly
 			}
 		}
 
@@ -69,7 +65,7 @@ namespace King_Pong_App.WebSocket
 
 				// trying to ensure that it only sends once:
 				await Task.Delay(400);
-				messageSentCounter++;
+				_messageSentCounter++;
 
 				//debug
 				numberOfTimesRun++;
@@ -90,7 +86,7 @@ namespace King_Pong_App.WebSocket
 			int numberOfTimesRun = 0;
 
 			Debug.WriteLine("Ready to receive");
-			ArraySegment<byte> byteReceived = new(receiveBuffer, offset, packet); ;
+			ArraySegment<byte> byteReceived = new(receiveBuffer, offset, count: packet); ;
 
 			WebSocketReceiveResult receiveMessage = await _client.ReceiveAsync(byteReceived, CancellationToken.None);
 			Debug.WriteLine("Message received");
