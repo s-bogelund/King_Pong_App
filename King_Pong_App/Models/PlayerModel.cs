@@ -42,12 +42,49 @@ namespace King_Pong_App.Models
 				OnPropertyChanged(nameof(NumberOfHits));
 			}
 		}
-		public PlayerModel() { }
+		public PlayerModel() 
+		{
+			numberOfHits = 0;
+		}
 		public PlayerModel(string name, int _numberOfHits = 0)
 		{
 			PlayerName = name;
 			numberOfHits = _numberOfHits;
 		}
+		/// <summary>
+		/// Increases the number of throws for a player
+		/// </summary>
+		public void AddThrow()
+		{
+			NumberOfThrows++;
+		}
+		/// <summary>
+		/// Increases the number of hits for a player
+		/// </summary>
+		public void AddHit()
+		{
+			NumberOfHits++;
+		}
+		/// <summary>
+		/// Calculates and returns the hitrate for a player
+		/// </summary>
+		/// <returns></returns>
+		public string Hitrate() => Math.Round((double)NumberOfHits / NumberOfThrows * 100, 2).ToString() + "%";
+
+		/// <summary>
+		/// Prints info the the player in the desired format 
+		/// for the GameWonWindow.
+		/// </summary>
+		/// <returns></returns>
+		public string PrintInfo()
+		{
+			string name = $"{PlayerName}: \n";
+			string hits = $"Antal Ramte: {NumberOfHits}\n";
+			string hitrate = $"Præcision: {Hitrate()}\n";
+
+			return name + hits + hitrate + "\n";
+		}
+
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		/// <summary>

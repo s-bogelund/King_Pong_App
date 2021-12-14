@@ -58,7 +58,7 @@ namespace King_Pong_App.ViewModels
             };
         }
 
-        public List<EllipseViewModel> backFourCups;
+        public List<CupModel> backFourCups;
 
         [JsonProperty] public int numberOfCups = 10;
 
@@ -130,14 +130,15 @@ namespace King_Pong_App.ViewModels
         /// Event handler for when a command is received from the server
         /// </summary>
         public event EventHandler CommandReceived;
+		
 
-        private TeamViewModel current;
+        private TeamModel current;
 
         /// <summary>
         /// Tracks which team's turn it currently is. 
         /// Also implements INotifyPropertyChanged.
         /// </summary>
-        public TeamViewModel Current
+        public TeamModel Current
         {
             get { return current; }
             set
@@ -149,39 +150,39 @@ namespace King_Pong_App.ViewModels
 
         #region Players and teams
 
-        [JsonProperty] public PlayerViewModel Player1 { get; set; }
-        [JsonProperty] public PlayerViewModel Player2 { get; set; }
-        [JsonProperty] public PlayerViewModel Player3 { get; set; }
-        [JsonProperty] public PlayerViewModel Player4 { get; set; }
+        [JsonProperty] public PlayerModel Player1 { get; set; }
+        [JsonProperty] public PlayerModel Player2 { get; set; }
+        [JsonProperty] public PlayerModel Player3 { get; set; }
+        [JsonProperty] public PlayerModel Player4 { get; set; }
 
-        [JsonProperty] public TeamViewModel Team1 { get; set; }
+        [JsonProperty] public TeamModel Team1 { get; set; }
 
-        [JsonProperty] public TeamViewModel Team2 { get; set; }
+        [JsonProperty] public TeamModel Team2 { get; set; }
 
         #endregion
 
         #region Cups
 
-        public EllipseViewModel Cup1_1 { get; set; }
-        public EllipseViewModel Cup1_2 { get; set; }
-        public EllipseViewModel Cup1_3 { get; set; }
-        public EllipseViewModel Cup1_4 { get; set; }
-        public EllipseViewModel Cup1_5 { get; set; }
-        public EllipseViewModel Cup1_6 { get; set; }
-        public EllipseViewModel Cup1_7 { get; set; }
-        public EllipseViewModel Cup1_8 { get; set; }
-        public EllipseViewModel Cup1_9 { get; set; }
-        public EllipseViewModel Cup1_10 { get; set; }
-        public EllipseViewModel Cup2_1 { get; set; }
-        public EllipseViewModel Cup2_2 { get; set; }
-        public EllipseViewModel Cup2_3 { get; set; }
-        public EllipseViewModel Cup2_4 { get; set; }
-        public EllipseViewModel Cup2_5 { get; set; }
-        public EllipseViewModel Cup2_6 { get; set; }
-        public EllipseViewModel Cup2_7 { get; set; }
-        public EllipseViewModel Cup2_8 { get; set; }
-        public EllipseViewModel Cup2_9 { get; set; }
-        public EllipseViewModel Cup2_10 { get; set; }
+        public CupModel Cup1_1 { get; set; }
+        public CupModel Cup1_2 { get; set; }
+        public CupModel Cup1_3 { get; set; }
+        public CupModel Cup1_4 { get; set; }
+        public CupModel Cup1_5 { get; set; }
+        public CupModel Cup1_6 { get; set; }
+        public CupModel Cup1_7 { get; set; }
+        public CupModel Cup1_8 { get; set; }
+        public CupModel Cup1_9 { get; set; }
+        public CupModel Cup1_10 { get; set; }
+        public CupModel Cup2_1 { get; set; }
+        public CupModel Cup2_2 { get; set; }
+        public CupModel Cup2_3 { get; set; }
+        public CupModel Cup2_4 { get; set; }
+        public CupModel Cup2_5 { get; set; }
+        public CupModel Cup2_6 { get; set; }
+        public CupModel Cup2_7 { get; set; }
+        public CupModel Cup2_8 { get; set; }
+        public CupModel Cup2_9 { get; set; }
+        public CupModel Cup2_10 { get; set; }
 
         #endregion
 

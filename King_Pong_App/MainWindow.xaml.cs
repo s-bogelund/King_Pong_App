@@ -14,7 +14,7 @@ namespace King_Pong_App
 	{
 		private readonly Uri _serverUri = new Uri("ws://10.9.8.2:9000/");
 		private readonly ClientWebSocket _socket = new();
-		public EllipseViewModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
+		public CupModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
 		public static GameSession _gameSession;
 		public static Client client;
 
@@ -105,7 +105,7 @@ namespace King_Pong_App
 			_gameSession.Current = number < _gameSession.numberOfCups ? _gameSession.Team1 : _gameSession.Team2;
 			HitWindow();
 			_gameSession.StarterTeamDecided = true;
-			UpdateTurnIndicator();
+			UpdateGameBoard();
 		}
 
 		/// <summary>
@@ -227,9 +227,9 @@ namespace King_Pong_App
 			cupSelect.ShowDialog();
 
 			if (_gameSession.numberOfCups == 6)
-				_gameSession.backFourCups.ForEach(c => c.HideEllipse());
+				_gameSession.backFourCups.ForEach(c => c.HideCup());
 			else
-				_gameSession.backFourCups.ForEach(c => c.ShowEllipse());
+				_gameSession.backFourCups.ForEach(c => c.ShowCup());
 		}
 
 		/// <summary>
@@ -243,7 +243,7 @@ namespace King_Pong_App
 			if (_gameSession.Team1.CupsRemaining <= 0 || _gameSession.Team2.CupsRemaining <= 0)
 				return;
 
-			List<EllipseViewModel> allTeam1Cups = new()
+			List<CupModel> allTeam1Cups = new()
 			{
 				_gameSession.Cup1_1,
 				_gameSession.Cup1_2,
@@ -256,7 +256,7 @@ namespace King_Pong_App
 				_gameSession.Cup1_9,
 				_gameSession.Cup1_10
 			};
-			List<EllipseViewModel> allTeam2Cups = new()
+			List<CupModel> allTeam2Cups = new()
 			{
 				_gameSession.Cup2_1,
 				_gameSession.Cup2_2,
@@ -270,8 +270,8 @@ namespace King_Pong_App
 				_gameSession.Cup2_10
 			};
 
-			List<EllipseViewModel> team1ActualCups = new() { };
-			List<EllipseViewModel> team2ActualCups = new() { };
+			List<CupModel> team1ActualCups = new() { };
+			List<CupModel> team2ActualCups = new() { };
 
 			//ensures that we can't hit cups that aren't used if using only 6 cups
 			for (int i = 0; i < _gameSession.numberOfCups; i++)  

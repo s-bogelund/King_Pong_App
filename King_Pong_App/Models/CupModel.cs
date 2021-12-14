@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace King_Pong_App.ViewModels
 {
-	public class EllipseViewModel : INotifyPropertyChanged
+	public class CupModel : INotifyPropertyChanged
 	{
 		private Visibility visibility;
 		/// <summary>
@@ -31,7 +31,7 @@ namespace King_Pong_App.ViewModels
 		/// Initalizes the instance with the attributes set to the 
 		/// values they should have at the start of a game.
 		/// </summary>
-		public EllipseViewModel()
+		public CupModel()
 		{
 			visibility = Visibility.Visible;
 			color = Brushes.Green;
@@ -39,14 +39,14 @@ namespace King_Pong_App.ViewModels
 		/// <summary>
 		/// Hides the object
 		/// </summary>
-		public void HideEllipse()
+		public void HideCup()
 		{
 			Visibility = Visibility.Hidden;
 		}
 		/// <summary>
 		/// Shows the object
 		/// </summary>
-		public void ShowEllipse()
+		public void ShowCup()
 		{
 			Visibility = Visibility.Visible;
 		}
@@ -65,6 +65,7 @@ namespace King_Pong_App.ViewModels
 				OnPropertyChanged("Color");
 			}
 		}
+
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
