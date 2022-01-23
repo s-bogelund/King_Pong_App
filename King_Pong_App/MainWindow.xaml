@@ -145,7 +145,7 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Ellipse 
-					x:Name="ellipse1_10"
+					x:Name="Cup1_10"
                     Grid.Row="0" 
                     Grid.Column="3" 
                     Style="{StaticResource cupCircles}"
@@ -153,7 +153,7 @@
                     Grid.ColumnSpan="1"
 					Visibility="{Binding Cup1_10.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse
-					x:Name="ellipse1_9"
+					x:Name="Cup1_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
                     Style="{StaticResource cupCircles}"
@@ -161,7 +161,7 @@
                     Grid.ColumnSpan="1"
 					Visibility="{Binding Cup1_9.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
-					x:Name="ellipse1_8"
+					x:Name="Cup1_8"
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}" 
@@ -169,7 +169,7 @@
                     Grid.ColumnSpan="1"
 					Visibility="{Binding Cup1_8.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
-					x:Name="ellipse1_7"
+					x:Name="Cup1_7"
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Style="{StaticResource cupCircles}" 
@@ -177,7 +177,7 @@
                     Grid.ColumnSpan="1"
 					Visibility="{Binding Cup1_7.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
-					x:Name="ellipse1_6"
+					x:Name="Cup1_6"
 					Opacity="90"
                     Grid.Row="1" 
                     Grid.Column="2"
@@ -185,35 +185,35 @@
 					Fill="{Binding Cup1_6.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
-					x:Name="ellipse1_5"
+					x:Name="Cup1_5"
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}" 
 					Fill="{Binding Cup1_5.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
-					x:Name="ellipse1_4"
+					x:Name="Cup1_4"
                     Grid.Row="1" 
                     Grid.Column="0" 
                     Style="{StaticResource cupCircles}"
 					Fill="{Binding Cup1_4.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
-					x:Name="ellipse1_3"
+					x:Name="Cup1_3"
                     Grid.Row="2" 
                     Grid.Column="2" 
                     Style="{StaticResource cupCircles}"
 					Fill="{Binding Cup1_3.Color}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
-					x:Name="ellipse1_2"
+					x:Name="Cup1_2"
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
 					Fill="{Binding Cup1_2.Color}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse  
-					x:Name="ellipse1_1"
+					x:Name="Cup1_1"
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
@@ -235,7 +235,7 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Ellipse
-					x:Name="ellipse2_10"
+					x:Name="Cup2_10"
                     Grid.Row="0" 
                     Grid.Column="3"
                     Style="{StaticResource cupCircles}"
@@ -243,7 +243,7 @@
                     Grid.ColumnSpan="1"
 					Visibility="{Binding Cup2_10.Visibility, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse
-					x:Name="ellipse2_9"
+					x:Name="Cup2_9"
                     Grid.Row="0" 
                     Grid.Column="2" 
                     Style="{StaticResource cupCircles}" 
@@ -251,7 +251,7 @@
                     Grid.ColumnSpan="1"
 					Visibility="{Binding Cup2_9.Visibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
-					x:Name="ellipse2_8"
+					x:Name="Cup2_8"
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
@@ -259,7 +259,7 @@
                     Grid.ColumnSpan="1"
 					Visibility="{Binding Cup2_8.Visibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
-					x:Name="ellipse2_7"
+					x:Name="Cup2_7"
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Style="{StaticResource cupCircles}"
@@ -267,14 +267,14 @@
                     Grid.ColumnSpan="1"
 					Visibility="{Binding Cup2_7.Visibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 				<Ellipse 
-					x:Name="ellipse2_6"
+					x:Name="Cup2_6"
                     Grid.Row="1" 
                     Grid.Column="2"
                     Style="{StaticResource cupCircles}"
 					Fill="{Binding Cup2_6.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse
-					x:Name="ellipse2_5"
+					x:Name="Cup2_5"
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
@@ -282,28 +282,28 @@
                     Grid.ColumnSpan="2">
 				</Ellipse>
 				<Ellipse 
-					x:Name="ellipse2_4"
+					x:Name="Cup2_4"
                     Grid.Row="1" 
                     Grid.Column="0" 
                     Style="{StaticResource cupCircles}"
 					Fill="{Binding Cup2_4.Color}"
                     Grid.ColumnSpan="2"/>
 				<Ellipse 
-					x:Name="ellipse2_3"
+					x:Name="Cup2_3"
                     Grid.Row="2" 
                     Grid.Column="2" 
                     Style="{StaticResource cupCircles}" 
 					Fill="{Binding Cup2_3.Color}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
-					x:Name="ellipse2_2"
+					x:Name="Cup2_2"
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}"
 					Fill="{Binding Cup2_2.Color}"
                     Grid.ColumnSpan="1"/>
 				<Ellipse 
-					x:Name="ellipse2_1"
+					x:Name="Cup2_1"
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Style="{StaticResource cupCircles}" 

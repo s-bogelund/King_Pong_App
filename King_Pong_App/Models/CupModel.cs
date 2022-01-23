@@ -9,8 +9,8 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace King_Pong_App.ViewModels
-{
+namespace King_Pong_App.Models;
+
 	public class CupModel : INotifyPropertyChanged
 	{
 		private Visibility visibility;
@@ -78,4 +78,4 @@ namespace King_Pong_App.ViewModels
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
-}
+

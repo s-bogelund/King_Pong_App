@@ -34,13 +34,13 @@ namespace King_Pong_App.Views
 		/// </summary>
 		public void HitPrint()
 		{
-			if (MainWindow._gameSession.StarterTeamDecided)
+			if (MainWindow.game.StarterTeamDecided)
 			{
-				AnnounceHitLabel.Content = $"{MainWindow._gameSession.Current.Roster[MainWindow._gameSession.currentPlayer].PlayerName.ToUpper()} \nRAMTE!";
+				AnnounceHitLabel.Content = $"{MainWindow.game.Current.Roster[MainWindow.game.currentPlayer].PlayerName.ToUpper()} \nRAMTE!";
 				return;
 			}
 
-			AnnounceHitLabel.Content = $"DER ER RAMT!! \n{MainWindow._gameSession.Current.TeamName.ToUpper()} \nSTARTER!";
+			AnnounceHitLabel.Content = $"DER ER RAMT!! \n{MainWindow.game.Current.TeamName.ToUpper()} \nSTARTER!";
 		}
 		/// <summary>
 		/// Closes the window after a delay determined by the 'second' argument

@@ -13,39 +13,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace King_Pong_App.Views
+namespace King_Pong_App.Views;
+
+/// <summary>
+/// Interaction logic for CupSelectWindow.xaml
+/// </summary>
+public partial class CupSelectWindow : Window
 {
-	/// <summary>
-	/// Interaction logic for CupSelectWindow.xaml
-	/// </summary>
-	public partial class CupSelectWindow : Window
+	public CupSelectWindow()
 	{
-		public CupSelectWindow()
-		{
-			InitializeComponent();
-		}
-		/// <summary>
-		/// Event handler that sets the number of cups of a game 
-		/// depending on which radiobutton is checked
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ConfirmCups_Click(object sender, RoutedEventArgs e)
-		{
-			if (!(bool)TenCupButton.IsChecked && !(bool)SixCupButton.IsChecked)
-			{
-				MessageBox.Show("Du skal vælge, hvor mange kopper der skal bruges i spillet");
-				return;
-			}
-
-			MainWindow._gameSession.numberOfCups = (bool)SixCupButton.IsChecked ? 6 : 10; // default value is 10
-
-			MainWindow._gameSession.Team1.CupsRemaining = MainWindow._gameSession.numberOfCups;
-			MainWindow._gameSession.Team2.CupsRemaining = MainWindow._gameSession.numberOfCups;
-			MainWindow._gameSession.cupsChosen = true;
-			Close();
-		}
-
-		
+		InitializeComponent();
 	}
+	/// <summary>
+	/// Event handler that sets the number of cups of a game 
+	/// depending on which radiobutton is checked
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	private void ConfirmCups_Click(object sender, RoutedEventArgs e)
+	{
+		if (!(bool)TenCupButton.IsChecked && !(bool)SixCupButton.IsChecked)
+		{
+			MessageBox.Show("Du skal vælge, hvor mange kopper der skal bruges i spillet");
+			return;
+		}
+
+		MainWindow.game.numberOfCups = (bool)SixCupButton.IsChecked ? 6 : 10; // default value is 10
+
+		MainWindow.game.Team1.CupsRemaining = MainWindow.game.numberOfCups;
+		MainWindow.game.Team2.CupsRemaining = MainWindow.game.numberOfCups;
+		MainWindow.game.cupsChosen = true;
+		Close();
+	}
+
+	
 }
+
