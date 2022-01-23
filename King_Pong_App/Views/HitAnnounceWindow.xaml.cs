@@ -27,7 +27,7 @@ namespace King_Pong_App.Views
 		{
 			InitializeComponent();
 			HitPrint();
-			StartCloseTimer(4);
+			StartCloseTimer(2);
 		}
 		/// <summary>
 		/// Shows the name of the current player that hit a cup
@@ -46,7 +46,7 @@ namespace King_Pong_App.Views
 		/// Closes the window after a delay determined by the 'second' argument
 		/// </summary>
 		/// <param name="seconds"></param>
-		private void StartCloseTimer(int seconds)
+		private void StartCloseTimer(double seconds)
 		{
 			DispatcherTimer timer = new DispatcherTimer();
 			timer.Interval = TimeSpan.FromSeconds(seconds);

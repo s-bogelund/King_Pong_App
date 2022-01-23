@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 using King_Pong_App.WebSocket;
 using System.Net.WebSockets;
+using System.Windows.Input;
 using King_Pong_App.Models;
 
 namespace King_Pong_App;
@@ -18,6 +19,8 @@ public partial class MainWindow : Window
 	public CupModel backFourCups; // in order to hide the back row if only six cup game mode is chosen
 	public static GameViewModel game;
 	public static Client client;
+	private List<bool> Team1Demo = new();
+	private List<bool> Team2Demo = new();
 
 	/// <summary>
 	/// When the application is launched this is where the Datacontext is defined.
@@ -138,6 +141,12 @@ public partial class MainWindow : Window
 		else
 			TwoPlayerGame();
 
+		for (int i = 0; i < game.numberOfCups; i++)
+		{
+			bool hit = false;
+			Team1Demo.Add(hit);
+			Team2Demo.Add(hit);
+		}
 		IntroRound();
 	}
 
@@ -393,4 +402,74 @@ public partial class MainWindow : Window
 		MessageBox.Show(@"For at give op, skal begge holdknapper holdes inde i mindst 5 sekunder. 
 							Bemærk at det er holdet som der har turen, som giver op");
 	}
+	private void DemoCommandSimulator(object sender, RoutedEventArgs e)
+	{
+		Random rand = new();
+		int number = rand.Next(0, 2);
+		Debug.WriteLine($"The random number generated is: {number} <----");
+
+		if (!game.gameInProgress)
+		{
+			//MessageBox.Show("Det er endnu ikke afgjort, hvem der starter endnu. Tryk AUTO DECIDE STARTER");
+			return;
+		}
+
+		if (game.gameOver)
+		{
+			GameOver();
+			return;
+		}
+
+		if (number == 1)
+		{
+			DemoCupHit();
+			return;
+		}
+		
+		if (number == 0)
+		{
+			game.Command = "0";
+			return;
+		}
+		Debug.WriteLine("Something went wrong :)");
+	}
+	private void DemoCupHit()
+	{
+		Random rand = new();
+		int number = 0;
+		bool found = false;
+		if (game.Current == game.Team1)
+		{
+			while (!found)
+			{
+				number = rand.Next(0, Team2Demo.Count);
+				Debug.WriteLine($"Random number was : {number}");
+				if(!Team2Demo[number])
+				{
+					Team2Demo[number] = true;
+					found = true;
+					number++;
+					game.Command = (number + game.numberOfCups).ToString();
+				}
+			}
+		}
+
+		if (game.Current == game.Team2)
+		{
+			while (!found)
+			{
+				number = rand.Next(0, Team1Demo.Count);
+				
+				Debug.WriteLine($"Random number was : {number}");
+				if(!Team1Demo[number])
+				{
+					Team1Demo[number] = true;
+					found = true;
+					number++;
+					game.Command = (number).ToString();
+				}
+			}
+		}
+	}
 }
+
