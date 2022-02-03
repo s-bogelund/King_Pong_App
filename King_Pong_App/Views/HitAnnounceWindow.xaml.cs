@@ -20,24 +20,33 @@ namespace King_Pong_App.Views
 	/// </summary>
 	public partial class HitAnnounceWindow : Window
 	{
+		/// <summary>
+		/// Prints relevant info and starts a timer for closing the window
+		/// </summary>
 		public HitAnnounceWindow()
 		{
 			InitializeComponent();
 			HitPrint();
-			StartCloseTimer(4);
+			StartCloseTimer(2);
 		}
-
+		/// <summary>
+		/// Shows the name of the current player that hit a cup
+		/// </summary>
 		public void HitPrint()
 		{
-			if (MainWindow._gameSession.StarterTeamDecided)
+			if (MainWindow.game.StarterTeamDecided)
 			{
-				AnnounceHitLabel.Content = $"{MainWindow._gameSession.Current.Roster[MainWindow._gameSession.currentPlayer].PlayerName.ToUpper()} \nRAMTE!";
+				AnnounceHitLabel.Content = $"{MainWindow.game.Current.Roster[MainWindow.game.currentPlayer].PlayerName.ToUpper()} \nRAMTE!";
 				return;
 			}
 
-			AnnounceHitLabel.Content = $"DER ER RAMT!! \n{MainWindow._gameSession.Current.TeamName.ToUpper()} \nSTARTER!";
+			AnnounceHitLabel.Content = $"DER ER RAMT!! \n{MainWindow.game.Current.TeamName.ToUpper()} \nSTARTER!";
 		}
-		private void StartCloseTimer(int seconds)
+		/// <summary>
+		/// Closes the window after a delay determined by the 'second' argument
+		/// </summary>
+		/// <param name="seconds"></param>
+		private void StartCloseTimer(double seconds)
 		{
 			DispatcherTimer timer = new DispatcherTimer();
 			timer.Interval = TimeSpan.FromSeconds(seconds);
